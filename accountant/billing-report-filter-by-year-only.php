@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <!-- Chart JS -->
@@ -37,7 +37,7 @@ if (!isset($_SESSION['username'])) {
 <body class="app">
 
     <?php $page = 'report';
-    include('navbar.php'); ?>
+    include('accountant-navbar.php'); ?>
 
     <div class="app-wrapper">
 
