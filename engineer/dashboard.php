@@ -51,7 +51,7 @@ if (!isset($_SESSION['username'])) {
             <div class="row g-4 mb-3">
 
                 <div class="col-6 col-lg-3">
-                    <a href="#">
+                    <a href="manage-projects.php">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <br />
                             <span class="nav-icon"><i class="fa fa-user fa-5x text-success"></i></span>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
 
                 <div class="col-6 col-lg-3">
-                    <a href="#">
+                    <a href="manage-projects.php">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <br />
                             <span class="nav-icon"><i class="fa fa-building fa-5x text-success"></i></span>
@@ -95,7 +95,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
 
                 <div class="col-6 col-lg-3">
-                    <a href="#">
+                    <a href="manage-projects.php">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <br />
                             <span class="nav-icon"><i class="fa fa-users fa-5x text-success"></i></span>

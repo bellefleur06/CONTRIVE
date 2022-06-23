@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
 <body class="app">
 
     <?php $page = 'report';
-    include('navbar.php'); ?>
+    include('engineer-navbar.php'); ?>
 
     <div class="app-wrapper">
 
