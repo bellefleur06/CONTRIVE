@@ -259,12 +259,12 @@ if (!isset($_SESSION['username'])) {
                             ?>
                             <tr>
                               <td class="cell w-100">
-                                <label for="setting-input-2" class="form-label" style="color:white"><b>
+                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
                                     ₱ <?php echo number_format($row['daily_income'], 2, '.', ','); ?>
                                   </b></label>
                               </td>
                               <td class="cell">
-                                <label for="setting-input-2" class="form-label" style="color:white">Income Today</label>
+                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;">Income Today</label>
                               </td>
                             </tr>
                             <tr>
@@ -274,12 +274,12 @@ if (!isset($_SESSION['username'])) {
                               $row = mysqli_fetch_assoc($result);
                               ?>
                               <td class="cell w-100">
-                                <label for="setting-input-2" class="form-label" style="color:white"><b>
+                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
                                     ₱ <?php echo number_format($row['monthly_income'], 2, '.', ','); ?>
                                   </b></label>
                               </td>
                               <td class="cell">
-                                <label for="setting-input-2" class="form-label" style="color:white">Income This Month</label>
+                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;">Income This Month</label>
                               </td>
                             </tr>
                           </tbody>
