@@ -696,7 +696,7 @@ if (!isset($_SESSION['username'])) {
 
   <?php
 
-  $sql = "SELECT sum(price) as income, monthname(payment_date) as month FROM payments WHERE month(payment_date) = MONTH(CURRENT_DATE) AND year(payment_date) = YEAR(CURRENT_DATE) GROUP BY month(payment_date)";
+  $sql = "SELECT sum(price) as income, monthname(payment_date) as month FROM payments WHERE month(payment_date) AND year(payment_date) = YEAR(CURRENT_DATE) GROUP BY month(payment_date)";
   $result = mysqli_query($conn, $sql);
 
   foreach ($result as $data) {
