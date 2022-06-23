@@ -1,0 +1,92 @@
+
+Kung chineck/pinagana nyo yung system eto yung makikita nyo.
+
+--------------------------------------------------------------------------------------------------- Contrive --------------------------------------------------------------------------------------------------
+
+Login page: Password validation, 8  to up alphanumeric characters.
+	    Validation for correct/incorrect login credentials.
+	    "Remember Me" checkbox.
+	    Simple alert message after login saying "Welcome Back Admin! or Staff!
+	    Forgot and Reset Password
+
+------------------------------------------------------------------------------------------------- Admin Side -------------------------------------------------------------------------------------------------
+
+Dashboard: Display Total Number of Clients, Projects, Employees, Suppliers, Total Income, Total, Payables and Total Receivables.
+	   
+Clients Module: Client CRUDS.
+	          Print Master List of Clients.
+
+Projects Module: Project CRUDS.
+	            Print Master List of Projects.
+	            Add Project Requirements for specific projects.
+	            Add Project Workers for specific projects.
+	            Add Project Work Divisions for specific projects.
+	            Add and Update Project Progress for specific project work division in specific projects.
+
+Accounts Receivables Module:  View Receivable Details (computation of all the project costs).
+			    Update Recievable. (recieve to be added for the companies total income).
+	            		    Print List of Receivables.
+
+Suppliers Module: Supplier CRUDS.
+	             Supplier Category Cruds
+	             Print Master List of Suppliers.
+
+Materials Module: Material CRDS.
+	             Print Master List of Materials.
+
+Payables Module: Update Payable.
+	             Print List of Payables.
+
+Purchase Module: Purchase CRUDS (for accounts payable).
+	             Recevings (for accounts payable).
+	             Returns (for accounts payable).
+
+Workers Module: Worker CRUDS.
+	            Worker Position CRUDS
+	            Print Master List of Workers.
+
+Staffs Module: Staff CRUDS.
+	         Print Master List of Staffs.
+
+Reports Module: Table and Bar Chart for the Monthly and Yearly Number of Clients, Projects, Suppliers, Workers and Staffs.
+
+System Module: Backup Database.
+	          Update User Profile.
+	          Change User Password.
+
+-------------------------------------------------------------------------------------------------- Staff Side --------------------------------------------------------------------------------------------------
+
+Dashboard: Display Total Number of Clients, Projects, Employees, Suppliers.
+	   
+Clients Module: Client CRUDS.
+	          Print Master List of Clients.
+
+Projects Module: Project CRUDS.
+	            Print Master List of Projects.
+	            Add Project Requirements for specific projects.
+	            Add Project Workers for specific projects.
+	            Add Project Work Divisions for specific projects.
+	            Add and Update Project Progress for specific project work division in specific projects.
+
+Suppliers Module: Supplier CRUDS.
+	             Supplier Category Cruds
+	             Print Master List of Suppliers.
+
+Purchase Module: Purchase CRUDS (hindi pa nagagawa yung delete and update ng order)
+	             Recevings (madadagdag sa stocks).
+	             Returns (return sa supplier with a valid reason).
+	             Purchase History.
+
+Materials Module: Material CRUDS. (update still has its error).
+	             Print Master List of Materials.
+
+Reports Module: Table and Bar Chart for the Monthly, Quarterly, and Yearly Number of Clients, Projects, Suppliers, Workers and Staffs with some specific views.
+
+System Module: Update User Profile.
+	          Change User Password.
+
+-------------------------------------------------------------------------------------------- Upcoming Features --------------------------------------------------------------------------------------------
+
+Purchase Order Module: Shopping Cart and Checkout Button
+
+Note: Test Run System and Fix Identified Bugs

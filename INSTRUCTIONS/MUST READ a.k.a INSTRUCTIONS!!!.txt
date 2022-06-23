@@ -1,0 +1,25 @@
+1. copy/move mo tong folder na to sa xampp\htdocs folder
+
+2. open xammp, start apache and mysql
+
+3. click admin for apache and mysql
+
+4. kung meron ka nang lumang db na "contrive_database" sa phpmyadmin mo, please pa drop nun at gumawa ka ng bagong database, same name lang naman ("contrive_database") tapos import mo lang ulet yung sql file ("contrive_database") na nasa db folder, may mga minodify kasi ako sa db kaya baka di gumana yung mga bagong features ng system (like yung login and validations) kapag luma yung db na gamit. kaya please pa drop nung luma at gawa ka ng bago
+
+for login:
+
+admin
+user: Administrator
+pass: Admin123
+
+admin
+user: Contrive
+pass: Contrive123
+
+staff
+user: Staff
+user: Staff123
+
+*alam ko po madami pang kulang at dapat ayusin dito kaya pacheck po at kung matutulungan nyo po ako gawin to, that will deeply appreciated.
+
+-pat

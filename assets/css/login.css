@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+body {
+  /*background-color: #57A071 !important;*/
+  /*background-image: url(https://static.vecteezy.com/system/resources/previews/000/113/893/original/free-medical-pattern-vector.png);*/
+  background: url(../images/bg.jpeg) no-repeat center fixed;
+  /* background-repeat: no-repeat;
+  background-position: center fixed; */
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
+
+h4 {
+  color: #2f3230;
+}
+p {
+  color: #2f3230;
+}
+label {
+  color: #2f3230;
+}
+.form-group input {
+  border: none;
+}
+
+.card {
+  background-color: #f7fafc !important;
+  border-radius: 12px !important;
+  border: none !important;
+}
+
+.form-group {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group i,
+.form-group input::placeholder {
+  color: #adb5bd !important;
+}
+
+.form-group input:focus,
+.form-group input:active {
+  box-shadow: none;
+}
+
+.btn {
+  /*background-color:rgba(1, 136, 223) !important;
+	border-color:rgba(1, 136, 223) !important;*/
+  background-color: #45ada9 !important;
+  border-color: #45ada9 !important;
+}
+
+.btn:focus,
+.btn:active {
+  box-shadow: none !important;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.button-green {
+  background: #15a362;
+  color: #fff;
+  border-color: #15a362;
+
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-red {
+  background: #d26d69;
+  color: #fff;
+  border-color: #d26d69;
+
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-blue {
+  background: #5b99ea;
+  color: #fff;
+  border-color: #5b99ea;
+
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 5px;
+}

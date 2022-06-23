@@ -1,0 +1,39 @@
+standard notif for clients, managers who are involved in the projects
+
+
+manage "recievables":
+view/drill down kung saan nakalist yung estimated cost for projects
+para mamonitor yung project constraints?
+
+supplier "manage": ok
+
+supplier "payables" : kulang pa...  "project - client, manager...?
+
+Inventory:
+purchase price - kelan binili, specific price
+purchase order
+
+purchase: "notes" kung bakit ni return yung materials
+pwedeng maging static, dropdown field
+
+dapat yung purchase orders is multiple na nakaattach lahat
+hindi pwede 1 to 1 butas daw yun
+
+employees: 
+sa project dapat may name ng worker or staff na involve the sa project
+sa staff: dapat kung sino yung engineer na nakaindicate dapat na engineer 
+
+reports:
+dapat meron month to year comparison and dapat may quarterly
+ sa project reports......
+ sa supplier dapat cronological order or sorted at kung monthly view dapat may filter eg. 2020/2021, dapat may total supplier na naiadd for this year pero since testing lang naman wag muna daw
+
+ sa worker dapat may purchase order for supplier, for porjects 
+
+ sa user logs dapat may filter
+
+ sa audit trails irrevelant yung login at logout activity
+
+ sa manage account no problem
+
+ 

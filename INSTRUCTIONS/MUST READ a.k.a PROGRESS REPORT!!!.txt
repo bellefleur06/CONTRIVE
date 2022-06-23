@@ -1,0 +1,84 @@
+CONTRIVE: RECORD AND BILLING MANAGEMENT SYSTEM FOR KITLAND CONSTRUCTION SERVICES
+
+MODULES:
+
+ADMIN MODULE
+✓ Security Login/Logout                                                                                                                - DONE
+- User Accounts                                                                                                                             - DONE
+- List of (Username, Password, User Level)                                                                                    - DONE
+- User Log: History kung anong oras naglog yung user                                                                    - DONE
+
+✓ Audit Trail                                                                                                                                  - DONE
+- Records every action performed on a file or folder by team’s 
+collaborators (Employee / Admin).
+- In other words, Audit Log. (Dito makikita history ng bawat 
+pinaggagawa sa system. Tamang refresh lang para marecord.
+
+BILLING MODULE RUDS                                                                                                                   - Di ko gets to, pwede nyo ba akong providan ng design na pagbabasihan      
+✓ Invoices                                                                                                                                         kung paano gagawin?
+- Digital signed
+- Online payment
+- Automated email
+- Cloud-based invoice management that is accessible to all vendors
+- Export invoices for proof
+✓ Transport Timesheets
+- For tracking the transport of materials
+- Digital approve and sign-off
+- Export ticket and timesheet for attachment
+
+
+CLIENT MODULE CRUDS
+✓ Client List                                                                                                                                   - DONE
+- Includes data of Client for Contact                                                                                              - DONE
+✓ Manage Projects                                                                                                                          - DONE
+- Costing and Status                                                                                                                       - DONE
+
+INVENTORY MODULE
+✓ Materials                                                                                                                                     - DONE
+- Stocks CRUDS                                                                                                                               - DONE
+✓ Equipment                                                                                                                                   - Bago to kaya idadagdag ko palang 
+- Stocks CRUDS                                                                                                                               - Nag iistock ba sila ng equipments? 
+- Status (If it is used for project or not)                                                                                          - Iniisip pa kung paano to idadagdag
+
+SUPPLIER MODULE
+✓ Supplier CRUDS                                                                                                                             - DONE
+✓ Payables                                                                                                                                       - DONE
+
+EMPLOYEE MODULE
+✓ On Site Worker Module CRUDS                                                                                                      - DONE
+✓ Staff Module CRUDS                                                                                                                     - DONE
+- Include their position / roles                                                                                                        - DONE
+
+PURCHASE MODULE
+✓ Receiving                                                                                                                                     - DONE
+- Track the materials receive from the supplier
+✓ Returns
+- Manage returns to the supplier
+✓ Purchase Orders 
+- View inventory receipts
+
+REPORTING (Historical (Daily/Weekly/Monthly/Quarterly/Annual) View)                                        (Kailangan ng tulong para sa mga data na dapat idisplay sa reporting pls                                                                                                                                                          hellllppppp!)
+
+✓ Supplier Report                                                                                                                            - DONE 
+✓ Employee Report                                                                                                                          - DONE 
+✓ Client Report                                                                                                                               - DONE 
+✓ Project Report                                                                                                                             - DONE 
+✓ On Site Worker Report                                                                                                                  - DONE 
+✓ Staff Report                                                                                                                                 - DONE 
+✓ Purchase Report                                                                                                                           - Di pa nalalagay
+✓ Inventory Report                                                                                                                          - Di pa nalalagay
+
+REMINDER!!
+DAHIL SA IT NAADIK AKO SA KAPE AT DAHIL SA CAPSTONE NATUTO AKO MAGDASAL SA HARAP NG LAPTOP!!
+
+
+
+
+
+
+
+
+
+
+
+
