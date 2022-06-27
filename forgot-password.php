@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
                 $mail->SMTPSecure = "tls";
                 $mail->Port = "587";
                 $mail->Username = "contrivekcs@gmail.com"; //ito yung gamit kong email pang send
-                $mail->Password = "contrivekcs"; //password ng email ko
+                $mail->Password = "xffsqsrowvxhrona"; //password ng email ko
                 $mail->Subject = "Password Reset Code"; //subject ng email natin
                 $mail->setFrom("contrivekcs@gmail.com"); //kung kanino galing yung email
                 $mail->isHTML(true); //naka true para madesignan yung email body
