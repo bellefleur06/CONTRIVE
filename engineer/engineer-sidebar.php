@@ -43,6 +43,15 @@
 						</a>
 					</li>
 					<!--//nav-item-->
+					<li class="nav-item">
+						<a class="nav-link <?php if ($page == 'workers') {
+												echo 'active';
+											} ?>" href="workers.php">
+							<span class="nav-icon"><i class="fa fa-users"></i></span>
+							<span class="nav-link-text">Workers</span>
+						</a>
+					</li>
+					<!--//nav-item-->
 
 					<li class="nav-item">
 						<a class="nav-link <?php if ($page == 'report') {

@@ -95,7 +95,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
 
                 <div class="col-6 col-lg-3">
-                    <a href="manage-projects.php">
+                    <a href="workers.php">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <br />
                             <span class="nav-icon"><i class="fa fa-users fa-5x text-success"></i></span>
