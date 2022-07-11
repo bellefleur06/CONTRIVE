@@ -249,42 +249,43 @@ if (!isset($_SESSION['username'])) {
                     <h4 class="stats-type mb-1" style="color:white">Net Worth</h4>
                     </h4>
                     <div class="container mt-4">
-                      <form class="settings-form" method="post">
-                        <table class="table text-center">
-                          <tbody>
-                            <?php
+                      <div class="row">
+                          <?php
                             $sql = "SELECT SUM(price) as daily_income FROM payments WHERE date(payment_date) = CURRENT_DATE";
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_assoc($result);
-                            ?>
-                            <tr>
-                              <td class="cell w-100">
-                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
-                                    ₱ <?php echo number_format($row['daily_income'], 2, '.', ','); ?>
-                                  </b></label>
-                              </td>
-                              <td class="cell">
-                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;">Income Today</label>
-                              </td>
-                            </tr>
-                            <tr>
-                              <?php
+                          ?>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-6">
+                              <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
+                                ₱ <?php echo number_format($row['daily_income'], 2, '.', ','); ?>
+                              </b></label>
+                            </div>
+                            <div class="col-6">
+                              <label for="setting-input-2" class="form-label" style="color:white; text-align:center;">Income Today</label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="col-12">
+                          <div class="row">
+                            <?php
                               $sql = "SELECT SUM(price) as monthly_income FROM payments WHERE month(payment_date) = MONTH(CURRENT_DATE)";
                               $result = mysqli_query($conn, $sql);
                               $row = mysqli_fetch_assoc($result);
-                              ?>
-                              <td class="cell w-100">
-                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
+                            ?>
+                            <div class="col-6">
+                                  <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
                                     ₱ <?php echo number_format($row['monthly_income'], 2, '.', ','); ?>
                                   </b></label>
-                              </td>
-                              <td class="cell">
-                                <label for="setting-input-2" class="form-label" style="color:white; text-align:center;">Income This Month</label>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </form>
+                            </div>
+                            <div class="col-6">
+                              <label for="setting-input-2" class="form-label" style="color:white; text-align:center;">Income This Month</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
