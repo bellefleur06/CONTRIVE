@@ -246,7 +246,7 @@ if (!isset($_SESSION['username'])) {
                       ₱ <?php echo number_format($row['total_income'], 2, '.', ','); ?>
                     </h1>
                     <hr class="mb-2" style="background-color:white">
-                    <h4 class="stats-type mb-1" style="color:white">Net Worth</h4>
+                    <h4 class="stats-type mb-1 mt-3" style="color:white">Net Worth</h4>
                     </h4>
                     <div class="container mt-4">
                       <div class="row">
@@ -256,7 +256,7 @@ if (!isset($_SESSION['username'])) {
                             $row = mysqli_fetch_assoc($result);
                           ?>
                         <div class="col-12">
-                          <div class="row">
+                          <div class="row my-3">
                             <div class="col-6">
                               <label for="setting-input-2" class="form-label" style="color:white; text-align:center;"><b>
                                 ₱ <?php echo number_format($row['daily_income'], 2, '.', ','); ?>
@@ -269,7 +269,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                         <hr>
                         <div class="col-12">
-                          <div class="row">
+                          <div class="row my-3">
                             <?php
                               $sql = "SELECT SUM(price) as monthly_income FROM payments WHERE month(payment_date) = MONTH(CURRENT_DATE)";
                               $result = mysqli_query($conn, $sql);
