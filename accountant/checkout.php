@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
         $activity = "Order " . $product_quantity . " " . $unit . " of " . $product_name . " from " . $supplier;
         $status = "Pending";
         $token = md5($email) . rand(10, 9999);
-        $link = "<a href='http://localhost/contrive/order-requests.php?key=" . $email . "&token=" . $token . "'>Click To View Orders</a>";
+        $link = "<a href='http://contrive.epizy.com/order-requests.php?key=" . $email . "&token=" . $token . "'>Click To View Orders</a>";
 
         $mail = new PHPMailer();
         $mail->isSMTP();
