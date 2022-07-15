@@ -37,8 +37,9 @@ if (isset($_POST['decline'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $status = "Rejected";
     $token = 0;
+    $notification_status = 0;
 
-    $sql = "UPDATE orders SET status = '$status', token = '$token',rejection_reason = '$rejection_reason', date_rejected = now() WHERE id = $id";
+    $sql = "UPDATE orders SET status = '$status', token = '$token',rejection_reason = '$rejection_reason', date_rejected = now(), notification_status = '$notification_status' WHERE id = $id";
     $result = mysqli_query($conn, $sql);
 
     if ($result == TRUE) {

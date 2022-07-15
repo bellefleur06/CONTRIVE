@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 20, 2022 at 10:30 AM
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jul 15, 2022 at 11:59 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -136,7 +136,7 @@ CREATE TABLE `invoices` (
 INSERT INTO `invoices` (`invoice_id`, `project_id`, `client`, `transportation`, `consultation_fee`, `total_miscellaneous`, `total_materials`, `total_labor`, `subtotal`, `total_tax`, `total_invoice`, `status`, `date_created`, `due_date`, `date_added`) VALUES
 (1, '1', 'Galtero Cayetano', '500.00', '1000.00', '1500.00', '56800.00', '2816.00', '61116.00', '7333.92', '68449.92', 'Paid', '2022-03-20', '2023-03-20', '2022-03-20 05:54:45'),
 (2, '4', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '0000-00-00', '0000-00-00', '0000-00-00 00:00:00'),
-(3, '3', 'Gezane Recto', '500.00', '1000.00', '1500.00', '209800.00', '3472.00', '214772.00', '25772.64', '240544.64', 'Pending', '2022-03-21', '2023-03-21', '2022-03-20 05:59:03');
+(3, '3', 'Gezane Recto', '500.00', '1000.00', '1500.00', '209800.00', '3472.00', '214772.00', '25772.64', '240544.64', 'Paid', '2022-03-21', '2023-03-21', '2022-03-20 05:59:03');
 
 -- --------------------------------------------------------
 
@@ -308,7 +308,11 @@ INSERT INTO `logs` (`id`, `username`, `log_time`, `activity`) VALUES
 (150, 'Administrator', '2022-03-19 20:43:20', 'Add Full Payment of ₱66770.00 For Accounts Receivable From Galtero Cayetano'),
 (151, 'Administrator', '2022-03-20 05:57:27', 'Add Partial Payment of ₱449.92.00 For Accounts Receivable From Galtero Cayetano'),
 (152, 'Administrator', '2022-03-20 05:59:49', 'Add Full Payment of ₱68000.00 For Accounts Receivable From Galtero Cayetano'),
-(153, 'Administrator', '2022-03-20 17:29:41', 'Backuped Database');
+(153, 'Administrator', '2022-03-20 17:29:41', 'Backuped Database'),
+(154, 'Administrator', '2022-06-23 15:59:16', 'Order 20 pc of Concrete Block from Rockwool Building Materials Philippines'),
+(155, 'Administrator', '2022-06-23 16:27:10', 'Add Partial Payment of ₱240000.00 For Accounts Receivable From Gezane Recto'),
+(156, 'Administrator', '2022-06-23 16:27:24', 'Add Full Payment of ₱544.64.00 For Accounts Receivable From Gezane Recto'),
+(157, 'Administrator', '2022-07-15 17:33:19', 'Order 10 pc of Concrete Block from Rockwool Building Materials Philippines');
 
 -- --------------------------------------------------------
 
@@ -364,23 +368,26 @@ CREATE TABLE `orders` (
   `rejection_reason` varchar(255) NOT NULL,
   `date_rejected` datetime NOT NULL,
   `return_reason` varchar(255) NOT NULL,
-  `date_returned` datetime NOT NULL
+  `date_returned` datetime NOT NULL,
+  `notification_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_id`, `product_id`, `products`, `product_price`, `qty`, `amount_paid`, `date_ordered`, `status`, `email_address`, `token`, `date_approved`, `date_received`, `rejection_reason`, `date_rejected`, `return_reason`, `date_returned`) VALUES
-(1, '#99762373', '5', 'Wood Lumber', '150.00', '25', '3750.00', '2022-03-09 07:17:29', 'Returning', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa6488', '0000-00-00 00:00:00', '2022-03-13 09:56:39', '', '0000-00-00 00:00:00', 'Items are not standard quality.', '2022-03-13 10:29:01'),
-(2, '#25977345', '1', 'Electrical Wire and Cable', '257.00', '10', '2570.00', '2022-03-09 07:17:29', 'On Delivery', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa1224', '0000-00-00 00:00:00', '2022-03-13 13:47:08', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-(3, '#51120221', '7', 'PVC Pipes', '111.00', '15', '1665.00', '2022-03-09 07:17:29', 'Received', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa81', '0000-00-00 00:00:00', '2022-03-15 09:41:19', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-(4, '#16324623', '2', 'Concrete Block', '18.00', '30', '540.00', '2022-03-09 07:17:29', 'Pending', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa2318', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '2022-03-16 11:27:42', '', '0000-00-00 00:00:00'),
-(5, '#27175382', '3', 'Electrical Conduit and Conduit Fitting', '81.00', '20', '1620.00', '2022-03-09 07:17:29', 'Returned', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa6574', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-(6, '#8392498', '4', 'Galvanized Iron Pipes', '899.00', '5', '4495.00', '2022-03-09 07:17:29', 'Received', 'contrivekcs@gmail.com', '0', '2022-03-15 19:25:31', '2022-03-19 20:16:39', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-(13, '#47135845', '2', 'Concrete Block', '18.00', '28', '504.00', '2022-03-15 13:03:02', 'Rejected', 'contrivekcs@gmail.com', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Out of Product Stocks', '2022-03-15 19:27:52', '', '0000-00-00 00:00:00'),
-(14, '#98635575', '5', 'Wood Lumber', '150.00', '10', '1500.00', '2022-03-16 12:01:45', 'Pending', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa2528', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-(15, '#54971183', '2', 'Concrete Block', '18.00', '20', '360.00', '2022-03-16 12:02:01', 'Received', 'contrivekcs@gmail.com', '0', '2022-03-16 12:03:43', '2022-03-18 07:28:04', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00');
+INSERT INTO `orders` (`id`, `order_id`, `product_id`, `products`, `product_price`, `qty`, `amount_paid`, `date_ordered`, `status`, `email_address`, `token`, `date_approved`, `date_received`, `rejection_reason`, `date_rejected`, `return_reason`, `date_returned`, `notification_status`) VALUES
+(1, '#99762373', '5', 'Wood Lumber', '150.00', '25', '3750.00', '2022-03-09 07:17:29', 'Returning', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa6488', '0000-00-00 00:00:00', '2022-03-13 09:56:39', '', '0000-00-00 00:00:00', 'Items are not standard quality.', '2022-03-13 10:29:01', 1),
+(2, '#25977345', '1', 'Electrical Wire and Cable', '257.00', '10', '2570.00', '2022-03-09 07:17:29', 'On Delivery', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa1224', '2022-07-15 17:06:13', '2022-03-13 13:47:08', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1),
+(3, '#51120221', '7', 'PVC Pipes', '111.00', '15', '1665.00', '2022-03-09 07:17:29', 'Received', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa81', '0000-00-00 00:00:00', '2022-03-15 09:41:19', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 0),
+(4, '#16324623', '2', 'Concrete Block', '18.00', '30', '540.00', '2022-03-09 07:17:29', 'Rejected', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa2318', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Out of Product Stocks', '2022-03-16 11:27:42', '', '0000-00-00 00:00:00', 1),
+(5, '#27175382', '3', 'Electrical Conduit and Conduit Fitting', '81.00', '20', '1620.00', '2022-03-09 07:17:29', 'Returned', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa6574', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1),
+(6, '#8392498', '4', 'Galvanized Iron Pipes', '899.00', '5', '4495.00', '2022-03-09 07:17:29', 'Received', 'contrivekcs@gmail.com', '0', '2022-03-15 19:25:31', '2022-03-19 20:16:39', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 0),
+(13, '#47135845', '2', 'Concrete Block', '18.00', '28', '504.00', '2022-03-15 13:03:02', 'Rejected', 'contrivekcs@gmail.com', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Out of Product Stocks', '2022-03-15 19:27:52', '', '0000-00-00 00:00:00', 1),
+(14, '#98635575', '5', 'Wood Lumber', '150.00', '10', '1500.00', '2022-03-16 12:01:45', 'Pending', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa2528', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1),
+(15, '#54971183', '2', 'Concrete Block', '18.00', '20', '360.00', '2022-03-16 12:02:01', 'Received', 'contrivekcs@gmail.com', '0', '2022-03-16 12:03:43', '2022-03-18 07:28:04', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 0),
+(16, '#7098479', '2', 'Concrete Block', '18.00', '20', '360.00', '2022-06-23 15:59:16', 'On Delivery', 'contrivekcs@gmail.com', '0', '2022-06-23 16:02:11', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1),
+(17, '#85387296', '2', 'Concrete Block', '18.00', '10', '180.00', '2022-07-15 17:33:19', 'Pending', 'contrivekcs@gmail.com', '19950b927cbd26eb6c37873ef6ee23fa2282', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -426,16 +433,20 @@ CREATE TABLE `payments` (
   `price` double(13,2) NOT NULL,
   `remaining_amount` decimal(13,2) NOT NULL,
   `payment_status` varchar(255) NOT NULL,
-  `payment_date` datetime NOT NULL DEFAULT current_timestamp()
+  `payment_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `notification_status` int(1) NOT NULL,
+  `encoder` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`payment_id`, `receivables_id`, `price`, `remaining_amount`, `payment_status`, `payment_date`) VALUES
-(1, '1', 449.92, '68000.00', 'Partial', '2022-03-20 05:57:27'),
-(2, '1', 68000.00, '0.00', 'Paid', '2022-03-20 16:48:42');
+INSERT INTO `payments` (`payment_id`, `receivables_id`, `price`, `remaining_amount`, `payment_status`, `payment_date`, `notification_status`, `encoder`) VALUES
+(1, '1', 449.92, '68000.00', 'Partial', '2022-03-20 05:57:27', 1, 1),
+(2, '1', 68000.00, '0.00', 'Paid', '2022-03-20 16:48:42', 1, 1),
+(3, '2', 240000.00, '544.64', 'Partial', '2022-06-23 16:27:10', 1, 1),
+(4, '2', 544.64, '0.00', 'Paid', '2022-06-23 16:27:24', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -554,7 +565,7 @@ CREATE TABLE `receivables` (
 
 INSERT INTO `receivables` (`id`, `invoice_id`, `client_name`, `total_invoice`, `total_remaining`, `receivable_status`, `receivable_date_added`, `receivable_date_received`) VALUES
 (1, '1', 'Galtero Cayetano', '68449.92', '0.00', 'Paid', '2022-03-20 05:54:45', '2022-03-20 05:59:49'),
-(2, '3', 'Gezane Recto', '240544.64', '240544.64', 'Unpaid', '2022-03-20 05:59:03', '0000-00-00 00:00:00');
+(2, '3', 'Gezane Recto', '240544.64', '0.00', 'Paid', '2022-03-20 05:59:03', '2022-06-23 16:27:24');
 
 -- --------------------------------------------------------
 
@@ -624,9 +635,9 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `staff_id`, `full_name`, `birthday`, `age`, `gender`, `address`, `contact`, `civil_status`, `profile`, `status`, `email`, `username`, `password`, `access`, `otp`, `date_added`, `last_login`, `last_activity`, `last_logout`) VALUES
-(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-03-20 17:29:31', '2022-03-20 17:29:41', '2022-03-20 17:29:47'),
-(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-03-20 16:03:24', '2022-03-20 16:03:24', '2022-03-20 16:15:46'),
-(8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-03-20 15:48:41', '2022-03-20 15:48:41', '2022-03-20 16:03:06');
+(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-07-15 14:39:41', '2022-07-15 17:33:19', '2022-07-14 17:55:23'),
+(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-07-13 16:55:37', '2022-07-13 16:55:37', '2022-07-13 16:58:28'),
+(8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-07-14 17:55:34', '2022-07-14 17:55:34', '2022-07-14 17:57:36');
 
 -- --------------------------------------------------------
 
@@ -907,7 +918,7 @@ ALTER TABLE `workers`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -937,7 +948,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -949,7 +960,7 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `payables`
@@ -961,7 +972,7 @@ ALTER TABLE `payables`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `positions`

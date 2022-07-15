@@ -37,8 +37,9 @@ if (isset($_POST['approve'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $status = "On Delivery";
     $token = 0;
+    $notification_status = 0;
 
-    $sql = "UPDATE orders SET status = '$status', token = '$token', date_approved= now() WHERE id = $id";
+    $sql = "UPDATE orders SET status = '$status', token = '$token', date_approved= now(), notification_status = '$notification_status' WHERE id = $id";
     $result = mysqli_query($conn, $sql);
 
     if ($result == TRUE) {

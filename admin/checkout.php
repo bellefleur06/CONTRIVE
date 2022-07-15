@@ -39,6 +39,7 @@ if (isset($_POST['submit'])) {
         $unit = mysqli_real_escape_string($conn, $_POST['unit'][$i]);
         $activity = "Order " . $product_quantity . " " . $unit . " of " . $product_name . " from " . $supplier;
         $status = "Pending";
+        $notification_status = "0";
         $token = md5($email) . rand(10, 9999);
         $link = "<a href='http://contrive.epizy.com/order-requests.php?key=" . $email . "&token=" . $token . "'>Click To View Orders</a>";
 
@@ -58,7 +59,7 @@ if (isset($_POST['submit'])) {
 
         if ($mail->send()) {
 
-            $sql = "INSERT INTO orders (order_id, product_id, products, product_price, qty, amount_paid, status, email_address, token) VALUES ('$order_id','$product_id','$product_name','$product_price','$product_quantity','$total_price','$status','$email','$token')";
+            $sql = "INSERT INTO orders (order_id, product_id, products, product_price, qty, amount_paid, status, email_address, token, notification_status) VALUES ('$order_id','$product_id','$product_name','$product_price','$product_quantity','$total_price','$status','$email','$token', '$notification_status')";
             $result = mysqli_query($conn, $sql);
 
             if ($result == TRUE) {
