@@ -155,9 +155,9 @@ if (!isset($_SESSION['username'])) {
                                                             <td class="cell" style="padding-top:0.5em"><?php echo date("M d, Y", strtotime($due_date)); ?></td>
                                                             <?php
                                                             //check if status is pending
-                                                            if ($status == "Pending") {
+                                                            if ($status == "Unpaid") {
                                                             ?>
-                                                                <td class="cell" style="padding-top:0.5em; font-weight:bold; color:blue">Pending</td>
+                                                                <td class="cell" style="padding-top:0.5em; font-weight:bold; color:blue">Unpaid</td>
 
                                                             <?php } else if ($status == "Paid") {
                                                             ?>

@@ -14,7 +14,7 @@ if (!isset($_SESSION['username'])) {
 <html lang="en">
 
 <head>
-    <title>CONTRIVE | Admin Dashboard</title>
+    <title>CONTRIVE | Engineer Dashboard</title>
 
     <!-- Meta -->
     <meta charset="utf-8" />
@@ -63,7 +63,7 @@ if (!isset($_SESSION['username'])) {
                                 $count = mysqli_num_rows($result);
 
                                 ?>
-                                <h4 class="stats-type mb-1">Clients</h4>
+                                <h4 class="stats-type mb-1">Assigned Clients</h4>
                                 <div class="stats-figure"><?php echo $count; ?></div>
                             </div>
                             <!--//app-card-body-->
@@ -85,7 +85,7 @@ if (!isset($_SESSION['username'])) {
                                 $count = mysqli_num_rows($result);
 
                                 ?>
-                                <h4 class="stats-type mb-1">Projects</h4>
+                                <h4 class="stats-type mb-1">Assigned Projects</h4>
                                 <div class="stats-figure"><?php echo $count; ?></div>
                             </div>
                             <!--//app-card-body-->
@@ -107,7 +107,7 @@ if (!isset($_SESSION['username'])) {
                                 $count = mysqli_num_rows($result);
 
                                 ?>
-                                <h4 class="stats-type mb-1">On-Site Workers</h4>
+                                <h4 class="stats-type mb-1">Assigned On-Site Workers</h4>
                                 <div class="stats-figure"><?php echo $count; ?></div>
                             </div>
                             <!--//app-card-body-->

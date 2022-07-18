@@ -22,6 +22,7 @@ if ($result == TRUE) {
     //check if project exist
     if ($count == 1) {
 
+        $project_id = $row['project_id'];
         $invoice_id = $row['invoice_id'];
         $name = $row['name'];
         $project_description = $row['project_description'];
@@ -49,7 +50,7 @@ if ($result == TRUE) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT * , SUM(requirements.price * requirements.quantity) as total_amount FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $id";
+$sql = "SELECT * , SUM(requirements.price * requirements.quantity) as total_amount FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $project_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -68,7 +69,7 @@ if ($result == TRUE) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT * , SUM(workers.rate * workers.hours_per_day) as total_amount FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $id";
+$sql = "SELECT * , SUM(workers.rate * workers.hours_per_day) as total_amount FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $project_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -246,7 +247,7 @@ $total_invoice_amount = $sub_total + $total_tax;
 
                                             $id = $_GET['ID'];
 
-                                            $sql = "SELECT * FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $id";
+                                            $sql = "SELECT * FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $project_id";
                                             $result = mysqli_query($conn, $sql);
                                             $count = mysqli_num_rows($result);
 
@@ -313,7 +314,7 @@ $total_invoice_amount = $sub_total + $total_tax;
 
                                             $id = $_GET['ID'];
 
-                                            $sql = "SELECT * FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $id";
+                                            $sql = "SELECT * FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $project_id";
                                             $result = mysqli_query($conn, $sql);
                                             $count = mysqli_num_rows($result);
 

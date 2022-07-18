@@ -182,13 +182,10 @@ if ($id == "") {
 										<?php endif;  ?>
 
 									</tr>
+									<tr>
+										<a href="manage-projects.php" class="btn app-btn btn-info ms-auto" style="color:white; float:right"><i class="fa fa-arrow-left"></i> Go Back</a>
+									</tr>
 								</table>
-								<form class="settings-form" action="delete-projects.php" method="post">
-									<a href="update-projects.php?ID=<?php echo $row['id']; ?>" class="btn app-btn-primary"><i class="fa fa-edit"></i> Edit</a>
-									<input type="hidden" name="ID" value="<?php echo $row['id']; ?>">
-									<button type="submit" name="delete" class="btn app-btn btn-danger" style="color:white" onclick="return confirm('Are you sure you want to delete this project record?')">Delete</button>
-									<a href="manage-projects.php" class="btn app-btn btn-info ms-auto" style="color:white; float:right"><i class="fa fa-arrow-left"></i> Go Back</a>
-								</form>
 							</div>
 							<!--//app-card-body-->
 
@@ -203,7 +200,7 @@ if ($id == "") {
 
 				<h1 class="app-page-title text-success"><span class="nav-icon"><i class="fa fa-chart-bar"></i></span> "<?php echo $row['name']; ?>" Project Division Progress</h1>
 
-				<a href="project-divisions.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-plus"></i> Add New Division / Project Update</a>
+				<a href="project-divisions.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-plus"></i> Add Project Update</a>
 				<hr class="my-4">
 
 				<div class="row g-4 settings-section">

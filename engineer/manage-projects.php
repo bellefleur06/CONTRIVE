@@ -46,7 +46,7 @@ if (!isset($_SESSION['username'])) {
 					<li class="breadcrumb-item active">Manage Projects</li>
 				</ol>
 				<h1 class="app-page-title"><span class=" nav-icon"><i class="fa fa-list"></i></span> Manage Projects</h1>
-				<a href="add-projects.php" class="btn app-btn-primary"><i class="fa fa-plus"></i> New Project</a>
+				<!-- <a href="add-projects.php" class="btn app-btn-primary"><i class="fa fa-plus"></i> New Project</a> -->
 				<a href="print-projects.php" target="_blank" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-print"></i> Print List</a>
 				<hr class="mb-4">
 				<!-- alert messages -->

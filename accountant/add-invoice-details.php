@@ -68,17 +68,39 @@ if (isset($_POST['create'])) {
 
             if ($result == TRUE) {
 
-                $sql = "INSERT INTO receivables (invoice_id, client_name, total_invoice,total_remaining, receivable_status) VALUES ('$id', '$client_name', '$total_invoice', '$total_invoice', '$receivable_status')";
-                $result = mysqli_query($conn, $sql);
+                if ($status == "Paid"){
 
-                //update last activity date and time
-                if ($result = TRUE) {
+                    $receivable_status = "Paid";
+                    $total_remaining = 0;
+
+                    $sql = "INSERT INTO receivables (invoice_id, client_name, total_invoice, total_remaining, receivable_status) VALUES ('$id', '$client_name', '$total_invoice', '$total_remaining', '$receivable_status')";
+                    $result = mysqli_query($conn, $sql);
+    
+                    //update last activity date and time
+                    if ($result = TRUE) {
+                    } else {
+                        echo "<script>alert('Error in Updating Last Activity')</script>";
+                    }
+    
+                    $_SESSION['create-invoice'] = "Invoice Created Successfully!";
+                    header("Location: invoice.php");
+
                 } else {
-                    echo "<script>alert('Error in Updating Last Activity')</script>";
+                    
+                    $sql = "INSERT INTO receivables (invoice_id, client_name, total_invoice,total_remaining, receivable_status) VALUES ('$id', '$client_name', '$total_invoice', '$total_invoice', '$receivable_status')";
+                    $result = mysqli_query($conn, $sql);
+    
+                    //update last activity date and time
+                    if ($result = TRUE) {
+                    } else {
+                        echo "<script>alert('Error in Updating Last Activity')</script>";
+                    }
+    
+                    $_SESSION['create-invoice'] = "Invoice Created Successfully!";
+                    header("Location: invoice.php");
                 }
 
-                $_SESSION['create-invoice'] = "Invoice Created Successfully!";
-                header("Location: invoice.php");
+
             } else {
 
                 $_SESSION['failed-to-create'] = "Failed To Create Invoice.";
@@ -102,8 +124,9 @@ if ($result == TRUE) {
     //check if project exist
     if ($count == 1) {
 
+        $project_id = $row['project_id'];
         $invoice_id = $row['invoice_id'];
-        $name = $row['name'];
+        $project_name = $row['name'];
         $project_description = $row['project_description'];
         $full_name = $row['full_name'];
         $location = $row['location'];
@@ -125,7 +148,7 @@ if ($result == TRUE) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT * , SUM(requirements.price * requirements.quantity) as total_amount FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $id";
+$sql = "SELECT * , SUM(requirements.price * requirements.quantity) as total_amount FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $project_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -144,7 +167,7 @@ if ($result == TRUE) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT * , SUM(workers.rate * workers.hours_per_day) as total_amount FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $id";
+$sql = "SELECT * , SUM(workers.rate * workers.hours_per_day) as total_amount FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $project_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -193,7 +216,7 @@ $total_invoice_amount = $sub_total + $total_tax;
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <!-- <link rel="stylesheet" href="../assets/css/style.css" /> -->
     <link rel="shortcut icon" href="../assets/images/icon.ico">
 
     <!-- JQuery -->
@@ -283,9 +306,8 @@ $total_invoice_amount = $sub_total + $total_tax;
                                     <p>Invoice Status <small style="font-weight:bold; font-size:1em; color:red">*</small>
                                         <select name="status" class="form-select">
                                             <option selected disabled>-- Mark Invoice As --</option>
-                                            <option value="Pending">Pending</option>
-                                            <option value="Partially Paid">Partially Paid</option>
-                                            <option value="Fully Paid">Fully Paid</option>
+                                            <option value="Unpaid">Unpaid</option>
+                                            <option value="Paid">Fully Paid</option>
                                         </select>
                                     </p>
                                 </div>
@@ -309,7 +331,7 @@ $total_invoice_amount = $sub_total + $total_tax;
                                                 <p style="font-size: 1.5em; font-weight:bold; color:#000">Project and Client Information</p>
                                                 <hr>
                                                 <tr>
-                                                    <td class="cell py-3"><b>Name: </b> <?php echo $name; ?>
+                                                    <td class="cell py-3"><b>Name: </b> <?php echo $project_name; ?>
                                                     </td>
                                                     <td class="cell py-3"><b>Description: </b> <?php echo $project_description; ?>
                                                     </td>
@@ -359,7 +381,6 @@ $total_invoice_amount = $sub_total + $total_tax;
                                         <thead>
                                             <div class="clearfix">
                                                 <h1 class="app-page-title" style="float:left">Materials</h1>
-                                                <a href="project-requirements.php?ID=<?php echo $id; ?> " target="blank" class="btn app-btn btn-success" style="color:white; float:right"><i class="fas fa-plus" style="color:white"></i></a>
                                             </div>
                                             <hr>
                                             <tr>
@@ -372,9 +393,7 @@ $total_invoice_amount = $sub_total + $total_tax;
                                         <tbody>
                                             <?php
 
-                                            $id = $_GET['ID'];
-
-                                            $sql = "SELECT * FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = $id";
+                                            $sql = "SELECT * FROM materials, requirements WHERE materials.id = requirements.material_id AND project_id = '$project_id'";
                                             $result = mysqli_query($conn, $sql);
                                             $count = mysqli_num_rows($result);
 
@@ -415,7 +434,6 @@ $total_invoice_amount = $sub_total + $total_tax;
                                         <thead>
                                             <div class="clearfix">
                                                 <h1 class="app-page-title" style="float:left">Labor</h1>
-                                                <a href="project-workers.php?ID=<?php echo $id; ?> " target="blank" class="btn app-btn btn-success" style="color:white; float:right"><i class="fas fa-plus" style="color:white"></i></a>
                                             </div>
                                             <hr>
                                             <tr>
@@ -428,9 +446,7 @@ $total_invoice_amount = $sub_total + $total_tax;
                                         <tbody>
                                             <?php
 
-                                            $id = $_GET['ID'];
-
-                                            $sql = "SELECT * FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND project_id = $id";
+                                            $sql = "SELECT * FROM workers, teams WHERE workers.position_id = teams.position_id AND workers.id = teams.member_id AND teams.project_id = '$project_id'";
                                             $result = mysqli_query($conn, $sql);
                                             $count = mysqli_num_rows($result);
 

@@ -364,6 +364,7 @@ if (isset($_POST['submit'])) {
 													<th class="cell">Payable ID</th>
 													<th class="cell">Supplier</th>
 													<th class="cell">Amount Paid</th>
+													<th class="cell">Remarks</th>
 													<th class="cell">Payment Date</th>
 													<th class="cell">Payment Type (Partial or Full)</th>
 												</tr>
@@ -386,6 +387,7 @@ if (isset($_POST['submit'])) {
 															<td class="cell" style="padding-top: 1em"><?php echo $row['payable_id']; ?></td>
 															<td class="cell" style="padding-top: 1em"><?php echo $row['supplier']; ?></td>
 															<td class="cell" style="padding-top: 1em">₱ <?php echo number_format($row['price'], 2, '.', ','); ?>
+															<td class="cell" style="padding-top: 1em"><?php echo $row['remarks']; ?>
 															<td class="cell" style="padding-top: 1em"><?php echo $date = date("M d, Y - h:i a", strtotime($row['date_paid'])); ?></td>
 															</td>
 															<?php

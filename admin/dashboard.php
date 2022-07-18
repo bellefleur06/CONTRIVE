@@ -96,7 +96,7 @@ if (!isset($_SESSION['username'])) {
                 $count = mysqli_num_rows($result);
 
                 ?>
-                <h4 class="stats-type mb-1">Invoices</h4>
+                <h4 class="stats-type mb-1">Client Invoices</h4>
                 <div class="stats-figure"><?php echo $count; ?></div>
               </div>
               <!--//app-card-body-->
@@ -197,7 +197,7 @@ if (!isset($_SESSION['username'])) {
                 $count = mysqli_num_rows($result);
 
                 ?>
-                <h4 class="stats-type mb-1">Paid Bills</h4>
+                <h4 class="stats-type mb-1">Paid Client Invoices</h4>
                 <div class="stats-figure"><?php echo $count; ?></div>
               </div>
               <!--//app-card-body-->
@@ -215,12 +215,12 @@ if (!isset($_SESSION['username'])) {
               <div class="app-card-body p-3 p-lg-4">
                 <?php
 
-                $sql = "SELECT * FROM invoices WHERE total_invoice != '' AND status = 'Pending'";
+                $sql = "SELECT * FROM invoices WHERE total_invoice != '' AND status = 'Unpaid'";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
                 ?>
-                <h4 class="stats-type mb-1">Pending Bills</h4>
+                <h4 class="stats-type mb-1">Unpaid Client Invoices</h4>
                 <div class="stats-figure"><?php echo $count ?></div>
               </div>
               <!--//app-card-body-->

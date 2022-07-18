@@ -76,8 +76,8 @@ if ($id == "") {
 					<li class="breadcrumb-item active">Project Details</li>
 				</ol>
 				<h1 class="app-page-title text-success"><span class="nav-icon"><i class="fa fa-building"></i></span> "<?php echo $row['name']; ?>" Project Details</h1>
-				<a href="project-workers.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class="fa fa-users"></i> Project Workers</a>
-				<a href="project-requirements.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class="fa fa-tools"></i> Project Requirements</a>
+				<!-- <a href="project-workers.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class="fa fa-users"></i> Project Workers</a>
+				<a href="project-requirements.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class="fa fa-tools"></i> Project Requirements</a> -->
 				<hr class="mb-4">
 				<div class="row g-4 settings-section">
 					<div class="col-12 col-md-12">
@@ -203,7 +203,7 @@ if ($id == "") {
 
 				<h1 class="app-page-title text-success"><span class="nav-icon"><i class="fa fa-chart-bar"></i></span> "<?php echo $row['name']; ?>" Project Division Progress</h1>
 
-				<a href="project-divisions.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-plus"></i> Add New Division / Project Update</a>
+				<!-- <a href="project-divisions.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-plus"></i> Add New Division / Project Update</a> -->
 				<hr class="my-4">
 
 				<div class="row g-4 settings-section">

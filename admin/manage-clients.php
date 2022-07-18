@@ -315,6 +315,7 @@ if (isset($_POST['update'])) {
 														$contact = $row['contact'];
 														$email = $row['email'];
 														$address = $row['address'];
+														$status = $row['status'];
 												?>
 														<tr>
 															<td class="cell" style="padding-top: 1em">
@@ -322,6 +323,12 @@ if (isset($_POST['update'])) {
 																<p><small>Contact No.: <b><?php echo $contact; ?></b></small></p>
 																<p><small>Email: <b><?php echo $email; ?></b></small></p>
 																<p><small>Address: <b><?php echo $address; ?></b></small></p>
+																<?php if ($status == '1') : ?>
+																	<small>Status: </small><b><small style="color: green">Active</p></b>
+																<?php else : ?>
+																	<small>Status: </small><b><small style="color: red">Inactive</p></b>
+																<?php endif; ?>
+
 															</td>
 
 															<td>

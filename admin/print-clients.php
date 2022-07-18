@@ -75,6 +75,7 @@ if (!isset($_SESSION['username'])) {
                         $email = $row['email'];
                         $address = $row['address'];
                         $date_added = $row['date_added'];
+                        $status = $row['status'];
                         $date = date("M d, Y", strtotime($date_added));
                 ?>
                         <tr>
@@ -82,6 +83,11 @@ if (!isset($_SESSION['username'])) {
                             <td><?php echo $contact; ?></td>
                             <td><?php echo $email; ?></td>
                             <td><?php echo $address; ?></td>
+                            <?php if ($status == '1') :?>
+                            <td><p>Active</p></td>
+                            <?php else : ?>
+                            <td><p>Inactive</p></td>
+                            <?php endif; ?>
                             <td><?php echo $date; ?></td>
                         </tr>
                 <?php

@@ -49,7 +49,7 @@ if (!isset($_SESSION['username'])) {
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-                <ol class="breadcrumb mb-2" style="float:right">
+                <ol class="breadcrumb mb-4" style="float:right">
                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                     <li class="breadcrumb-item active">Billing</li>
                 </ol>
@@ -155,9 +155,9 @@ if (!isset($_SESSION['username'])) {
                                                             <td class="cell" style="padding-top:0.5em"><?php echo date("M d, Y", strtotime($due_date)); ?></td>
                                                             <?php
                                                             //check if status is pending
-                                                            if ($status == "Pending") {
+                                                            if ($status == "Unpaid") {
                                                             ?>
-                                                                <td class="cell" style="padding-top:0.5em; font-weight:bold; color:blue">Pending</td>
+                                                                <td class="cell" style="padding-top:0.5em; font-weight:bold; color:blue">Unpaid</td>
 
                                                             <?php } else if ($status == "Paid") {
                                                             ?>
