@@ -103,6 +103,10 @@ if (isset($_POST['add'])) {
             $result = mysqli_query($conn, $sql);
 
             if ($result == TRUE) {
+    
+                $assigned =  "Yes";
+                $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$member_id'";
+                $result = mysqli_query($conn, $sql);
 
                 $_SESSION['assign-member'] = "Member Assigned Successfully.";
 
@@ -156,6 +160,9 @@ if (isset($_GET['ID']) && isset($_GET['delete'])) {
 
         //check if worker exist
         if ($count == 1) {
+
+            $member_id = $row['id'];
+
         } else {
 
             $_SESSION['project-not-found'] = "Project Not Found.";
@@ -173,6 +180,10 @@ if (isset($_GET['ID']) && isset($_GET['delete'])) {
 
     //check if delete process is true
     if ($result == TRUE) {
+
+        $assigned =  "No";
+        $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$member_id'";
+        $result = mysqli_query($conn, $sql);
 
         // $_SESSION['remove-member'] = "Member Removed Successfully!";
         // header("Location: project-workers.php?ID=$project_id");
