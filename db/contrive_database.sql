@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 18, 2022 at 12:07 PM
+-- Generation Time: Jul 19, 2022 at 02:55 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -66,6 +66,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
   `contact` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -77,12 +78,12 @@ CREATE TABLE `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `name`, `contact`, `email`, `address`, `date_added`, `status`) VALUES
-(1, 'Carlo Talion', '09354161854', 'carlotalion@gmail.com', 'Edsa Extension Corner Roxas Boulevard, Pasay City, Metro Manila', '2019-05-25', '1'),
-(2, 'Galtero Cayetano', '09146285623', 'galterocayetano@gmail.com', 'Piape Boulevard Davao City, Davao Del Sur', '2020-08-17', '1'),
-(3, 'Gezane Recto', '09561856381', 'gezanerecto@gmail.com', '2/F Eltanal Building, Roxas Avenue, Iligan, Lanao Del Norte', '2021-07-02', '1'),
-(4, 'Vincent Lara', '09383518463', 'vincentlara@gmail.com', 'Legaspi Towers II 1200, Makati City, Metro Manila', '2021-04-01', '1'),
-(5, 'Patrick Ail B. Bandola', '09503638031', 'pbandola06@gmail.com', 'San Pedro City, Laguna', '2022-07-16', '1');
+INSERT INTO `clients` (`id`, `name`, `company_name`, `contact`, `email`, `address`, `date_added`, `status`) VALUES
+(1, 'Carlo Talion', 'Carlo Talion Company', '09354161854', 'carlotalion@gmail.com', 'Edsa Extension Corner Roxas Boulevard, Pasay City, Metro Manila', '2019-05-25', '1'),
+(2, 'Galtero Cayetano', 'Galtero Cayetano Company', '09146285623', 'galterocayetano@gmail.com', 'Piape Boulevard Davao City, Davao Del Sur', '2020-08-17', '1'),
+(3, 'Gezane Recto', 'Gezane Recto Company', '09561856381', 'gezanerecto@gmail.com', '2/F Eltanal Building, Roxas Avenue, Iligan, Lanao Del Norte', '2021-07-02', '1'),
+(4, 'Vincent Lara', 'Vincent Lara Company', '09383518463', 'vincentlara@gmail.com', 'Legaspi Towers II 1200, Makati City, Metro Manila', '2021-04-01', '1'),
+(5, 'Patrick Ail B. Bandola', 'Patrick Ail B. Bandola Company', '09503638031', 'pbandola06@gmail.com', 'San Pedro City, Laguna', '2022-07-16', '1');
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,9 @@ CREATE TABLE `history` (
 
 INSERT INTO `history` (`id`, `payables_id`, `price`, `remaining_amount`, `remarks`, `payable_status`, `date_paid`) VALUES
 (1, '1', '2570.00', '0.00', 'Full Payment', 'Paid', '2022-03-13 20:20:54'),
-(2, '4', '495.00', '4000.00', 'Partial Payment', 'Partial', '2022-03-19 20:17:16');
+(2, '4', '495.00', '4000.00', 'Partial Payment', 'Partial', '2022-03-19 20:17:16'),
+(3, '4', '1000.00', '3000.00', 'Partial Payment', 'Partial', '2022-07-19 17:00:41'),
+(4, '4', '1000.00', '2000.00', 'Partial Payment', 'Partial', '2022-07-19 17:41:39');
 
 -- --------------------------------------------------------
 
@@ -137,13 +140,9 @@ CREATE TABLE `invoices` (
 --
 
 INSERT INTO `invoices` (`invoice_id`, `project_id`, `client`, `transportation`, `consultation_fee`, `total_miscellaneous`, `total_materials`, `total_labor`, `subtotal`, `total_tax`, `total_invoice`, `status`, `date_created`, `due_date`, `date_added`) VALUES
-(1, '1', 'Galtero Cayetano', '500.00', '1000.00', '1500.00', '56800.00', '2816.00', '61116.00', '7333.92', '68449.92', 'Paid', '2022-03-20', '2023-03-20', '2022-03-20 05:54:45'),
-(3, '3', 'Gezane Recto', '500.00', '1000.00', '1500.00', '209800.00', '3472.00', '214772.00', '25772.64', '240544.64', 'Paid', '2022-03-21', '2023-03-21', '2022-03-20 05:59:03'),
-(7, '33', 'Patrick Ail B. Bandola', '20000.00', '1000.00', '21000.00', '2025.00', '688.00', '23713.00', '2845.56', '26558.56', 'Unpaid', '2022-07-16', '2023-07-16', '2022-07-16 16:31:53'),
-(8, '33', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '0000-00-00', '0000-00-00', '0000-00-00 00:00:00'),
-(9, '33', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '0000-00-00', '0000-00-00', '0000-00-00 00:00:00'),
-(10, '', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '0000-00-00', '0000-00-00', '0000-00-00 00:00:00'),
-(11, '', '', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '0000-00-00', '0000-00-00', '0000-00-00 00:00:00');
+(1, '1', 'Galtero Cayetano', '1000.00', '1000.00', '2000.00', '56800.00', '2816.00', '61616.00', '7393.92', '69009.92', 'Paid', '2022-07-19', '2023-07-19', '2022-07-19 17:29:38'),
+(2, '3', 'Gezane Recto', '1000.00', '1000.00', '2000.00', '209800.00', '3472.00', '215272.00', '25832.64', '241104.64', 'Unpaid', '2022-07-19', '2023-07-19', '2022-07-19 17:30:47'),
+(3, '33', 'Patrick Ail B. Bandola', '1000.00', '1000.00', '2000.00', '2025.00', '688.00', '4713.00', '565.56', '5278.56', 'Unpaid', '2022-07-19', '2023-07-19', '2022-07-19 17:40:29');
 
 -- --------------------------------------------------------
 
@@ -329,7 +328,35 @@ INSERT INTO `logs` (`id`, `username`, `log_time`, `activity`) VALUES
 (164, 'Administrator', '2022-07-16 15:38:08', 'Add New Project Requirement For San Pedro City Library - 20 pc Concrete Block'),
 (165, 'Administrator', '2022-07-16 15:38:14', 'Add New Project Requirement For San Pedro City Library - 15 pc PVC Pipes'),
 (166, 'Administrator', '2022-07-16 15:39:12', 'Add New Project Progress Update For San Pedro City Library - Roof - 20%'),
-(167, 'Administrator', '2022-07-16 15:39:27', 'Add New Project Progress Update For San Pedro City Library - Window - 20%');
+(167, 'Administrator', '2022-07-16 15:39:27', 'Add New Project Progress Update For San Pedro City Library - Window - 20%'),
+(168, 'Administrator', '2022-07-19 15:51:18', 'Update Client Details of Carlo Talion'),
+(169, 'Administrator', '2022-07-19 15:51:54', 'Update Client Details of Carlo Talion'),
+(170, 'Administrator', '2022-07-19 15:58:55', 'Add New Client - Cielito Guerrero'),
+(171, 'Administrator', '2022-07-19 15:59:01', 'Update Client Details of Cielito Guerrero'),
+(172, 'Administrator', '2022-07-19 15:59:09', 'Delete Client Record of Cielito Guerrero'),
+(173, 'Accountant', '2022-07-19 16:40:37', 'Add Partial Payment of ₱30.08.00 For Accounts Receivable From Vincent Lara'),
+(174, 'Accountant', '2022-07-19 16:50:22', 'Add Partial Payment of ₱2000.00 For Accounts Receivable From Vincent Lara'),
+(175, 'Accountant', '2022-07-19 16:53:59', 'Add Partial Payment of ₱1000.00 For Accounts Receivable From Vincent Lara'),
+(176, 'Accountant', '2022-07-19 17:00:41', 'Add Partial Payment of ₱1000.00 For Accounts Payable For Sheraton Plumbing And Construction Supply'),
+(177, 'Accountant', '2022-07-19 17:03:17', 'Add Partial Payment of ₱1000.00 For Accounts Receivable From Vincent Lara'),
+(178, 'Accountant', '2022-07-19 17:04:27', 'Add Partial Payment of ₱1000.00 For Accounts Receivable From Vincent Lara'),
+(179, 'Accountant', '2022-07-19 17:30:08', 'Add Partial Payment of ₱9.92.00 For Accounts Receivable From Galtero Cayetano'),
+(180, 'Accountant', '2022-07-19 17:33:22', 'Add Full Payment of ₱69000.00 For Accounts Receivable From Galtero Cayetano'),
+(181, 'Accountant', '2022-07-19 17:40:54', 'Add Partial Payment of ₱104.64.00 For Accounts Receivable From Gezane Recto'),
+(182, 'Accountant', '2022-07-19 17:41:39', 'Add Partial Payment of ₱1000.00 For Accounts Payable For Sheraton Plumbing And Construction Supply'),
+(183, 'Engineer', '2022-07-19 19:39:44', 'Removed Project Worker For Paradise Palms - Drake Alfonso - Carpenter'),
+(184, 'Engineer', '2022-07-19 19:56:34', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(185, 'Engineer', '2022-07-19 19:56:58', 'Removed Project Worker For Jmb Food Sales - Drake Alfonso - Carpenter'),
+(186, 'Engineer', '2022-07-19 20:01:21', 'Removed Project Worker For Jmb Food Sales - Drake Alfonso - Carpenter'),
+(187, 'Engineer', '2022-07-19 20:02:15', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(188, 'Engineer', '2022-07-19 20:09:44', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(189, 'Engineer', '2022-07-19 20:09:59', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(190, 'Engineer', '2022-07-19 20:10:29', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(191, 'Engineer', '2022-07-19 20:11:01', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(192, 'Engineer', '2022-07-19 20:11:43', 'Removed Project Worker For Jmb Food Sales - Drake Alfonso - Carpenter'),
+(193, 'Engineer', '2022-07-19 20:12:26', 'Removed Project Worker For Jmb Food Sales - Drake Alfonso - Carpenter'),
+(194, 'Engineer', '2022-07-19 20:12:30', 'Removed Project Worker For Jmb Food Sales - Frisco  Alcaraz - Construction Worker'),
+(195, 'Administrator', '2022-07-19 20:47:38', 'Add New Project - Pat\'s Restaturant');
 
 -- --------------------------------------------------------
 
@@ -436,7 +463,7 @@ CREATE TABLE `payables` (
 INSERT INTO `payables` (`id`, `payable_id`, `order_id`, `product_id`, `products`, `product_price`, `qty`, `amount_paid`, `total_amount`, `date_ordered`, `date_received`, `status`, `date_paid`, `user_id`) VALUES
 (1, '#967871', '#25977345', '1', 'Electrical Wire and Cable', '257.00', '10', '2570.00', '0.00', '2022-03-09 07:17:29', '2022-03-13 13:47:08', 'Paid', '2022-03-13 20:20:54', '1'),
 (3, '#167326', '#54971183', '2', 'Concrete Block', '18.00', '20', '360.00', '360.00', '2022-03-16 12:02:01', '2022-03-18 07:28:04', 'Unpaid', '0000-00-00 00:00:00', '1'),
-(4, '#110506', '#8392498', '4', 'Galvanized Iron Pipes', '899.00', '5', '4495.00', '4000.00', '2022-03-09 07:17:29', '2022-03-19 20:16:39', 'Partial', '0000-00-00 00:00:00', '1');
+(4, '#110506', '#8392498', '4', 'Galvanized Iron Pipes', '899.00', '5', '4495.00', '2000.00', '2022-03-09 07:17:29', '2022-03-19 20:16:39', 'Partial', '0000-00-00 00:00:00', '1');
 
 -- --------------------------------------------------------
 
@@ -453,7 +480,7 @@ CREATE TABLE `payments` (
   `remarks` varchar(255) NOT NULL,
   `payment_date` datetime NOT NULL DEFAULT current_timestamp(),
   `notification_status` int(1) NOT NULL,
-  `encoder` int(11) NOT NULL
+  `encoder` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -461,10 +488,9 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`payment_id`, `receivables_id`, `price`, `remaining_amount`, `payment_status`, `remarks`, `payment_date`, `notification_status`, `encoder`) VALUES
-(1, '1', 449.92, '68000.00', 'Partial', 'Billing A', '2022-03-20 05:57:27', 1, 1),
-(2, '1', 68000.00, '0.00', 'Paid', 'Billing B', '2022-03-20 16:48:42', 1, 1),
-(3, '2', 240000.00, '544.64', 'Partial', 'Billing A', '2022-06-23 16:27:10', 1, 1),
-(4, '2', 544.64, '0.00', 'Paid', 'Billing A', '2022-06-23 16:27:24', 1, 1);
+(1, '1', 9.92, '69000.00', 'Partial', 'Billing B', '2022-07-19 17:30:08', 1, 'Accountant'),
+(2, '1', 69000.00, '0.00', 'Paid', 'Billing B', '2022-07-19 17:33:22', 1, 'Accountant'),
+(3, '2', 104.64, '241000.00', 'Partial', 'Billing A', '2022-07-19 17:40:54', 1, 'Accountant');
 
 -- --------------------------------------------------------
 
@@ -515,21 +541,6 @@ CREATE TABLE `progress` (
   `date_updated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `progress`
---
-
-INSERT INTO `progress` (`id`, `project_id`, `project_name`, `division_name`, `progress`, `date_added`, `date_updated`) VALUES
-(1, '3', 'Paradise Palms', 'Floor', '100', '2022-01-31 10:31:06', '2022-01-31 10:31:06'),
-(2, '3', 'Paradise Palms', 'Windows', '100', '2022-01-31 10:31:13', '2022-01-31 10:31:13'),
-(3, '3', 'Paradise Palms', 'Roof', '100', '2022-01-31 10:31:18', '2022-01-31 10:31:18'),
-(4, '1', 'Jmb Food Sales', 'Tiles', '30', '2022-01-31 10:50:11', '2022-01-31 10:50:11'),
-(5, '1', 'Jmb Food Sales', 'Door', '65', '2022-01-31 10:50:16', '2022-01-31 10:50:16'),
-(6, '1', 'Jmb Food Sales', 'Walls', '35', '2022-01-31 10:50:19', '2022-01-31 10:50:19'),
-(7, '3', 'Paradise Palms', 'Tiles', '100', '2022-03-16 11:43:53', '2022-03-16 11:43:53'),
-(8, '33', 'San Pedro City Library', 'Roof', '20', '2022-07-16 15:37:14', '2022-07-16 15:37:14'),
-(9, '33', 'San Pedro City Library', 'Window', '20', '2022-07-16 15:37:18', '2022-07-16 15:37:18');
-
 -- --------------------------------------------------------
 
 --
@@ -561,7 +572,8 @@ INSERT INTO `projects` (`id`, `type`, `name`, `project_description`, `engineer_i
 (2, 'Residential Construction', 'Lakeside View', 'Subdivision Area in Nueva Ecija', '3', 'Nueva Ecija', 'Carlo Talion', '2020-09-06', '2022-01-08', 'Cancelled', 'Pending', '0000-00-00 00:00:00', '2020-07-24'),
 (3, 'Residential Construction', 'Paradise Palms', 'Subdivision Area in Pampanga', '3', 'Pampanga', 'Gezane Recto', '2020-12-17', '2021-05-13', 'Finished', 'Pending', '2021-11-02 18:38:59', '2021-08-25'),
 (4, 'Commercial Construction', 'The Royal Bistro', 'Coffee and Cake Shop in Metro Manila', '3', 'Metro Manila', 'Vincent Lara', '2020-09-06', '2022-10-23', 'Started', 'Pending', '2021-11-02 11:44:31', '2021-07-18'),
-(33, 'Commercial Construction', 'San Pedro City Library', 'Public Library in San Pedro City, Laguna', '3', 'San Pedro City, Laguna', 'Patrick Ail B. Bandola', '2022-07-16', '2023-07-16', 'On Hold', 'Pending', '0000-00-00 00:00:00', '2022-07-16');
+(33, 'Commercial Construction', 'San Pedro City Library', 'Public Library in San Pedro City, Laguna', '3', 'San Pedro City, Laguna', 'Patrick Ail B. Bandola', '2022-07-16', '2023-07-16', 'On Hold', 'Pending', '0000-00-00 00:00:00', '2022-07-16'),
+(34, 'Commercial Construction', 'Pat\'s Restaturant', 'Restaurant in San Pedro', '3', 'San Pedro Laguna', 'Patrick Ail B. Bandola', '2022-07-19', '2023-07-19', 'On Hold', 'Pending', '0000-00-00 00:00:00', '2022-07-19');
 
 -- --------------------------------------------------------
 
@@ -585,9 +597,9 @@ CREATE TABLE `receivables` (
 --
 
 INSERT INTO `receivables` (`id`, `invoice_id`, `client_name`, `total_invoice`, `total_remaining`, `receivable_status`, `receivable_date_added`, `receivable_date_received`) VALUES
-(1, '1', 'Galtero Cayetano', '68449.92', '0.00', 'Paid', '2022-03-20 05:54:45', '2022-03-20 05:59:49'),
-(2, '3', 'Gezane Recto', '240544.64', '0.00', 'Paid', '2022-03-20 05:59:03', '2022-06-23 16:27:24'),
-(5, '7', 'Patrick Ail B. Bandola', '26558.56', '26558.56', 'Unpaid', '2022-07-16 16:31:53', '0000-00-00 00:00:00');
+(1, '1', 'Galtero Cayetano', '69009.92', '0.00', 'Paid', '2022-07-19 17:29:38', '2022-07-19 17:33:22'),
+(2, '2', 'Gezane Recto', '241104.64', '241000.00', 'Partial', '2022-07-19 17:30:47', '0000-00-00 00:00:00'),
+(3, '3', 'Patrick Ail B. Bandola', '5278.56', '5278.56', 'Unpaid', '2022-07-19 17:40:29', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -659,9 +671,9 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `staff_id`, `full_name`, `birthday`, `age`, `gender`, `address`, `contact`, `civil_status`, `profile`, `status`, `email`, `username`, `password`, `access`, `otp`, `date_added`, `last_login`, `last_activity`, `last_logout`) VALUES
-(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-07-18 17:57:41', '2022-07-18 17:57:41', '2022-07-18 18:01:05'),
-(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-07-18 18:01:24', '2022-07-18 18:01:24', '2022-07-18 18:06:25'),
-(8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-07-18 17:40:10', '2022-07-18 17:40:10', '2022-07-18 17:57:35');
+(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-07-19 20:46:24', '2022-07-19 20:47:38', '2022-07-19 20:54:18'),
+(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-07-19 20:54:29', '2022-07-19 20:54:29', '2022-07-19 20:46:17'),
+(8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-07-19 19:08:37', '2022-07-19 19:08:37', '2022-07-19 19:25:57');
 
 -- --------------------------------------------------------
 
@@ -714,9 +726,7 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `project_id`, `project`, `position_id`, `member_id`, `working_days`) VALUES
-(1, '1', 'Jmb Food Sales', '14', '4', '396'),
 (2, '1', 'Jmb Food Sales', '5', '24', '396'),
-(3, '1', 'Jmb Food Sales', '10', '28', '396'),
 (6, '3', 'Paradise Palms', '12', '2', '147'),
 (7, '3', 'Paradise Palms', '2', '21', '147'),
 (8, '3', 'Paradise Palms', '3', '22', '147'),
@@ -725,9 +735,10 @@ INSERT INTO `teams` (`id`, `project_id`, `project`, `position_id`, `member_id`, 
 (11, '4', 'The Royal Bistro', '13', '30', '777'),
 (12, '4', 'The Royal Bistro', '9', '27', '777'),
 (16, '4', 'The Royal Bistro', '6', '25', '777'),
-(18, '1', 'Jmb Food Sales', '1', '1', '396'),
 (19, '4', 'The Royal Bistro', '4', '23', '777'),
-(26, '33', 'San Pedro City Library', '5', '24', '365');
+(26, '33', 'San Pedro City Library', '5', '24', '365'),
+(34, '1', 'Jmb Food Sales', '10', '28', '396'),
+(35, '1', 'Jmb Food Sales', '1', '1', '396');
 
 -- --------------------------------------------------------
 
@@ -746,24 +757,6 @@ CREATE TABLE `updates` (
   `user_id` varchar(255) NOT NULL,
   `date_posted` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `updates`
---
-
-INSERT INTO `updates` (`update_id`, `project_id`, `project_name`, `division_id`, `division_name`, `progress`, `details`, `user_id`, `date_posted`) VALUES
-(1, '3', 'Paradise Palms', '1', 'Floor', '100', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde quisquam dolore dolor? Veritatis quod maiores pariatur magnam culpa beatae. Ex?', '3', '2022-01-31 10:31:47'),
-(2, '3', 'Paradise Palms', '2', 'Windows', '100', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, perferendis ipsam. Sunt ut cumque odio nulla, totam beatae consectetur earum iure sit!', '3', '2022-01-31 10:35:27'),
-(3, '3', 'Paradise Palms', '3', 'Roof', '100', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam nulla fugiat inventore tempore eius numquam placeat asperiores. Repellat qui maiores aut officiis nesciunt?', '3', '2022-01-31 10:40:27'),
-(4, '1', 'Jmb Food Sales', '4', 'Tiles', '10', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. At neque exercitationem quibusdam quidem aliquid, magnam quos delectus, voluptatibus ea blanditiis inventore. Quam, quis! Reprehenderit.', '3', '2022-01-31 10:50:52'),
-(5, '1', 'Jmb Food Sales', '5', 'Door', '65', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum odit laboriosam sint harum nemo corrupti sit! Labore saepe odit veniam quaerat ullam libero reprehenderit sequi.', '3', '2022-01-31 10:52:05'),
-(6, '1', 'Jmb Food Sales', '6', 'Walls', '35', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem reprehenderit praesentium possimus necessitatibus temporibus illum? Architecto voluptate voluptatum repellendus quae unde, ipsa ut nemo modi consequatur.', '3', '2022-01-31 10:53:18'),
-(7, '1', 'Jmb Food Sales', '4', 'Tiles', '18', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat sunt voluptatum impedit tenetur odit dolor consequatur nam ut, asperiores mollitia magni iste magnam quo unde vero quam, vel rem molestias porro.', '3', '2022-02-02 12:36:33'),
-(8, '1', 'Jmb Food Sales', '4', 'Tiles', '28', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut voluptatum, dignissimos aperiam sed odit eos et, exercitationem ipsam deleniti suscipit, minus quod consequuntur ullam ea. Temporibus consequatur fugit ipsam consequuntur, expedita repudiandae pe', '3', '2022-02-23 15:56:05'),
-(9, '1', 'Jmb Food Sales', '4', 'Tiles', '30', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus accusamus quis earum quia architecto doloremque unde voluptas nulla nesciunt itaque. Rem aliquid unde nisi, quidem aspernatur hic mollitia iure voluptates necessitatibus eos reiciendis', '3', '2022-03-11 11:33:48'),
-(10, '3', 'Paradise Palms', '7', 'Tiles', '100', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolor reprehenderit, fugiat harum ad obcaecati commodi velit repellendus, sed perspiciatis ex numquam ipsa et quis quia doloremque vitae animi alias!', '3', '2022-03-16 11:44:32'),
-(11, '33', 'San Pedro City Library', '8', 'Roof', '20', 'On-going', '1', '2022-07-16 15:39:12'),
-(12, '33', 'San Pedro City Library', '9', 'Window', '20', 'Completed', '1', '2022-07-16 15:39:27');
 
 -- --------------------------------------------------------
 
@@ -805,12 +798,12 @@ INSERT INTO `workers` (`id`, `emp_id`, `last_name`, `first_name`, `middle_name`,
 (21, 'EMP-739', 'Dacanay', 'Christian', 'Patacsil', '1990-03-08', '31', 'Male', 'National Road, Calasiao', '09755173939', 'Married', '2', 'Flooring Installer', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-06-06'),
 (22, 'EMP-970', 'Abella', 'Edwardo', 'Everardo', '1995-09-12', '26', 'Male', '2308-C Lt Sy Compound Taft Avenue, Pasay City', '09025520271', 'Single', '3', 'Glazier', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-12-13'),
 (23, 'EMP-866', 'Lorete', 'Steven', 'Ampatuan', '1978-04-10', '43', 'Male', '222 Violago Compound, E. Rodriguez, Quezon City ', '09024149534', 'Divorced', '4', 'Tile Setter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-02-17'),
-(24, 'EMP-818', 'Ladera', 'Arthur', 'Declan', '1965-11-11', '56', 'Male', 'South Drive Baguio, Benguet', '09744447122', 'Separated', '5', 'Brick Mason', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-08-20'),
+(24, 'EMP-818', 'Ladera', 'Arthur', 'Declan', '1965-11-11', '56', 'Male', 'South Drive Baguio, Benguet', '09744447122', 'Separated', '5', 'Brick Mason', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2020-08-20'),
 (25, 'EMP-880', 'Macalinao', 'Peter', 'Cuanco', '1985-10-12', '36', 'Male', 'Zapote Road, Sycamore Annex, Las Pinas', '09028071413', 'Married', '6', 'Roofer', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-04-19'),
 (26, 'EMP-123', 'Magpantay', 'Ezra', 'Jaron', '1973-11-15', '48', 'Male', '139 Mother Ignacia Avenue, South Triangle, Quezon City', '09099201020', 'Divorced', '8', 'Iron Worker', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-05-12'),
 (27, 'EMP-889', 'Frisco', 'Fred', 'Daculug', '1988-02-26', '33', 'Male', 'Ramagi Building, 1081 Pedro Gil Street, Paco, Manila', '09025261955', 'Married', '9', 'Plumber', '90.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-03-26'),
 (28, 'EMP-951', 'Alfonso', 'Drake', 'Madid', '1991-04-27', '30', 'Male', '434 Plateria Street, Quiapo, Manila', '09077332963', 'Married', '10', 'Carpenter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-01-29'),
-(29, 'EMP-526', 'Torrealba', 'Elmer', 'Holden', '1993-07-01', '28', 'Male', 'Citibank Tower, 8741 Paseo De Roxas Street, Makati City', '09028195177', 'Single', '11', 'Painter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-03-09'),
+(29, 'EMP-526', 'Torrealba', 'Elmer', 'Holden', '1993-07-01', '28', 'Male', 'Citibank Tower, 8741 Paseo De Roxas Street, Makati City', '09028195177', 'Single', '11', 'Painter', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2021-03-09'),
 (30, 'EMP-675', 'Quaimbao', 'Rodney', 'Asuncion', '1985-12-07', '35', 'Male', 'Baclayon, Bohol', '09055409531', 'Married', '13', 'Pipefitter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-12-06');
 
 --
@@ -957,25 +950,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -999,7 +992,7 @@ ALTER TABLE `payables`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `positions`
@@ -1011,19 +1004,19 @@ ALTER TABLE `positions`
 -- AUTO_INCREMENT for table `progress`
 --
 ALTER TABLE `progress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `receivables`
 --
 ALTER TABLE `receivables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `requirements`
@@ -1047,13 +1040,13 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `updates`
 --
 ALTER TABLE `updates`
-  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `workers`
