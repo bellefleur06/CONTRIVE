@@ -17,18 +17,20 @@ $edit = false;
 if (isset($_POST['submit'])) {
 
 	$clientname =  mysqli_real_escape_string($conn, $_POST['name']);
+	$companyname =  mysqli_real_escape_string($conn, $_POST['companyname']);
 	$contact = mysqli_real_escape_string($conn, $_POST['contact']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$address = mysqli_real_escape_string($conn, $_POST['address']);
+	$status = "1";
 	$activity = "Add New Client - " . $clientname;
 
-	$sql =  "SELECT name FROM clients WHERE name = '$clientname'";
+	$sql =  "SELECT name FROM clients WHERE name = '$clientname' OR company_name = '$companyname'";
 	$result = mysqli_query($conn, $sql);
 
 	//check if client already exist
 	if (!$result->num_rows > 0) {
 
-		$sql = "INSERT INTO clients (name, contact, email, address) VALUES ('$clientname', '$contact', '$email', '$address')";
+		$sql = "INSERT INTO clients (name, company_name, contact, email, address, status) VALUES ('$clientname', '$companyname', '$contact', '$email', '$address', '$status')";
 		$result = mysqli_query($conn, $sql);
 
 		//check if insert result is true
@@ -56,6 +58,7 @@ if (isset($_POST['submit'])) {
 
 			//clear texboxes if the result is true
 			$_POST['name'] = "";
+			$_POST['company_name'] = "";
 			$_POST['contact'] = "";
 			$_POST['email'] = "";
 			$_POST['address'] = "";
@@ -84,9 +87,11 @@ if (isset($_GET['ID'])) {
 
 		if ($count == 1) {
 			$clientname = $row['name'];
+			$companyname = $row['company_name'];
 			$contact = $row['contact'];
 			$email = $row['email'];
 			$address = $row['address'];
+			$status = $row['status'];
 		}
 	}
 }
@@ -95,12 +100,14 @@ if (isset($_GET['ID'])) {
 if (isset($_POST['update'])) {
 
 	$clientname =  mysqli_real_escape_string($conn, $_POST['name']);
+	$companyname =  mysqli_real_escape_string($conn, $_POST['companyname']);
 	$contact = mysqli_real_escape_string($conn, $_POST['contact']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$address = mysqli_real_escape_string($conn, $_POST['address']);
+	$status = mysqli_real_escape_string($conn, $_POST['status']);
 	$activity = "Update Client Details of " . $clientname;
 
-	$sql = "UPDATE clients SET name = '$clientname', contact = '$contact', email = '$email', address = '$address' WHERE id = $client_id";
+	$sql = "UPDATE clients SET name = '$clientname', company_name = '$companyname', contact = '$contact', email = '$email', address = '$address', status = '$status' WHERE id = $client_id";
 	$result = mysqli_query($conn, $sql);
 
 	//check if update process if true
@@ -264,6 +271,10 @@ if (isset($_POST['update'])) {
 										<input type="text" name="name" class="form-control" <?php if ($edit == true) : ?> value="<?php echo $clientname; ?>" <?php else : ?> value="<?php echo $_POST['name']; ?>" <?php endif ?> autocomplete="off" required>
 									</div>
 									<div class="mb-3">
+										<label for="setting-input-3" class="form-label">Company Name: </label>
+										<input type="text" name="companyname" class="form-control" <?php if ($edit == true) : ?> value="<?php echo $companyname; ?>" <?php else : ?> value="<?php echo $_POST['companyname']; ?>" <?php endif ?> autocomplete="off" required>
+									</div>
+									<div class="mb-3">
 										<label for="setting-input-3" class="form-label">Contact No.: </label>
 										<input type="number" name="contact" class="form-control" <?php if ($edit == true) : ?> value="<?php echo $contact; ?>" <?php endif ?> autocomplete="off" required value="<?php echo $_POST['contact']; ?>">
 									</div>
@@ -275,6 +286,17 @@ if (isset($_POST['update'])) {
 										<label for="setting-input-3" class="form-label">Address: </label>
 										<textarea style="height: 6em" name="address" class="form-control" autocomplete="off" required cols="3"><?php if ($edit == true) : ?><?php echo $address; ?><?php else : ?><?php echo $_POST['address']; ?><?php endif ?></textarea>
 									</div>
+									<?php if ($edit == true) : ?>
+										<div class="mb-3">
+											<fieldset class="form-group">
+												<label for="setting-input-3" class="form-label">Status: </label>
+												<select name="status" class="form-select" id="basicSelect" required>
+													<option value="1" <?php echo ($row['status'] == "1") ? 'selected' : ''; ?>>Active</option>
+													<option value="0" <?php echo ($row['status'] == "0") ? 'selected' : ''; ?>>Inactive</option>
+												</select>
+											</fieldset>
+										</div>
+									<?php endif ?>
 									<?php if ($edit == true) : ?>
 										<button type="submit" name="update" class="btn app-btn-primary">Update</button>
 										<a href="manage-clients.php" class="btn app-btn-primary" style="float:right;background-color:grey">Cancel</a>

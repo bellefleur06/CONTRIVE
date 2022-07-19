@@ -34,13 +34,42 @@
 						<!--//nav-link-->
 					</li>
 					<!--//nav-item-->
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link <?php if ($page == 'invoice') {
 												echo 'active';
 											} ?>" href="invoice.php">
 							<span class="nav-icon"><i class="fas fa-file-invoice"></i></span>
 							<span class="nav-link-text">Billing</span>
 						</a>
+					</li> -->
+					<li class="nav-item has-submenu">
+						<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						<a class="nav-link submenu-toggle <?php if ($page == 'receivable' or $page == 'payable' or $page == 'invoice') {
+																echo 'active';
+															} ?>" href="#" data-toggle="collapse" data-target="#submenu-4" aria-expanded="<?php if ($page == 'receivable' or $page == 'payable' or $page == 'invoice') {
+																																				echo 'true';
+																																			} ?>" aria-controls="submenu-4">
+							<span class="nav-icon"><i class="fa fa-file-invoice"></i></span>
+							<span class="nav-link-text">Billing</span>
+							<span class="submenu-arrow"><i class="fa fa-angle-down"></i></span>
+							<!--//submenu-arrow-->
+						</a>
+						<!--//nav-link-->
+						<div id="submenu-4" class="collapse submenu submenu-4 <?php if ($page == 'receivable' or $page == 'payable' or $page == 'invoice') {
+																					echo 'show';
+																				} ?>" data-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item"><a class="submenu-link <?php if ($page == 'invoice') {
+																					echo 'active';
+																				} ?>" href="invoice.php">Invoices</a></li>
+								<li class="submenu-item"><a class="submenu-link <?php if ($page == 'receivable') {
+																					echo 'active';
+																				} ?>" href="manage-receivables.php">Manage Receivables</a></li>
+								<li class="submenu-item"><a class="submenu-link <?php if ($page == 'payable') {
+																					echo 'active';
+																				} ?>" href="manage-payables.php">Manage Payables</a></li>
+							</ul>
+						</div>
 					</li>
 					<li class="nav-item has-submenu">
 						<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->

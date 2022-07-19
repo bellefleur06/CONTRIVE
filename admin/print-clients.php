@@ -49,13 +49,15 @@ if (!isset($_SESSION['username'])) {
         <table id="ready" class="table table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th style="text-align:center" colspan="5">Clients Master List</th>
+                    <th style="text-align:center" colspan="7">Clients Master List</th>
                 </tr>
                 <tr>
                     <th>Full Name</th>
+                    <th>Company Name</th>
                     <th>Contact No.</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Status</th>
                     <th>Date Added</th>
                 </tr>
             </thead>
@@ -71,6 +73,7 @@ if (!isset($_SESSION['username'])) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row['id'];
                         $clientname = $row['name'];
+                        $company_name = $row['company_name'];
                         $contact = $row['contact'];
                         $email = $row['email'];
                         $address = $row['address'];
@@ -80,6 +83,7 @@ if (!isset($_SESSION['username'])) {
                 ?>
                         <tr>
                             <td><?php echo $clientname; ?></td>
+                            <td><?php echo $company_name; ?></td>
                             <td><?php echo $contact; ?></td>
                             <td><?php echo $email; ?></td>
                             <td><?php echo $address; ?></td>

@@ -61,7 +61,7 @@ if (isset($_POST['return'])) {
 
     $return_reason =  mysqli_real_escape_string($conn, $_POST['return_reason']);
     $status = "Returning";
-    $activity = "Receive Order To " . $supplier . " - " . $qty . " " . $unit . " of " . $product;
+    $activity = "Return Order To " . $supplier . " - " . $qty . " " . $unit . " of " . $product;
 
     $sql = "UPDATE orders SET status = '$status', return_reason = '$return_reason', date_returned = now() WHERE id = $id";
     $result = mysqli_query($conn, $sql);

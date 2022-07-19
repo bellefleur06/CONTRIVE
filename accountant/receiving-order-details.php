@@ -88,7 +88,7 @@ if (isset($_POST['receive'])) {
     $mail->SMTPSecure = "tls";
     $mail->Port = "587";
     $mail->Username = "contrivekcs@gmail.com"; //ito yung gamit kong email pang send
-    $mail->Password = "contrivekcs"; //password ng email ko
+    $mail->Password = "xffsqsrowvxhrona"; //password ng app
     $mail->Subject = "Order Received!"; //subject ng email natin
     $mail->setFrom("contrivekcs@gmail.com"); //kung kanino galing yung email
     $mail->isHTML(true); //naka true para madesignan yung email body

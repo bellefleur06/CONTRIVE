@@ -77,7 +77,7 @@ if (!isset($_SESSION['username'])) {
                 }
                 ?>
                 <div class="row g-3 mb-4 align-items-center justify-content-between">
-                    <div class="col-auto">
+                    <!-- <div class="col-auto">
                         <a href="add-invoice.php" class="btn app-btn-primary"><i class=" fa fa-plus"></i> New Invoice</a>
                     </div>
                     <div class="col-auto">
@@ -92,15 +92,15 @@ if (!isset($_SESSION['username'])) {
                                         <option value="option-4">Last 3 months</option>
 
                                     </select>
-                                </div>
+                                </div> -->
                                 <!-- <div class="col-auto">
                                     <a class="btn app-btn-secondary" href="#"><i class="fas fa-download"></i> Download CSV</a>
                                 </div> -->
-                            </div>
+                            <!-- </div> -->
                             <!--//row-->
-                        </div>
+                        <!-- </div> -->
                         <!--//table-utilities-->
-                    </div>
+                    <!-- </div> -->
                     <!--//col-auto-->
                 </div>
                 <!--//row-->

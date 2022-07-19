@@ -38,6 +38,8 @@ if (isset($_POST['submit'])) {
     $amount = mysqli_real_escape_string($conn, $_POST['amount']);
     $total_amount_receivable = mysqli_real_escape_string($conn, $_POST['total_amount_receivable']);
     $receivable_id = mysqli_real_escape_string($conn, $_POST['receivable_id']);
+    $payment_remarks = mysqli_real_escape_string($conn, $_POST['payment']);
+    $notification_status = 1;
 
     if ($amount < $total_amount_receivable) {
         $status = "Partial";
@@ -53,7 +55,7 @@ if (isset($_POST['submit'])) {
 
     if ($diff == 0) {
 
-        $sql = "INSERT INTO payments (receivables_id, price, remaining_amount, payment_status) VALUES ('$receivable_id', '$amount', '$diff', '$status')";
+        $sql = "INSERT INTO payments (receivables_id, price, remaining_amount, payment_status, remarks, notification_status, encoder) VALUES ('$id', '$amount', '$diff', '$status', '$payment_remarks', '$notification_status', '{$_SESSION['username']}')";
         $result = mysqli_query($conn, $sql);
 
         if ($result == TRUE) {
@@ -93,11 +95,7 @@ if (isset($_POST['submit'])) {
             } else {
                 echo "<script>alert('Error in Recording Logs')</script>";
             }
-
-            $sql = "SELECT * FROM receivables WHERE total_invoice != '' AND id = '$id'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
-
+            
             $_SESSION['add-payment'] = "Payment Added Successfully!";
         } else {
 
@@ -105,7 +103,7 @@ if (isset($_POST['submit'])) {
         }
     } else {
 
-        $sql = "INSERT INTO payments (receivables_id, price, remaining_amount, payment_status) VALUES ('$receivable_id', '$amount', '$diff', '$status')";
+        $sql = "INSERT INTO payments (receivables_id, price, remaining_amount, payment_status, remarks, notification_status, encoder) VALUES ('$id', '$amount', '$diff', '$status', '$payment_remarks', '$notification_status', '{$_SESSION['username']}')";
         $result = mysqli_query($conn, $sql);
 
         if ($result == TRUE) {
@@ -136,11 +134,6 @@ if (isset($_POST['submit'])) {
             } else {
                 echo "<script>alert('Error in Recording Logs')</script>";
             }
-
-            $sql = "SELECT * FROM receivables WHERE total_invoice != '' AND id = '$id'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
-
             $_SESSION['add-payment'] = "Payment Added Successfully!";
         } else {
 
@@ -183,7 +176,7 @@ if (isset($_POST['submit'])) {
 <body class="app">
 
     <?php $page = 'receivable';
-    include('navbar.php'); ?>
+    include('accountant-navbar.php'); ?>
 
     <div class="app-wrapper">
 
@@ -216,6 +209,15 @@ if (isset($_POST['submit'])) {
                                 <form class="settings-form" method="post">
                                     <table class="table text-left">
                                         <thead>
+                                            <?php
+                                            
+                                            $id = $_GET['ID'];
+
+                                            $sql = "SELECT * FROM receivables WHERE total_invoice != '' AND id = '$id'";
+                                            $result = mysqli_query($conn, $sql);
+                                            $row = mysqli_fetch_assoc($result);
+                                            
+                                            ?>
                                             <a href="manage-receivables.php" class="btn app-btn btn-info" style="color:white; float:right"><i class="fa fa-arrow-left"></i> Go Back</a>
                                             <h5 style="color:#5b99ea; font-weight:bold">Receivable Details</h5>
                                             <hr>
@@ -409,7 +411,7 @@ if (isset($_POST['submit'])) {
 
                 <?php else : ?>
                     <div class="row g-4 settings-section">
-                        <!-- <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-4">
                             <h1 class="app-page-title text-success"><span class="nav-icon"><i class="fa fa-wallet"></i></span> Add Payment</h1>
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
@@ -417,18 +419,22 @@ if (isset($_POST['submit'])) {
                                         <div class="mb-3">
                                             <label for="setting-input-3" class="form-label">Amount: </label>
                                             <input type="text" name="amount" class="form-control" placeholder="₱0.00" autocomplete="off" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="setting-input-3" class="form-label">Remarks: </label>
+                                            <input type="text" name="payment" class="form-control" autocomplete="off" required>
                                             <input type="hidden" name="total_amount_receivable" value="<?php echo $row['total_remaining'] ?>">
                                             <input type="hidden" name="receivable_id" value="<?php echo $row['id'] ?>">
                                             <input type="hidden" name="invoice_id" value="<?php echo $row['invoice_id'] ?>">
                                         </div>
                                         <button type="submit" name="submit" class="btn app-btn-primary">Add</button>
                                     </form>
-                                </div> -->
+                                </div>
                                 <!--//app-card-body-->
-                            <!-- </div>
-                        </div> -->
+                            </div>
+                        </div>
 
-                        <div class="col-12">
+                        <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
                                     <form class="settings-form" method="post">
@@ -438,6 +444,7 @@ if (isset($_POST['submit'])) {
                                                     <th class="cell">Receivable ID</th>
                                                     <th class="cell">Client</th>
                                                     <th class="cell">Amount Paid</th>
+                                                    <th class="cell">Remarks</th>
                                                     <th class="cell">Payment Date</th>
                                                     <th class="cell">Payment Type (Partial or Full)</th>
                                                 </tr>
@@ -461,6 +468,7 @@ if (isset($_POST['submit'])) {
                                                             <td class="cell" style="padding-top: 1em">#<?php echo $row['receivables_id']; ?></td>
                                                             <td class="cell" style="padding-top: 1em"><?php echo $row['client_name']; ?></td>
                                                             <td class="cell" style="padding-top: 1em">₱<?php echo number_format($row['price'], 2, '.', ','); ?>
+                                                            <td class="cell" style="padding-top: 1em"><?php echo $row['remarks']; ?></td>
                                                             <td class="cell" style="padding-top: 1em"><?php echo $date = date("M d, Y - h:i a", strtotime($row['payment_date'])); ?></td>
                                                             </td>
                                                             <?php

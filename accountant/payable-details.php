@@ -35,8 +35,10 @@ if ($id == "") {
 if (isset($_POST['submit'])) {
 
 	$amount = mysqli_real_escape_string($conn, $_POST['amount']);
+	$remarks = mysqli_real_escape_string($conn, $_POST['payment']);
 	$total_amount_payable = mysqli_real_escape_string($conn, $_POST['total_amount_payable']);
 	$payable_id = mysqli_real_escape_string($conn, $_POST['payable_id']);
+	$notification_status = 1;
 
 	if ($amount < $total_amount_payable) {
 		$status = "Partial";
@@ -52,7 +54,7 @@ if (isset($_POST['submit'])) {
 
 	if ($diff == 0) {
 
-		$sql = "INSERT INTO history (payables_id, price, remaining_amount, payable_status) VALUES ('$payable_id', '$amount', '$diff', '$status')";
+		$sql = "INSERT INTO history (payables_id, price, remaining_amount, remarks, payable_status, notification_status, encoder) VALUES ('$payable_id', '$amount', '$diff', '$remarks', '$status', '$notification_status', '{$_SESSION['username']}')";
 		$result = mysqli_query($conn, $sql);
 
 		if ($result == TRUE) {
@@ -95,7 +97,7 @@ if (isset($_POST['submit'])) {
 		}
 	} else {
 
-		$sql = "INSERT INTO history (payables_id, price, remaining_amount, payable_status) VALUES ('$payable_id', '$amount', '$diff', '$status')";
+		$sql = "INSERT INTO history (payables_id, price, remaining_amount, remarks, payable_status, notification_status, encoder) VALUES ('$payable_id', '$amount', '$diff', '$remarks', '$status', '$notification_status', '{$_SESSION['username']}')";
 		$result = mysqli_query($conn, $sql);
 
 		if ($result == TRUE) {
@@ -127,10 +129,6 @@ if (isset($_POST['submit'])) {
 				echo "<script>alert('Error in Recording Logs')</script>";
 			}
 
-			$sql = "SELECT * FROM materials, payables WHERE payables.product_id = materials.id AND payables.id = '$id'";
-			$result = mysqli_query($conn, $sql);
-			$row = mysqli_fetch_assoc($result);
-
 			$_SESSION['add-payment'] = "Payment Added Successfully!";
 		} else {
 
@@ -157,7 +155,7 @@ if (isset($_POST['submit'])) {
 	<script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
 	<!-- App CSS -->
-	<link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+	<link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
 	<link rel="stylesheet" href="../assets/css/style.css" />
 
 
@@ -173,7 +171,7 @@ if (isset($_POST['submit'])) {
 <body class="app">
 
 	<?php $page = 'payable';
-	include('navbar.php'); ?>
+	include('accountant-navbar.php'); ?>
 
 	<div class="app-wrapper">
 
@@ -210,6 +208,15 @@ if (isset($_POST['submit'])) {
 											<h5 style="color:#5b99ea; font-weight:bold">Payable Details</h5>
 											<hr>
 										</thead>
+										<?php
+
+										$id = $_GET['ID'];
+
+										$sql = "SELECT * FROM materials, payables WHERE payables.product_id = materials.id AND payables.id = '$id'";
+										$result = mysqli_query($conn, $sql);
+										$row = mysqli_fetch_assoc($result);
+										
+										?>
 										<tbody>
 											<tr>
 												<td style="padding-top:1.5em">
@@ -423,25 +430,29 @@ if (isset($_POST['submit'])) {
 
 				<?php else : ?>
 					<div class="row g-4 settings-section">
-						<!-- <div class="col-12 col-md-4">
+						<div class="col-12 col-md-4">
 							<h1 class="app-page-title text-success"><span class="nav-icon"><i class="fa fa-wallet"></i></span> Add Payment</h1>
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<div class="app-card-body">
 									<form class="settings-form" method="post">
 										<div class="mb-3">
 											<label for="setting-input-3" class="form-label">Amount: </label>
-											<input type="number" name="amount" class="form-control" autocomplete="off" required>
+											<input type="text" name="amount" class="form-control" placeholder="0.00" autocomplete="off" required>
+										</div>
+										<div class="mb-3">
+											<label for="setting-input-3" class="form-label">Remarks: </label>
+											<input type="text" name="payment" class="form-control" autocomplete="off" required>
 											<input type="hidden" name="total_amount_payable" value="<?php echo $row['total_amount'] ?>">
 											<input type="hidden" name="payable_id" value="<?php echo $row['id'] ?>">
 										</div>
 										<button type="submit" name="submit" class="btn app-btn-primary">Add</button>
 									</form>
-								</div> -->
+								</div>
 								<!--//app-card-body-->
-							<!-- </div>
-						</div> -->
+							</div>
+						</div>
 
-						<div class="col-12">
+						<div class="col-12 col-md-8">
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<div class="app-card-body">
 									<form class="settings-form" method="post">
@@ -451,6 +462,7 @@ if (isset($_POST['submit'])) {
 													<th class="cell">Payable ID</th>
 													<th class="cell">Supplier</th>
 													<th class="cell">Amount Paid</th>
+													<th class="cell">Remarks</th>
 													<th class="cell">Payment Date</th>
 													<th class="cell">Payment Type (Partial or Full)</th>
 												</tr>
@@ -474,6 +486,7 @@ if (isset($_POST['submit'])) {
 															<td class="cell" style="padding-top: 1em"><?php echo $row['payable_id']; ?></td>
 															<td class="cell" style="padding-top: 1em"><?php echo $row['supplier']; ?></td>
 															<td class="cell" style="padding-top: 1em">₱ <?php echo number_format($row['price'], 2, '.', ','); ?>
+															<td class="cell" style="padding-top: 1em"><?php echo $row['remarks']; ?></td>
 															<td class="cell" style="padding-top: 1em"><?php echo $date = date("M d, Y - h:i a", strtotime($row['date_paid'])); ?></td>
 															</td>
 															<?php
