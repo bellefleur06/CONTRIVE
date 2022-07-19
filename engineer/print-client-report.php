@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' GROUP BY clients.name";
+$sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' AND clients.status = '1' GROUP BY clients.name";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -80,7 +80,16 @@ $client_name = $row['name'];
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td>
+                        <b>Status:</b>
+                    <?php if ($row['status'] == '1') 
+                    {
+                        echo 'Active';
+                    } else {
+                        echo 'Inactive';
+                    }?>
+                    </td>
+                    <td colspan="2">
                         <b>No. of Requested Projects:</b>
                         <?php echo $row['count']; ?>
                     </td>

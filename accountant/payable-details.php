@@ -38,7 +38,6 @@ if (isset($_POST['submit'])) {
 	$remarks = mysqli_real_escape_string($conn, $_POST['payment']);
 	$total_amount_payable = mysqli_real_escape_string($conn, $_POST['total_amount_payable']);
 	$payable_id = mysqli_real_escape_string($conn, $_POST['payable_id']);
-	$notification_status = 1;
 
 	if ($amount < $total_amount_payable) {
 		$status = "Partial";
@@ -54,7 +53,7 @@ if (isset($_POST['submit'])) {
 
 	if ($diff == 0) {
 
-		$sql = "INSERT INTO history (payables_id, price, remaining_amount, remarks, payable_status, notification_status, encoder) VALUES ('$payable_id', '$amount', '$diff', '$remarks', '$status', '$notification_status', '{$_SESSION['username']}')";
+		$sql = "INSERT INTO history (payables_id, price, remaining_amount, remarks, payable_status) VALUES ('$payable_id', '$amount', '$diff', '$remarks', '$status')";
 		$result = mysqli_query($conn, $sql);
 
 		if ($result == TRUE) {
@@ -97,7 +96,7 @@ if (isset($_POST['submit'])) {
 		}
 	} else {
 
-		$sql = "INSERT INTO history (payables_id, price, remaining_amount, remarks, payable_status, notification_status, encoder) VALUES ('$payable_id', '$amount', '$diff', '$remarks', '$status', '$notification_status', '{$_SESSION['username']}')";
+		$sql = "INSERT INTO history (payables_id, price, remaining_amount, remarks, payable_status) VALUES ('$payable_id', '$amount', '$diff', '$remarks', '$status')";
 		$result = mysqli_query($conn, $sql);
 
 		if ($result == TRUE) {

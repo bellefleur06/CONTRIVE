@@ -99,7 +99,7 @@ if (!isset($_SESSION['username'])) {
                                         <table id="myTable" class="table app-table-hover mb-0 text-left">
                                             <thead>
                                                 <?php
-                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE date_added BETWEEN '$from_date' AND '$to_date' GROUP BY name ORDER BY date_added";
+                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE date_added BETWEEN '$from_date' AND '$to_date' WHERE clients.status = '1' GROUP BY name ORDER BY date_added";
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>
@@ -140,7 +140,7 @@ if (!isset($_SESSION['username'])) {
                                         <table id="myTable" class="table app-table-hover mb-0 text-left">
                                             <thead>
                                                 <?php
-                                                $sql = "SELECT *, COUNT(*) as count FROM clients GROUP BY name ORDER BY date_added";
+                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE clients.status = '1' GROUP BY name ORDER BY date_added";
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>

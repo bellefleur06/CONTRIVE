@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' GROUP BY clients.name";
+$sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' AND clients.status = '1' GROUP BY clients.name";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -53,17 +53,14 @@ if ($id == "") {
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
-
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body class="app">
 
-    <?php $page = 'report';
+    <?php $page = 'report'; 
     include('accountant-navbar.php'); ?>
 
     <div class="app-wrapper">
@@ -77,6 +74,15 @@ if ($id == "") {
                                 <a href="print-client-report.php?ID=<?php echo $id; ?>" target="_blank" class="btn app-btn btn-info mb-3" style="color:white"><i class=" fa fa-print"></i> Print Report Details</a>
                                 <div class="app-card app-card-settings shadow-sm p-4">
                                     <div class="app-card-body">
+                                        <?php
+                                        
+                                        $id = $_GET['ID'];
+
+                                        $sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' AND clients.status = '1' GROUP BY clients.name";
+                                        $result = mysqli_query($conn, $sql);
+                                        $row = mysqli_fetch_assoc($result);
+
+                                        ?>
                                         <table class="table app-table-hover text-left">
                                             <tr>
                                                 <td class="cell" colspan="2">
@@ -88,7 +94,7 @@ if ($id == "") {
                                             </tr>
                                             <tr>
                                                 <td class="cell py-3">
-                                                    <b>Name:</b> <?php echo $row['name']; ?>
+                                                    <b>Name:</b> <?php echo $row['client_name']; ?>
                                                 </td>
                                                 <td class="cell py-3" colspan="2">
                                                     <b>Address:</b> <?php echo $row['address']; ?>
@@ -106,7 +112,16 @@ if ($id == "") {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="cell py-3" colspan="3">
+                                                <td class="cell py-3">
+                                                    <b>Status:</b>
+                                                    <?php if ($row['status'] == '1') 
+                                                        {
+                                                            echo 'Active';
+                                                        } else {
+                                                            echo 'Inactive';
+                                                        }?>
+                                                </td>
+                                                <td class="cell py-3" colspan="2">
                                                     <b>No. of Requested Projects:</b>
                                                     <?php echo $row['count']; ?>
                                                 </td>

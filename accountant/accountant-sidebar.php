@@ -109,7 +109,58 @@
 						</a>
 					</li>
 					<!--//nav-item-->
+					<?php
+							$sql = "SELECT * FROM orders WHERE notification_status = '0' AND status != 'Received'";
+							$result = mysqli_query($conn, $sql);
+							$orders = mysqli_num_rows($result);
+									
+							$sql = "SELECT * FROM payments WHERE notification_status = '0'";
+							$result = mysqli_query($conn, $sql);
+							$payments = mysqli_num_rows($result);
 
+							$total = $payments + $orders;
+						?>
+					<li class="nav-item has-submenu">
+						<a class="nav-link submenu-toggle <?php if ($page == 'notifications') {
+																echo 'active';
+															} ?>" href="#" data-toggle="collapse" data-target="#submenu-7" aria-expanded="<?php if ($page == 'notifications') {
+																																				echo 'true';
+																																			} ?>" aria-controls="submenu-7">
+							<span class="nav-icon"><i class="fa fa-bell"></i></span>
+							<span class="nav-link-text">Notifications</span>
+							<span class="submenu-arrow"><span class="fw-bold" style="color:red; padding-right:1rem"><?php echo $total;?></span> <i class="fa fa-angle-down"></i></span>
+							<!--//submenu-arrow-->
+						</a>
+						<!--//nav-link-->
+
+						<div id="submenu-7" class="collapse submenu submenu-7 <?php if ($page == 'notifications') {
+																					echo 'show';
+																				} ?>" data-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								
+								<?php if ($orders > 0) : ?>
+									<span class="nav-link-text float-end fw-bold" style="color:red; padding-right:2rem"><?php echo $orders; ?></span>
+									<li class="submenu-item"><a class="submenu-link <?php if ($page == 'order') {
+																					echo 'active';
+																				} ?>" href="order-notifications.php">Orders</a></li>
+								<?php else : ?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($page == 'order') {
+																					echo 'active';
+																				} ?>" href="order-notifications.php">Orders</a></li>
+								<?php endif; ?>
+								<?php if ($payments > 0) : ?>
+									<span class="nav-link-text float-end fw-bold" style="color:red; padding-right:2rem"><?php echo $payments; ?></span>
+									<li class="submenu-item"><a class="submenu-link <?php if ($page == 'payment') {
+																					echo 'active';
+																				} ?>" href="payment-notifications.php">Payments</a></li>
+								<?php else : ?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($page == 'payment') {
+																					echo 'active';
+																				} ?>" href="payment-notifications.php">Payments</a></li>
+								<?php endif; ?>
+							</ul>
+						</div>
+					</li>
 
 
 				</ul>

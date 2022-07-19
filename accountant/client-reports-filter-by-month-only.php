@@ -25,17 +25,18 @@ if (!isset($_SESSION['username'])) {
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <!-- Chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
 </head>
 
 <body class="app">
 
-    <?php $page = 'report';
+    <?php $page = 'report'; 
     include('accountant-navbar.php'); ?>
 
     <div class="app-wrapper">
@@ -112,7 +113,7 @@ if (!isset($_SESSION['username'])) {
                                         <table id="myTable" class="table app-table-hover mb-0 text-left">
                                             <thead>
                                                 <?php
-                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE month(date_added) = '$month' AND year(date_added) = '$year' GROUP BY name ORDER BY date_added";
+                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE month(date_added) = '$month' AND year(date_added) = '$year' AND clients.status = '1' GROUP BY name ORDER BY date_added";
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>
@@ -153,7 +154,7 @@ if (!isset($_SESSION['username'])) {
                                         <table id="myTable" class="table app-table-hover mb-0 text-left">
                                             <thead>
                                                 <?php
-                                                $sql = "SELECT *, COUNT(*) as count FROM clients GROUP BY name ORDER BY date_added";
+                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE clients.status = '1' GROUP BY name ORDER BY date_added";
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>

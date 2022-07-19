@@ -113,7 +113,7 @@ if (!isset($_SESSION['username'])) {
                                         <table id="myTable" class="table app-table-hover mb-0 text-left">
                                             <thead>
                                                 <?php
-                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE month(date_added) = '$month' AND year(date_added) = '$year' GROUP BY name ORDER BY date_added";
+                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE month(date_added) = '$month' AND year(date_added) = '$year' AND clients.status = '1' GROUP BY name ORDER BY date_added";
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['username'])) {
                                         <table id="myTable" class="table app-table-hover mb-0 text-left">
                                             <thead>
                                                 <?php
-                                                $sql = "SELECT *, COUNT(*) as count FROM clients GROUP BY name ORDER BY date_added";
+                                                $sql = "SELECT *, COUNT(*) as count FROM clients WHERE clients.status = '1' GROUP BY name ORDER BY date_added";
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>

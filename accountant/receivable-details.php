@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
     $total_amount_receivable = mysqli_real_escape_string($conn, $_POST['total_amount_receivable']);
     $receivable_id = mysqli_real_escape_string($conn, $_POST['receivable_id']);
     $payment_remarks = mysqli_real_escape_string($conn, $_POST['payment']);
-    $notification_status = 1;
+    $notification_status = 0;
 
     if ($amount < $total_amount_receivable) {
         $status = "Partial";

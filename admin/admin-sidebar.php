@@ -201,6 +201,16 @@
 																					echo 'active';
 																				} ?>" href="order-notifications.php">Orders</a></li>
 								<?php endif; ?>
+								<?php if ($payments > 0) : ?>
+									<span class="nav-link-text float-end fw-bold" style="color:red; padding-right:2rem"><?php echo $payments; ?></span>
+									<li class="submenu-item"><a class="submenu-link <?php if ($page == 'payment') {
+																					echo 'active';
+																				} ?>" href="payment-notifications.php">Payments</a></li>
+								<?php else : ?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($page == 'payment') {
+																					echo 'active';
+																				} ?>" href="payment-notifications.php">Payments</a></li>
+								<?php endif; ?>
 							</ul>
 						</div>
 					</li>
