@@ -109,6 +109,8 @@ if (!isset($_SESSION['username'])) {
 												?>
 												<tr>
 													<th class="cell">Name</th>
+													<th class="cell">Company Name</th>
+													<th class="cell">Status</th>
 													<th class="cell">Total no. of Projects Ordered</th>
 													<th class="cell">Date Added</th>
 													<th class="cell">Action</th>
@@ -118,8 +120,10 @@ if (!isset($_SESSION['username'])) {
 												<?php while ($row = mysqli_fetch_array($result)) { ?>
 													<tr>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['company_name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php if ($row['status'] == '1'){ echo 'Active'; } else { echo 'Inactive'; }; ?></td>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
-														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added']));; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
 														<td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
 													</tr>
 												<?php } ?>
@@ -150,6 +154,8 @@ if (!isset($_SESSION['username'])) {
 												?>
 												<tr>
 													<th class="cell">Name</th>
+													<th class="cell">Company Name</th>
+													<th class="cell">Status</th>
 													<th class="cell">Total no. of Projects Ordered</th>
 													<th class="cell">Date Added</th>
 													<th class="cell">Action</th>
@@ -159,6 +165,8 @@ if (!isset($_SESSION['username'])) {
 												<?php while ($row = mysqli_fetch_array($result)) { ?>
 													<tr>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['company_name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php if ($row['status'] == '1'){ echo 'Active'; } else { echo 'Inactive'; }; ?></td>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
 														<td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>

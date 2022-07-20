@@ -334,6 +334,7 @@ if (isset($_POST['update'])) {
 													while ($row = mysqli_fetch_assoc($result)) {
 														$id = $row['id'];
 														$clientname = $row['name'];
+														$companyname = $row['company_name'];
 														$contact = $row['contact'];
 														$email = $row['email'];
 														$address = $row['address'];
@@ -342,6 +343,7 @@ if (isset($_POST['update'])) {
 														<tr>
 															<td class="cell" style="padding-top: 1em">
 																<p>Name: <b><?php echo $clientname; ?></b></p>
+																<p>Company Name: <b><?php echo $companyname; ?></b></p>
 																<p><small>Contact No.: <b><?php echo $contact; ?></b></small></p>
 																<p><small>Email: <b><?php echo $email; ?></b></small></p>
 																<p><small>Address: <b><?php echo $address; ?></b></small></p>

@@ -22,8 +22,6 @@ if (isset($_POST['submit'])) {
 	$start_date = mysqli_real_escape_string($conn, $_POST['start_date']);
 	$end_date = mysqli_real_escape_string($conn, $_POST['end_date']);
 	$status = "On Hold";
-	$receivable_status = "Pending";
-	$date_received = "";
 	$activity = "Add New Project - " . $name;
 
 	if (empty($type) or empty($engineer_id) or empty($clientname)) {
@@ -37,44 +35,76 @@ if (isset($_POST['submit'])) {
 		//check if project already exist
 		if (!$result->num_rows > 0) {
 
-			$sql = "INSERT INTO projects (type, name, project_description, engineer_id, location, client_name, start_date, end_date, status, receivable_status, date_received) VALUES ('$type', '$name', '$description', '$engineer_id', '$location', '$clientname', '$start_date', '$end_date', '$status', '$receivable_status', '$date_received')";
-			$result = mysqli_query($conn, $sql);
+			$contract_file = $_FILES['contract_file']['name'];
+			$file_temp = $_FILES['contract_file']['tmp_name'];
+			$allowed_ext = array("pdf");
+			$exp = explode(".", $contract_file);
+			$ext = end($exp);
+			$path = "../documents/" .$contract_file;
 
-			//check if insert process is true
-			if ($result == TRUE) {
+			$blueprint_file = $_FILES['blueprint_file']['name'];
+			$file_temp = $_FILES['blueprint_file']['tmp_name'];
+			$allowed_ext = array("pdf");
+			$exp = explode(".", $blueprint_file);
+			$ext = end($exp);
+			$path = "../documents/" .$blueprint_file;
+	
+			//check if there is a file to be uploaded
+			if ($contract_file  == "" or $blueprint_file == "") {
+	
+				$_SESSION['select-file'] = "Please Select Contract or Blueprint File!";
+	
+				//check if the file is an image
+			} else if (in_array($ext, $allowed_ext)) {
 
-				$sql = "UPDATE staffs SET last_activity = now() WHERE id = '{$_SESSION['id']}'";
-				$result = mysqli_query($conn, $sql);
+				if (move_uploaded_file($file_temp, $path)) {
 
-				//update last activity date and time
-				if ($result = TRUE) {
+					$sql = "INSERT INTO projects (type, name, project_description, engineer_id, location, client_name, start_date, end_date, contract, blueprint, status) VALUES ('$type', '$name', '$description', '$engineer_id', '$location', '$clientname', '$start_date', '$end_date', '$contract_file', '$blueprint_file', '$status')";
+					$result = mysqli_query($conn, $sql);
+	
+					//check if insert process is true
+					if ($result == TRUE) {
+	
+						$sql = "UPDATE staffs SET last_activity = now() WHERE id = '{$_SESSION['id']}'";
+						$result = mysqli_query($conn, $sql);
+	
+						//update last activity date and time
+						if ($result = TRUE) {
+						} else {
+							echo "<script>alert('Error in Updating Last Activity')</script>";
+						}
+	
+						$sql = "INSERT INTO logs SET username = '{$_SESSION['username']}' , log_time = now(), activity = '$activity'";
+						$result = mysqli_query($conn, $sql);
+	
+						//insert info into audit trail
+						if ($result = TRUE) {
+						} else {
+							echo "<script>alert('Error in Recording Logs')</script>";
+						}
+	
+						$_SESSION['add-projects'] = "Project Added Successfully!";
+						header("Location: manage-projects.php");
+	
+						//clear textboxes if result is true
+						$_POST['type'] = "";
+						$_POST['name'] = "";
+						$_POST['engineer'] = "";
+						$_POST['location'] = "";
+						$_POST['client'] = "";
+						$_POST['start_date'] = "";
+						$_POST['end_date'] = "";
+					} else {
+	
+						$_SESSION['failed-to-add'] = "Failed to Add Project.";
+					}
+					
 				} else {
-					echo "<script>alert('Error in Updating Last Activity')</script>";
+					
+					$_SESSION['upload-failed'] = "file Not Uploaded!";
 				}
-
-				$sql = "INSERT INTO logs SET username = '{$_SESSION['username']}' , log_time = now(), activity = '$activity'";
-				$result = mysqli_query($conn, $sql);
-
-				//insert info into audit trail
-				if ($result = TRUE) {
-				} else {
-					echo "<script>alert('Error in Recording Logs')</script>";
-				}
-
-				$_SESSION['add-projects'] = "Project Added Successfully!";
-				header("Location: manage-projects.php");
-
-				//clear textboxes if result is true
-				$_POST['type'] = "";
-				$_POST['name'] = "";
-				$_POST['engineer'] = "";
-				$_POST['location'] = "";
-				$_POST['client'] = "";
-				$_POST['start_date'] = "";
-				$_POST['end_date'] = "";
 			} else {
-
-				$_SESSION['failed-to-add'] = "Failed to Add Project.";
+					$_SESSION['invalid-file-format'] = "Invalid File Format! File should be on 'PDF' Format Only.";
 			}
 		} else {
 			$_SESSION['project-already-exist'] = "Project Already Exist.";
@@ -165,12 +195,39 @@ if (isset($_POST['submit'])) {
 				<?php
 					unset($_SESSION['project-already-exist']);
 				}
+				if (isset($_SESSION['select-file'])) {
+				?>
+					<div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+						<strong> <?php echo $_SESSION['select-file']; ?> </strong>
+						<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+					</div>
+				<?php
+					unset($_SESSION['select-file']);
+				}
+				if (isset($_SESSION['invalid-file-format'])) {
+				?>
+					<div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+						<strong> <?php echo $_SESSION['invalid-file-format']; ?> </strong>
+						<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+					</div>
+				<?php
+					unset($_SESSION['invalid-file-format']);
+				}
+				if (isset($_SESSION['upload-failed'])) {
+				?>
+					<div class="alert alert-danger alert-dismissible fade show" id="alert" role="alert">
+						<strong> <?php echo $_SESSION['upload-failed']; ?> </strong>
+						<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+					</div>
+				<?php
+					unset($_SESSION['upload-failed']);
+				}
 				?>
 				<div class="row g-4 settings-section">
 					<div class="col-12 col-md-12">
 						<div class="app-card app-card-settings shadow-sm p-4">
 							<div class="app-card-body">
-								<form class="settings-form" method="post">
+								<form class="settings-form" method="post" enctype="multipart/form-data">
 									<div class="pb-5">
 										<a href="manage-projects.php" class="btn app-btn btn-info" style="color:white; float:right"><i class="fa fa-list"></i> Project List</a>
 									</div>
@@ -260,6 +317,18 @@ if (isset($_POST['submit'])) {
 									<div class="mb-3">
 										<label for="setting-input-3" class="form-label">End Date: </label>
 										<input type="text" id="endDate" name="end_date" class="form-control" placeholder="yyyy-mm-dd" autocomplete="off" required value="<?php echo $_POST['end_date']; ?>">
+									</div>
+									<div class="mb-3">
+										<div class="row">
+											<div class="col-12 col-md-6">
+												<label for="setting-input-3" class="form-label">Project Contract: </label>
+												<input type="file" name="contract_file" class="form-control" autocomplete="off" required value="<?php echo $_POST['contract_file']; ?>">
+											</div>
+											<div class="col-12 col-md-6">
+												<label for="setting-input-3" class="form-label">Project Blueprint: </label>
+												<input type="file" name="blueprint_file" class="form-control" autocomplete="off" required value="<?php echo $_POST['blueprint_file']; ?>">
+											</div>
+										</div>
 									</div>
 									<button type="submit" name="submit" class="btn app-btn-primary">Add</button>
 								</form>

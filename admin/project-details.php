@@ -182,6 +182,22 @@ if ($id == "") {
 										<?php endif;  ?>
 
 									</tr>
+									<tr>
+										<td class="cell" style="padding-top: 1em">
+											<label for="setting-input-2" class="form-label">Project Contract: </label>
+										</td>
+										<td class="cell" style="padding-top: 1em; text-align:right">
+											<label for="setting-input-3" class="form-label"><a href="view-contract.php?file=<?php echo $row['contract'];?>" target="blank" class="btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></label>
+										</td>
+									</tr>
+									<tr>
+										<td class="cell" style="padding-top: 1em">
+											<label for="setting-input-2" class="form-label">Project Blueprint: </label>
+										</td>
+										<td class="cell" style="padding-top: 1em; text-align:right">
+											<label for="setting-input-3" class="form-label"><a href="view-contract.php?file=<?php echo $row['blueprint'];?>" target="blank" class="btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></label>
+										</td>
+									</tr>
 								</table>
 								<form class="settings-form" action="delete-projects.php" method="post">
 									<a href="update-projects.php?ID=<?php echo $row['id']; ?>" class="btn app-btn-primary"><i class="fa fa-edit"></i> Edit</a>

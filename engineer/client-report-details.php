@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' GROUP BY clients.name";
+$sql = "SELECT *, COUNT(*) as count FROM projects, clients WHERE projects.client_name = clients.name AND clients.id = '$id' AND clients.status = '1' GROUP BY clients.name";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -56,9 +56,6 @@ if ($id == "") {
     <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
 
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body class="app">
@@ -88,7 +85,7 @@ if ($id == "") {
                                             </tr>
                                             <tr>
                                                 <td class="cell py-3">
-                                                    <b>Name:</b> <?php echo $row['name']; ?>
+                                                    <b>Name:</b> <?php echo $row['client_name']; ?>
                                                 </td>
                                                 <td class="cell py-3" colspan="2">
                                                     <b>Address:</b> <?php echo $row['address']; ?>
@@ -106,7 +103,16 @@ if ($id == "") {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="cell py-3" colspan="3">
+                                                <td class="cell py-3">
+                                                    <b>Status:</b>
+                                                    <?php if ($row['status'] == '1') 
+                                                        {
+                                                            echo 'Active';
+                                                        } else {
+                                                            echo 'Inactive';
+                                                        }?>
+                                                </td>
+                                                <td class="cell py-3" colspan="2">
                                                     <b>No. of Requested Projects:</b>
                                                     <?php echo $row['count']; ?>
                                                 </td>

@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="../assets/css/portal.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <!-- Chart JS -->
@@ -36,8 +36,8 @@ if (!isset($_SESSION['username'])) {
 
 <body class="app">
 
-    <?php $page = 'report'; 
-    include('accountant-navbar.php'); ?>
+    <?php $page = 'report';
+	include('accountant-navbar.php'); ?>
 
     <div class="app-wrapper">
 
@@ -117,20 +117,24 @@ if (!isset($_SESSION['username'])) {
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>
-                                                    <th class="cell">Name</th>
-                                                    <th class="cell">Total no. of Projects Ordered</th>
-                                                    <th class="cell">Date Added</th>
-                                                    <th class="cell">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php while ($row = mysqli_fetch_array($result)) { ?>
-                                                    <tr>
-                                                        <td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
-                                                        <td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
-                                                        <td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added']));; ?></td>
-                                                        <td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
-                                                    </tr>
+													<th class="cell">Name</th>
+													<th class="cell">Company Name</th>
+													<th class="cell">Status</th>
+													<th class="cell">Total no. of Projects Ordered</th>
+													<th class="cell">Date Added</th>
+													<th class="cell">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php while ($row = mysqli_fetch_array($result)) { ?>
+													<tr>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['company_name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php if ($row['status'] == '1'){ echo 'Active'; } else { echo 'Inactive'; }; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
+														<td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
+													</tr>
                                                 <?php } ?>
                                             </tbody>
                                         </table>
@@ -158,20 +162,24 @@ if (!isset($_SESSION['username'])) {
                                                 $result = mysqli_query($conn, $sql);
                                                 ?>
                                                 <tr>
-                                                    <th class="cell">Name</th>
-                                                    <th class="cell">Total no. of Projects Ordered</th>
-                                                    <th class="cell">Date Added</th>
-                                                    <th class="cell">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php while ($row = mysqli_fetch_array($result)) { ?>
-                                                    <tr>
-                                                        <td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
-                                                        <td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
-                                                        <td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
-                                                        <td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
-                                                    </tr>
+													<th class="cell">Name</th>
+													<th class="cell">Company Name</th>
+													<th class="cell">Status</th>
+													<th class="cell">Total no. of Projects Ordered</th>
+													<th class="cell">Date Added</th>
+													<th class="cell">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php while ($row = mysqli_fetch_array($result)) { ?>
+													<tr>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['company_name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php if ($row['status'] == '1'){ echo 'Active'; } else { echo 'Inactive'; }; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
+														<td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
+													</tr>
                                                 <?php } ?>
                                             </tbody>
                                         </table>

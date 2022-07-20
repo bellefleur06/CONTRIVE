@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
 <body class="app">
 
 	<?php $page = 'report';
-	include('engineer-navbar.php'); ?>
+    include('engineer-navbar.php'); ?>
 
 	<div class="app-wrapper">
 
@@ -104,11 +104,13 @@ if (!isset($_SESSION['username'])) {
 										<table id="myTable" class="table app-table-hover mb-0 text-left">
 											<thead>
 												<?php
-												$sql = "SELECT *, COUNT(*) as count FROM clients WHERE year(date_added) = '$year' GROUP BY name ORDER BY date_added";
+												$sql = "SELECT *, COUNT(*) as count FROM clients WHERE year(date_added) = '$year' AND clients.status = '1' GROUP BY name ORDER BY date_added";
 												$result = mysqli_query($conn, $sql);
 												?>
 												<tr>
 													<th class="cell">Name</th>
+													<th class="cell">Company Name</th>
+													<th class="cell">Status</th>
 													<th class="cell">Total no. of Projects Ordered</th>
 													<th class="cell">Date Added</th>
 													<th class="cell">Action</th>
@@ -118,8 +120,10 @@ if (!isset($_SESSION['username'])) {
 												<?php while ($row = mysqli_fetch_array($result)) { ?>
 													<tr>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['company_name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php if ($row['status'] == '1'){ echo 'Active'; } else { echo 'Inactive'; }; ?></td>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
-														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added']));; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
 														<td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
 													</tr>
 												<?php } ?>
@@ -145,11 +149,13 @@ if (!isset($_SESSION['username'])) {
 										<table id="myTable" class="table app-table-hover mb-0 text-left">
 											<thead>
 												<?php
-												$sql = "SELECT *, COUNT(*) as count FROM clients GROUP BY name ORDER BY date_added";
+												$sql = "SELECT *, COUNT(*) as count FROM clients WHERE clients.status = '1' GROUP BY name ORDER BY date_added";
 												$result = mysqli_query($conn, $sql);
 												?>
 												<tr>
 													<th class="cell">Name</th>
+													<th class="cell">Company Name</th>
+													<th class="cell">Status</th>
 													<th class="cell">Total no. of Projects Ordered</th>
 													<th class="cell">Date Added</th>
 													<th class="cell">Action</th>
@@ -159,6 +165,8 @@ if (!isset($_SESSION['username'])) {
 												<?php while ($row = mysqli_fetch_array($result)) { ?>
 													<tr>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php echo $row['company_name']; ?></td>
+														<td class="cell" style="padding-top: 0.5em"><?php if ($row['status'] == '1'){ echo 'Active'; } else { echo 'Inactive'; }; ?></td>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $row['count']; ?></td>
 														<td class="cell" style="padding-top: 0.5em"><?php echo $date = date("M d, Y", strtotime($row['date_added'])); ?></td>
 														<td><a href="client-report-details.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-success" style="color:white"><i class="fa fa-eye"></i> View</a></td>
