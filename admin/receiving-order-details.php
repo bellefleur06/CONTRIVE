@@ -111,7 +111,9 @@ $mail->SMTPSecure = "tls";
                 echo "<script>alert('Error in Recording Logs')</script>";
             }
 
-            $sql = "UPDATE orders SET status = '$order_status', date_received = now() WHERE id = $id";
+            $notification_status = 0;
+
+            $sql = "UPDATE orders SET status = '$order_status', date_received = now(), notification_status = '$notification_status',  encoder = '{$_SESSION['username']}' WHERE id = $id"; 
             $result = mysqli_query($conn, $sql);
 
             if ($result = TRUE) {

@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
 					<li class="breadcrumb-item">Manage Receivables</li>
 				</ol>
 				<h1 class="app-page-title"><span class="nav-icon"><i class="fa fa-list"></i></span> Manage Receivables</h1>
-				<a href="print-receivables.php" target="blank" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-print"></i> Print List</a>
+				<!-- <a href="print-receivables.php" target="blank" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-print"></i> Print List</a> -->
 				<hr class="mb-4">
 				<?php
 				if (isset($_SESSION['update-receivables'])) {

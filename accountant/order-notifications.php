@@ -62,8 +62,7 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-12 col-md-12">
 
                     <?php
-						$sql = "SELECT * FROM materials, orders WHERE materials.name = orders.products AND notification_status = '0' AND status != 'Received' ORDER BY orders.id DESC
-                        ";
+						$sql = "SELECT * FROM materials, orders WHERE materials.name = orders.products AND orders.view_status = '0' ORDER BY orders.id DESC";
                         $result = mysqli_query($conn, $sql);
                         $count = mysqli_num_rows($result);
 
@@ -71,6 +70,7 @@ $row = mysqli_fetch_assoc($result);
 							if ($count > 0) {
 
                                 while ($row = mysqli_fetch_assoc($result)) {
+                                    $id = $row['id'];
                                     $order_id = $row['order_id'];
                                     $status = $row['status'];
                                     $supplier = $row['supplier'];
@@ -84,6 +84,7 @@ $row = mysqli_fetch_assoc($result);
                                     $rejection_reason = $row['rejection_reason'];
                                     $date_returned = $row['date_returned'];
                                     $return_reason = $row['return_reason'];
+                                    $encoder = $row['encoder'];
                                     ?>
                     <div class="app-card app-card-notification shadow-sm mb-4">
                         <div class="app-card-header px-4 py-3">
@@ -95,11 +96,10 @@ $row = mysqli_fetch_assoc($result);
                                     <h2 class="notification-title mb-1"> <?php echo "Your Order ";?> <span class="fw-bold"> <?php echo $order_id; ?></span> <?php echo " is " . $status; ?> </h4>
                                     
                                     <ul class="notification-meta list-inline mb-0">
-                                        <!-- <li class="list-inline-item">2 hrs ago</li>
-                                        <li class="list-inline-item">|</li> -->
+                                        <li class="list-inline-item"><span class="fw-bold"><?php echo $encoder; ?></li></span>
+                                        <li class="list-inline-item">|</li>
                                         <li class="list-inline-item"><span class="fw-bold"><?php echo $supplier; ?></li></span>
                                     </ul>
-                            
                                 </div><!--//col-->
                             </div><!--//row-->
                         </div><!--//app-card-header-->
@@ -119,14 +119,14 @@ $row = mysqli_fetch_assoc($result);
                                     <span style="font-size: 1rem">  Date Approved: <span class="fw-bold"> <?php if ($date_approved == "0000-00-00 00:00:00") {
                                             echo "Waiting for Approval";
                                         } else {
-                                            echo $date = date("M d, Y", strtotime($date_approved));
+                                            echo $date = date("M d, Y - h:i a", strtotime($date_approved));
                                         }   
                                     ?></span></span>
                                     <br>
                                     <span style="font-size: 1rem"> Date Rejected: <span class="fw-bold"> <?php if ($date_rejected == "0000-00-00 00:00:00") {
                                             echo "-";
                                         } else {
-                                            echo $date = date("M d, Y", strtotime($date_rejected));
+                                            echo $date = date("M d, Y - h:i a", strtotime($date_rejected));
                                         }   
                                     ?></span></span>
                                     <br>
@@ -135,7 +135,7 @@ $row = mysqli_fetch_assoc($result);
                                     <span style="font-size: 1rem"> Date Returned <span class="fw-bold"> <?php if ($date_returned == "0000-00-00 00:00:00") {
                                             echo "-";
                                         } else {
-                                            echo $date = date("M d, Y", strtotime($date_returned));
+                                            echo $date = date("M d, Y - h:i a", strtotime($date_returned));
                                         }   
                                     ?></span></span> 
                                     <br>
@@ -149,16 +149,15 @@ $row = mysqli_fetch_assoc($result);
 				    </div><!--//app-card-->
                     <hr class="my-4">
                     
-                    <?php
-                            
-                    
-                            }
-                            
-                            $notification_status = 1;
+                    <?php   
+                        }
 
-                            $sql= "UPDATE orders SET notification_status = '$notification_status' WHERE order_id = '$order_id'";
-                            $result = mysqli_query($conn, $sql);
-                            
+                        $notification_status = 1;
+
+                        $sql= "UPDATE orders SET notification_status = '$notification_status' WHERE payment_id = '$payment_id'";
+                        $result = mysqli_query($conn, $sql);
+
+
                         } else {
                     ?>
                         <div class="app-card app-card-notification shadow-sm mb-4">

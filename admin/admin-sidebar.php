@@ -163,7 +163,7 @@
 					</li>
 					<!--//nav-item-->
 						<?php
-							$sql = "SELECT * FROM orders WHERE notification_status = '0' AND status != 'Received'";
+							$sql = "SELECT * FROM orders WHERE notification_status = '0'";
 							$result = mysqli_query($conn, $sql);
 							$orders = mysqli_num_rows($result);
 									

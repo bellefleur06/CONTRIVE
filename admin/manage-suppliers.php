@@ -196,7 +196,7 @@ if (isset($_POST['update'])) {
 					<li class="breadcrumb-item active">Manage Suppliers</li>
 				</ol>
 				<h1 class="app-page-title"><span class="nav-icon"><i class="fa fa-list"></i></span> Manage Suppliers</h1>
-				<a href="manage-categories.php" class="btn app-btn btn-secondary" style="color:white"><i class="fas fa-layer-group"></i> Manage Categories</a>
+				<!-- <a href="manage-categories.php" class="btn app-btn btn-secondary" style="color:white"><i class="fas fa-layer-group"></i> Manage Categories</a> -->
 				<a href="print-suppliers.php" target="_blank" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-print"></i> Print List</a>
 				<hr class="mb-4">
 				<!-- alert messages -->

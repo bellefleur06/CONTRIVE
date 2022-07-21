@@ -31,7 +31,7 @@ if ($result == TRUE) {
     //check if order exist
     if ($count == 1) {
 
-        $id = $row['product_id'];
+        $id = $row['id'];
         $order_id = $row['order_id'];
         $product_id = $row['product_id'];
         $product_name = $row['products'];
@@ -111,7 +111,9 @@ if (isset($_POST['receive'])) {
                 echo "<script>alert('Error in Recording Logs')</script>";
             }
 
-            $sql = "UPDATE orders SET status = '$order_status', date_received = now() WHERE id = $id";
+            $notification_status = 0;
+
+            $sql = "UPDATE orders SET status = '$order_status', date_received = now(), notification_status = '$notification_status',  encoder = '{$_SESSION['username']}' WHERE id = $id";
             $result = mysqli_query($conn, $sql);
 
             if ($result = TRUE) {
@@ -325,6 +327,13 @@ if (isset($_POST['receive'])) {
                                         </tr>
                                     </tbody>
                                 </table>
+                                <?php
+                                
+                                $sql = "SELECT * FROM materials, orders WHERE orders.product_id = materials.id AND orders.id = $id";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+
+                                ?>
                                 <?php if ($status == 'On Delivery') : ?>
                                     <form class="settings-form" method="post">
                                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">

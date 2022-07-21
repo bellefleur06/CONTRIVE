@@ -24,7 +24,7 @@ if ($result == TRUE) {
     //check if order exist
     if ($count == 1) {
 
-        $id = $row['product_id'];
+        $id = $row['id'];
         $order_id = $row['order_id'];
         $product_id = $row['product_id'];
         $product_name = $row['products'];
@@ -63,7 +63,7 @@ if (isset($_POST['return'])) {
     $status = "Returning";
     $activity = "Return Order To " . $supplier . " - " . $qty . " " . $unit . " of " . $product;
 
-    $sql = "UPDATE orders SET status = '$status', return_reason = '$return_reason', date_returned = now() WHERE id = $id";
+    $sql = "UPDATE orders SET status = '$status', return_reason = '$return_reason', date_returned = now(), notification_status = '$notification_status', encoder = '{$_SESSION['username']}' WHERE id = $id";
     $result = mysqli_query($conn, $sql);
 
     //check if insert process is true

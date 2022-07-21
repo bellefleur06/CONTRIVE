@@ -62,7 +62,7 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-12 col-md-12">
 
                     <?php
-                        $sql = "SELECT * FROM payments, receivables WHERE receivables.id = payments.receivables_id AND payments.notification_status = '0'";
+                        $sql = "SELECT * FROM payments, receivables WHERE receivables.id = payments.receivables_id AND payments.view_status = '0' ORDER BY payments.payment_id DESC";
                         $result = mysqli_query($conn, $sql);
                         $count = mysqli_num_rows($result);
 
@@ -90,7 +90,7 @@ $row = mysqli_fetch_assoc($result);
                                     <h4 class="notification-title mb-1">New Payment Added</h4>
                                     
                                     <ul class="notification-meta list-inline mb-0">
-                                        <li class="list-inline-item"><?php echo $encoder; ?></li>
+                                        <li class="list-inline-item"><span class="fw-bold"><?php echo $encoder; ?></li></span>
                                     </ul>
                             
                                 </div><!--//col-->
@@ -113,7 +113,7 @@ $row = mysqli_fetch_assoc($result);
                                         <br>
                                         <span style="font-size: 1rem"> Payment Status: <span class="fw-bold"> <?php echo $payment_status; ?></span></span>
                                         <br>
-                                        <span style="font-size: 1rem"> Payment Date: <span class="fw-bold"> <?php echo $date = date("M d, Y", strtotime($payment_date)); ?></span></span>
+                                        <span style="font-size: 1rem"> Payment Date: <span class="fw-bold"> <?php echo $date = date("M d, Y - h:i a", strtotime($payment_date)); ?></span></span>
                                         <br>
                                         </div>
                                     </div>
