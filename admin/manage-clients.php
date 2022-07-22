@@ -271,7 +271,7 @@ if (isset($_POST['update'])) {
 										<input type="text" name="name" class="form-control" <?php if ($edit == true) : ?> value="<?php echo $clientname; ?>" <?php else : ?> value="<?php echo $_POST['name']; ?>" <?php endif ?> autocomplete="off" required>
 									</div>
 									<div class="mb-3">
-										<label for="setting-input-3" class="form-label">Company Name: </label>
+										<label for="setting-input-3" class="form-label">Project Name: </label>
 										<input type="text" name="companyname" class="form-control" <?php if ($edit == true) : ?> value="<?php echo $companyname; ?>" <?php else : ?> value="<?php echo $_POST['companyname']; ?>" <?php endif ?> autocomplete="off" required>
 									</div>
 									<div class="mb-3">
@@ -324,10 +324,9 @@ if (isset($_POST['update'])) {
 											</thead>
 											<tbody>
 												<?php
-												$sql = "SELECT * FROM clients";
+												$sql = "SELECT * FROM clients ORDER BY id DESC";
 												$result = mysqli_query($conn, $sql);
 												$count = mysqli_num_rows($result);
-
 												//check if clients exist
 												if ($count > 0) {
 
@@ -343,7 +342,7 @@ if (isset($_POST['update'])) {
 														<tr>
 															<td class="cell" style="padding-top: 1em">
 																<p>Name: <b><?php echo $clientname; ?></b></p>
-																<p>Company Name: <b><?php echo $companyname; ?></b></p>
+																<p>Project Name: <b><?php echo $companyname; ?></b></p>
 																<p><small>Contact No.: <b><?php echo $contact; ?></b></small></p>
 																<p><small>Email: <b><?php echo $email; ?></b></small></p>
 																<p><small>Address: <b><?php echo $address; ?></b></small></p>
