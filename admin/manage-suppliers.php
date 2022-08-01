@@ -16,23 +16,18 @@ $edit = false;
 //check if add button is clicked 
 if (isset($_POST['submit'])) {
 
-	$category =  mysqli_real_escape_string($conn, $_POST['category']);
-	$category_name =  mysqli_real_escape_string($conn, $_POST['category_name']);
 	$name =  mysqli_real_escape_string($conn, $_POST['name']);
 	$person = mysqli_real_escape_string($conn, $_POST['person']);
 	$contact = mysqli_real_escape_string($conn, $_POST['contact']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$address = mysqli_real_escape_string($conn, $_POST['address']);
 	$status = "Active";
-	$activity = "Add New " . $category_name . " Supplier - " . $name;
-
-	$sql =  "SELECT category_id, name FROM suppliers WHERE category_id = '$category' AND name = '$name'";
-	$result = mysqli_query($conn, $sql);
+	$activity = "Add New Supplier - " . $name;
 
 	//check if supplier already exist
 	if (!$result->num_rows > 0) {
 
-		$sql = "INSERT INTO suppliers (category_id, category_name, name, person, contact, email, address, status) VALUES ('$category', '$category_name', '$name', '$person', '$contact', '$email', '$address', '$status')";
+		$sql = "INSERT INTO suppliers (name, person, contact, email, address, status) VALUES ('$name', '$person', '$contact', '$email', '$address', '$status')";
 		$result = mysqli_query($conn, $sql);
 
 		//check if insert result is true
@@ -59,7 +54,6 @@ if (isset($_POST['submit'])) {
 			$_SESSION['add-suppliers'] = "Supplier Added Successfully!";
 
 			//clear texboxes if the result is true
-			$_POST['category'] = "";
 			$_POST['name'] = "";
 			$_POST['person'] = "";
 			$_POST['contact'] = "";
@@ -89,8 +83,6 @@ if (isset($_GET['ID'])) {
 		$count = mysqli_num_rows($result);
 
 		if ($count == 1) {
-			$category_id = $row['category_id'];
-			$category_name = $row['category_name'];
 		}
 	}
 }
@@ -98,8 +90,6 @@ if (isset($_GET['ID'])) {
 //check if update button is clicked
 if (isset($_POST['update'])) {
 
-	$category = mysqli_real_escape_string($conn, $_POST['category']);
-	$category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
 	$name = mysqli_real_escape_string($conn, $_POST['name']);
 	$person = mysqli_real_escape_string($conn, $_POST['person']);
 	$contact = mysqli_real_escape_string($conn, $_POST['contact']);
@@ -108,7 +98,7 @@ if (isset($_POST['update'])) {
 	$status = mysqli_real_escape_string($conn, $_POST['status']);
 	$activity = "Update Supplier Details of " . $name;
 
-	$sql = "UPDATE suppliers SET category_id = '$category', category_name = '$category_name', name = '$name', person = '$person', contact = '$contact', email = '$email', address = '$address', status = '$status' WHERE id = '$supplier_id'";
+	$sql = "UPDATE suppliers SET name = '$name', person = '$person', contact = '$contact', email = '$email', address = '$address', status = '$status' WHERE id = '$supplier_id'";
 	$result = mysqli_query($conn, $sql);
 
 	//check if update process if true
@@ -277,35 +267,6 @@ if (isset($_POST['update'])) {
 								<?php if ($edit == false) : ?>
 									<form class="settings-form" method="post">
 										<div class="mb-3">
-											<fieldset class="form-group">
-												<label for="setting-input-3" class="form-label">Category: </label>
-												<select name="category" class="form-select" id="category" onchange='fetch_select(this.value)' required>
-													<option disabled selected>-- Select Supplier Category --</option>
-													<?php
-													$sql = "SELECT * FROM categories";
-													$result = mysqli_query($conn, $sql);
-													$count = mysqli_num_rows($result);
-
-													//check if client exists
-													if ($count > 0) {
-														while ($row = mysqli_fetch_assoc($result)) {
-															$id = $row['id'];
-															$name = $row['name'];
-													?>
-															<option value="<?php echo $id; ?>"><?php echo $name; ?></option>
-														<?php
-														}
-													} else {
-														?>
-														<option value="">No Category Found</option>
-													<?php
-													}
-													?>
-												</select>
-											</fieldset>
-										</div>
-										<input id="category_name" type="hidden" name="category_name" class="form-control" required readonly>
-										<div class="mb-3">
 											<label for="setting-input-3" class="form-label">Name: </label>
 											<textarea style="height: 4.5em" name="name" class="form-control" autocomplete="off" required cols="3"><?php echo $_POST['name']; ?></textarea>
 										</div>
@@ -329,37 +290,6 @@ if (isset($_POST['update'])) {
 									</form>
 								<?php else : ?>
 									<form class="settings-form" method="post">
-										<div class="mb-3">
-											<fieldset class="form-group">
-												<label for="setting-input-3" class="form-label">Supplier Category: </label>
-												<select name="category" class="form-select" id="category" onchange='fetch_select(this.value)' required>
-													<option value="<?php echo $category_id; ?>"><?php echo $category_name ?></option>
-
-													<?php
-													$sql = "SELECT * FROM categories";
-													$result = mysqli_query($conn, $sql);
-													$count = mysqli_num_rows($result);
-
-													//check if client exists
-													if ($count > 0) {
-														while ($row = mysqli_fetch_assoc($result)) {
-															$category_id = $row['id'];
-															$name = $row['name'];
-													?>
-															<option value="<?php echo $category_id; ?>"><?php echo $name; ?></option>
-														<?php
-														}
-													} else {
-														?>
-														<option value="">No Category Found</option>
-													<?php
-													}
-													?>
-
-												</select>
-											</fieldset>
-										</div>
-
 										<?php
 										$id = $_GET['ID'];
 
@@ -381,7 +311,6 @@ if (isset($_POST['update'])) {
 											}
 										}
 										?>
-										<input id="category_name" type="hidden" name="category_name" class="form-control" value="<?php echo $row['category_name']; ?>" required readonly>
 										<div class="mb-3">
 											<label for="setting-input-3" class="form-label">Name: </label>
 											<textarea style="height: 4.5em" name="name" class="form-control" autocomplete="off" required cols="3"><?php echo $row['name']; ?></textarea>
@@ -446,7 +375,6 @@ if (isset($_POST['update'])) {
 													while ($row = mysqli_fetch_assoc($result)) {
 														$id = $row['id'];
 														$name = $row['name'];
-														$category_name = $row['category_name'];
 														$person = $row['person'];
 														$email = $row['email'];
 														$contact = $row['contact'];
@@ -456,7 +384,6 @@ if (isset($_POST['update'])) {
 														<tr>
 															<td class="cell" style="padding-top: 0.5em">
 																<p>Name: <b><?php echo $name; ?></b></p>
-																<p><small>Category: <b><?php echo $category_name; ?></b></small></p>
 																<p><small>Contact Person: <b><?php echo $person; ?></b></small></p>
 																<p><small>Contact No.: <b><?php echo $contact; ?></b></small></p>
 																<p><small>Email: <b><?php echo $email; ?></b></small></p>

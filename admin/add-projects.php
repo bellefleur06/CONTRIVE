@@ -315,17 +315,17 @@ if (isset($_POST['submit'])) {
 										<input type="text" id="startDate" name="start_date" class="form-control" placeholder="yyyy-mm-dd" autocomplete="off" required value="<?php echo $_POST['start_date']; ?>">
 									</div>
 									<div class="mb-3">
-										<label for="setting-input-3" class="form-label">End Date: </label>
+										<label for="setting-input-3" class="form-label">Estimated End Date: </label>
 										<input type="text" id="endDate" name="end_date" class="form-control" placeholder="yyyy-mm-dd" autocomplete="off" required value="<?php echo $_POST['end_date']; ?>">
 									</div>
 									<div class="mb-3">
 										<div class="row">
 											<div class="col-12 col-md-6">
-												<label for="setting-input-3" class="form-label">Project Contract: </label>
+												<label for="setting-input-3" class="form-label">Project Contract: </label> <span class="fw-bold" style="color:red">(File must be on PDF Format)</span>
 												<input type="file" name="contract_file" class="form-control" autocomplete="off" required value="<?php echo $_POST['contract_file']; ?>">
 											</div>
 											<div class="col-12 col-md-6">
-												<label for="setting-input-3" class="form-label">Project Blueprint: </label>
+												<label for="setting-input-3" class="form-label">Project Blueprint: </label> <span class="fw-bold" style="color:red">(File must be on PDF Format)</span>
 												<input type="file" name="blueprint_file" class="form-control" autocomplete="off" required value="<?php echo $_POST['blueprint_file']; ?>">
 											</div>
 										</div>

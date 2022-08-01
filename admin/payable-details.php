@@ -373,7 +373,7 @@ if (isset($_POST['submit'])) {
 												<?php
 												$id = $_GET['ID'];
 
-												$sql = "SELECT * FROM materials, payables, history WHERE payables.product_id = materials.id AND history.payables_id = payables.id AND payables.id = $id";
+												$sql = "SELECT * FROM materials, payables, history WHERE payables.product_id = materials.id AND history.payables_id = payables.id AND payables.id = $id ORDER BY history.id DESC";
 												$result = mysqli_query($conn, $sql);
 												$count = mysqli_num_rows($result);
 
@@ -460,7 +460,7 @@ if (isset($_POST['submit'])) {
 
 												$id = $_GET['ID'];
 
-												$sql = "SELECT * FROM materials, payables, history WHERE payables.product_id = materials.id AND history.payables_id = payables.id AND payables.id = $id";
+												$sql = "SELECT * FROM materials, payables, history WHERE payables.product_id = materials.id AND history.payables_id = payables.id AND payables.id = $id ORDER BY history.id DESC";
 												$result = mysqli_query($conn, $sql);
 												$count = mysqli_num_rows($result);
 

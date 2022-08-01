@@ -131,7 +131,7 @@ if (!isset($_SESSION['username'])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $sql = "SELECT * FROM staffs, clients, projects, invoices WHERE staffs.id = projects.engineer_id AND clients.name = projects.client_name AND invoices.project_id = projects.id AND invoices.total_invoice != '' ORDER by invoice_id";
+                                                $sql = "SELECT * FROM staffs, clients, projects, invoices WHERE staffs.id = projects.engineer_id AND clients.name = projects.client_name AND invoices.project_id = projects.id AND invoices.total_invoice != '' ORDER by invoice_id DESC";
                                                 $result = mysqli_query($conn, $sql);
                                                 $count = mysqli_num_rows($result);
 

@@ -148,7 +148,7 @@ if ($id == "") {
 									</tr>
 									<tr>
 										<td class="cell" style="padding-top: 1em">
-											<label for="setting-input-2" class="form-label">End Date: </label>
+											<label for="setting-input-2" class="form-label">Estimated End Date: </label>
 										</td>
 										<td class="cell" style="padding-top: 1em; text-align:right">
 											<label for="setting-input-3" class="form-label">

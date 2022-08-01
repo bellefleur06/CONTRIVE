@@ -325,7 +325,7 @@ if (!isset($_SESSION['username'])) {
                       <tr>
                         <th class="cell">Project Name</th>
                         <th class="cell">Location</th>
-                        <th class="cell">Due Date</th>
+                        <th class="cell">Estimated End Date</th>
                         <th class="cell">Status</th>
 
                       </tr>
@@ -426,7 +426,7 @@ if (!isset($_SESSION['username'])) {
                           $amount_paid = $row['amount_paid'];
                           $date_ordered = $row['date_ordered'];
                           $status = $row['status'];
-                          $date = date("M d, Y", strtotime($date_ordered));
+                          $date = date("M d, Y - h:i a", strtotime($date_ordered));
                       ?>
                           <tr>
                             <td class="cell" style="padding-top: 1em"><?php echo $order_id; ?></td>
@@ -517,7 +517,7 @@ if (!isset($_SESSION['username'])) {
                     </thead>
                     <tbody>
                       <?php
-                      $sql = "SELECT * FROM receivables WHERE total_invoice != '' LIMIT 3";
+                      $sql = "SELECT * FROM receivables WHERE total_invoice != '' ORDER BY receivables.id DESC LIMIT 3";
                       $result = mysqli_query($conn, $sql);
                       $count = mysqli_num_rows($result);
 
@@ -543,7 +543,7 @@ if (!isset($_SESSION['username'])) {
                               //check if receivable status is received
                             } else if ($row['receivable_status'] == "Partial") {
                             ?>
-                              <td class="cell" style="padding-top: 1em; font-weight:bold; color:green">Partially Paid</td>
+                              <td class="cell" style="padding-top: 1em; font-weight:bold; color:blue">Partially Paid</td>
                             <?php
                             } else if ($row['receivable_status'] == "Paid") {
                             ?>
@@ -590,7 +590,7 @@ if (!isset($_SESSION['username'])) {
                     </thead>
                     <tbody>
                       <?php
-                      $sql = "SELECT * FROM materials, payables WHERE payables.product_id = materials.id";
+                      $sql = "SELECT * FROM materials, payables WHERE payables.product_id = materials.id ORDER BY payables.id DESC LIMIT 3";
                       $result = mysqli_query($conn, $sql);
                       $count = mysqli_num_rows($result);
 
@@ -601,7 +601,7 @@ if (!isset($_SESSION['username'])) {
                           $supplier = $row['supplier'];
                           $amount_paid = $row['amount_paid'];
                           $date_received = $row['date_received'];
-                          $date = date("M d, Y", strtotime($date_received));
+                          $date = date("M d, Y - h:i a", strtotime($date_received));
                           $status = $row['status'];
                       ?>
                           <tr>

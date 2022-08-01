@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 21, 2022 at 10:56 AM
+-- Generation Time: Aug 01, 2022 at 11:18 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -36,26 +36,6 @@ CREATE TABLE `cart` (
   `qty` varchar(255) NOT NULL,
   `total_price` decimal(13,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
-
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'Foundation'),
-(2, 'Electrical'),
-(3, 'Plumbing');
 
 -- --------------------------------------------------------
 
@@ -387,7 +367,17 @@ INSERT INTO `logs` (`id`, `username`, `log_time`, `activity`) VALUES
 (221, 'Accountant', '2022-07-21 16:45:12', 'Add Full Payment of ₱4000.00 For Accounts Payable For Rockwool Building Materials Philippines'),
 (222, 'Accountant', '2022-07-21 16:48:49', 'Add Full Payment of ₱300.00 For Accounts Payable For Cross-Link Electric and Construction Corporation'),
 (223, 'Accountant', '2022-07-21 16:50:46', 'Add Full Payment of ₱2000.00 For Accounts Payable For Sheraton Plumbing And Construction Supply'),
-(224, 'Accountant', '2022-07-21 16:52:03', 'Add Full Payment of ₱360.00 For Accounts Payable For Rockwool Building Materials Philippines');
+(224, 'Accountant', '2022-07-21 16:52:03', 'Add Full Payment of ₱360.00 For Accounts Payable For Rockwool Building Materials Philippines'),
+(225, 'Administrator', '2022-08-01 16:30:02', 'Update Supplier Details of Cross-Link Electric and Construction Corporation'),
+(226, 'Administrator', '2022-08-01 16:30:08', 'Update Supplier Details of Cross-Link Electric and Construction Corporation'),
+(227, 'Administrator', '2022-08-01 16:35:50', 'Update Material Details of Electrical Wire and Cable'),
+(228, 'Administrator', '2022-08-01 16:35:57', 'Update Material Details of Electrical Wire and Cable'),
+(229, 'Administrator', '2022-08-01 16:47:27', 'Update Material Details of Electrical Wire and Cable'),
+(230, 'Administrator', '2022-08-01 16:47:37', 'Update Material Details of Electrical Wire and Cable'),
+(231, 'Administrator', '2022-08-01 16:47:50', 'Update Material Details of Electrical Wire and Cable'),
+(232, 'Administrator', '2022-08-01 16:48:40', 'Add New Material - ASD from Cross-Link Electric and Construction Corporation'),
+(233, 'Administrator', '2022-08-01 16:48:47', 'Update Material Details of ASD'),
+(234, 'Administrator', '2022-08-01 16:48:49', 'Delete Material Record of ASD');
 
 -- --------------------------------------------------------
 
@@ -397,8 +387,6 @@ INSERT INTO `logs` (`id`, `username`, `log_time`, `activity`) VALUES
 
 CREATE TABLE `materials` (
   `id` int(11) NOT NULL,
-  `category_id` varchar(255) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
   `supplier` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -412,13 +400,13 @@ CREATE TABLE `materials` (
 -- Dumping data for table `materials`
 --
 
-INSERT INTO `materials` (`id`, `category_id`, `category_name`, `supplier`, `name`, `description`, `unit`, `price`, `stocks`, `date_added`) VALUES
-(1, '2', 'Electrical', 'Cross-Link Electric and Construction Corporation', 'Electrical Wire and Cable', 'P/N B-30-1000 30AWG Tin Plated Copper Wire Wreppin', 'm', '257.00', '311', '2022-02-03 18:42:39'),
-(2, '1', 'Foundation', 'Rockwool Building Materials Philippines', 'Concrete Block', 'Concrete Hollow Blocks (CHB), 6″', 'pc', '18.00', '700', '2022-02-03 18:42:39'),
-(3, '2', 'Electrical', 'Enerzone Electrical Construction Corporation', 'Electrical Conduit and Conduit Fitting', 'PVC Conduit Pipe, 1/2″ diameter, 3m', 'm', '81.00', '400', '2022-02-03 18:42:39'),
-(4, '3', 'Plumbing', 'Sheraton Plumbing And Construction Supply', 'Galvanized Iron Pipes', 'GI Pipe, 1/2″, Sch40, Seamless, 6 meters', 'm', '899.00', '205', '2022-02-03 18:42:39'),
-(5, '1', 'Foundation', 'Happy Wood Construction Supply', 'Wood Lumber', '2 x 3 x 10 (Mahogany)', 'pc', '150.00', '225', '2022-02-03 18:42:39'),
-(7, '3', 'Plumbing', 'Richwell Plumbing Hardware and Construction Supply', 'PVC Pipes', 'PVC Pipe, (19mm D)', 'pc', '111.00', '400', '2022-02-03 18:42:39');
+INSERT INTO `materials` (`id`, `supplier`, `name`, `description`, `unit`, `price`, `stocks`, `date_added`) VALUES
+(1, 'Cross-Link Electric and Construction Corporation', 'Electrical Wire and Cable', 'P/N B-30-1000 30AWG Tin Plated Copper Wire Wreppin', 'm', '257.00', '311', '2022-02-03 18:42:39'),
+(2, 'Rockwool Building Materials Philippines', 'Concrete Block', 'Concrete Hollow Blocks (CHB), 6″', 'pc', '18.00', '700', '2022-02-03 18:42:39'),
+(3, 'Enerzone Electrical Construction Corporation', 'Electrical Conduit and Conduit Fitting', 'PVC Conduit Pipe, 1/2″ diameter, 3m', 'm', '81.00', '400', '2022-02-03 18:42:39'),
+(4, 'Sheraton Plumbing And Construction Supply', 'Galvanized Iron Pipes', 'GI Pipe, 1/2″, Sch40, Seamless, 6 meters', 'm', '899.00', '205', '2022-02-03 18:42:39'),
+(5, 'Happy Wood Construction Supply', 'Wood Lumber', '2 x 3 x 10 (Mahogany)', 'pc', '150.00', '225', '2022-02-03 18:42:39'),
+(7, 'Richwell Plumbing Hardware and Construction Supply', 'PVC Pipes', 'PVC Pipe, (19mm D)', 'pc', '111.00', '400', '2022-02-03 18:42:39');
 
 -- --------------------------------------------------------
 
@@ -454,8 +442,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_id`, `product_id`, `products`, `product_price`, `qty`, `amount_paid`, `date_ordered`, `status`, `email_address`, `token`, `date_approved`, `date_received`, `rejection_reason`, `date_rejected`, `return_reason`, `date_returned`, `notification_status`, `view_status`, `encoder`) VALUES
-(1, '#97196700', '2', 'Concrete Block', '18.00', '200', '3600.00', '2022-07-21 15:03:23', 'Received', 'contrivekcs@gmail.com', '0', '2022-07-21 15:04:24', '2022-07-21 15:05:31', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1, 0, 'Administrator'),
-(2, '#31378164', '3', 'Electrical Conduit and Conduit Fitting', '81.00', '2', '162.00', '2022-07-21 15:22:48', 'Rejected', 'contrivekcs@gmail.com', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Out of Stock', '2022-07-21 15:23:50', '', '0000-00-00 00:00:00', 1, 0, 'Administrator'),
+(1, '#97196700', '2', 'Concrete Block', '18.00', '200', '3600.00', '2022-07-21 15:03:23', 'Received', 'contrivekcs@gmail.com', '0', '2022-07-21 15:04:24', '2022-07-21 15:05:31', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1, 1, 'Administrator'),
+(2, '#31378164', '3', 'Electrical Conduit and Conduit Fitting', '81.00', '2', '162.00', '2022-07-21 15:22:48', 'Rejected', 'contrivekcs@gmail.com', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Out of Stock', '2022-07-21 15:23:50', '', '0000-00-00 00:00:00', 1, 1, 'Administrator'),
 (3, '#56419163', '1', 'Electrical Wire and Cable', '257.00', '1', '257.00', '2022-07-21 15:29:05', 'Received', 'contrivekcs@gmail.com', '0', '2022-07-21 15:33:18', '2022-07-21 15:36:30', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 1, 0, 'Administrator'),
 (5, '#28990267', '4', 'Galvanized Iron Pipes', '899.00', '1', '899.00', '2022-07-21 15:42:31', 'Returning', 'contrivekcs@gmail.com', '0', '2022-07-21 15:42:42', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'Not Quality Material ', '2022-07-21 16:02:59', 1, 0, 'Administrator');
 
@@ -696,9 +684,9 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `staff_id`, `full_name`, `birthday`, `age`, `gender`, `address`, `contact`, `civil_status`, `profile`, `status`, `email`, `username`, `password`, `access`, `otp`, `date_added`, `last_login`, `last_activity`, `last_logout`) VALUES
-(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-07-21 16:53:15', '2022-07-21 16:53:15', '2022-07-21 16:55:40'),
-(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-07-20 19:10:49', '2022-07-20 19:11:46', '2022-07-19 20:46:17'),
-(8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-07-21 16:53:58', '2022-07-21 16:53:58', '2022-07-21 16:55:34');
+(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-08-01 15:55:54', '2022-08-01 16:48:49', '2022-08-01 16:52:00'),
+(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-08-01 17:03:30', '2022-08-01 17:03:30', '2022-08-01 17:18:18'),
+(8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-08-01 16:52:08', '2022-08-01 16:52:08', '2022-08-01 17:03:21');
 
 -- --------------------------------------------------------
 
@@ -708,8 +696,6 @@ INSERT INTO `staffs` (`id`, `staff_id`, `full_name`, `birthday`, `age`, `gender`
 
 CREATE TABLE `suppliers` (
   `id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `person` varchar(255) NOT NULL,
   `contact` varchar(255) NOT NULL,
@@ -723,13 +709,13 @@ CREATE TABLE `suppliers` (
 -- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`id`, `category_id`, `category_name`, `name`, `person`, `contact`, `email`, `address`, `status`, `date_added`) VALUES
-(1, 1, 'Foundation', 'Happy Wood Construction Supply', 'Alonzo Dimaanos', '09815473810', 'contrivekcs@gmail.com', 'Muntinlupa, Metro Manila', 'Active', '2019-06-14 06:51:14'),
-(2, 2, 'Electrical', 'Cross-Link Electric and Construction Corporation', 'Shane Manahan', '09815473810', 'contrivekcs@gmail.com', 'Parañaque, Metro Manila', 'Active', '2019-09-11 06:57:11'),
-(3, 3, 'Plumbing', 'Richwell Plumbing Hardware and Construction Supply', 'Cristos Caballero', '09815473810', 'contrivekcs@gmail.com', 'Manila', 'Active', '2020-07-28 07:05:06'),
-(4, 1, 'Foundation', 'Rockwool Building Materials Philippines', 'Warren Europa', '09815473810', 'contrivekcs@gmail.com', 'Muntinlupa, Metro Manila', 'Active', '2020-12-20 07:05:10'),
-(5, 2, 'Electrical', 'Enerzone Electrical Construction Corporation', 'Jaxon Mangahas', '09815473810', 'contrivekcs@gmail.com', 'Quezon City', 'Active', '2021-04-18 07:05:15'),
-(6, 3, 'Plumbing', 'Sheraton Plumbing and Construction Supply', 'Ian Solas', '09815473810', 'contrivekcs@gmail.com', 'Manila', 'Active', '2021-06-06 20:56:37');
+INSERT INTO `suppliers` (`id`, `name`, `person`, `contact`, `email`, `address`, `status`, `date_added`) VALUES
+(1, 'Happy Wood Construction Supply', 'Alonzo Dimaanos', '09815473810', 'contrivekcs@gmail.com', 'Muntinlupa, Metro Manila', 'Active', '2019-06-14 06:51:14'),
+(2, 'Cross-Link Electric and Construction Corporation', 'Shane Manahan', '09815473810', 'contrivekcs@gmail.com', 'Parañaque, Metro Manila', 'Active', '2019-09-11 06:57:11'),
+(3, 'Richwell Plumbing Hardware and Construction Supply', 'Cristos Caballero', '09815473810', 'contrivekcs@gmail.com', 'Manila', 'Active', '2020-07-28 07:05:06'),
+(4, 'Rockwool Building Materials Philippines', 'Warren Europa', '09815473810', 'contrivekcs@gmail.com', 'Muntinlupa, Metro Manila', 'Active', '2020-12-20 07:05:10'),
+(5, 'Enerzone Electrical Construction Corporation', 'Jaxon Mangahas', '09815473810', 'contrivekcs@gmail.com', 'Quezon City', 'Active', '2021-04-18 07:05:15'),
+(6, 'Sheraton Plumbing and Construction Supply', 'Ian Solas', '09815473810', 'contrivekcs@gmail.com', 'Manila', 'Active', '2021-06-06 20:56:37');
 
 -- --------------------------------------------------------
 
@@ -763,7 +749,8 @@ INSERT INTO `teams` (`id`, `project_id`, `project`, `position_id`, `member_id`, 
 (19, '4', 'The Royal Bistro', '4', '23', '777'),
 (26, '33', 'San Pedro City Library', '5', '24', '365'),
 (34, '1', 'Jmb Food Sales', '10', '28', '396'),
-(36, '1', 'Jmb Food Sales', '1', '1', '396');
+(36, '1', 'Jmb Food Sales', '1', '1', '396'),
+(37, '4', 'The Royal Bistro', '5', '24', '777');
 
 -- --------------------------------------------------------
 
@@ -823,7 +810,7 @@ INSERT INTO `workers` (`id`, `emp_id`, `last_name`, `first_name`, `middle_name`,
 (21, 'EMP-739', 'Dacanay', 'Christian', 'Patacsil', '1990-03-08', '31', 'Male', 'National Road, Calasiao', '09755173939', 'Married', '2', 'Flooring Installer', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-06-06'),
 (22, 'EMP-970', 'Abella', 'Edwardo', 'Everardo', '1995-09-12', '26', 'Male', '2308-C Lt Sy Compound Taft Avenue, Pasay City', '09025520271', 'Single', '3', 'Glazier', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-12-13'),
 (23, 'EMP-866', 'Lorete', 'Steven', 'Ampatuan', '1978-04-10', '43', 'Male', '222 Violago Compound, E. Rodriguez, Quezon City ', '09024149534', 'Divorced', '4', 'Tile Setter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-02-17'),
-(24, 'EMP-818', 'Ladera', 'Arthur', 'Declan', '1965-11-11', '56', 'Male', 'South Drive Baguio, Benguet', '09744447122', 'Separated', '5', 'Brick Mason', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2020-08-20'),
+(24, 'EMP-818', 'Ladera', 'Arthur', 'Declan', '1965-11-11', '56', 'Male', 'South Drive Baguio, Benguet', '09744447122', 'Separated', '5', 'Brick Mason', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-08-20'),
 (25, 'EMP-880', 'Macalinao', 'Peter', 'Cuanco', '1985-10-12', '36', 'Male', 'Zapote Road, Sycamore Annex, Las Pinas', '09028071413', 'Married', '6', 'Roofer', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-04-19'),
 (26, 'EMP-123', 'Magpantay', 'Ezra', 'Jaron', '1973-11-15', '48', 'Male', '139 Mother Ignacia Avenue, South Triangle, Quezon City', '09099201020', 'Divorced', '8', 'Iron Worker', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-05-12'),
 (27, 'EMP-889', 'Frisco', 'Fred', 'Daculug', '1988-02-26', '33', 'Male', 'Ramagi Building, 1081 Pedro Gil Street, Paco, Manila', '09025261955', 'Married', '9', 'Plumber', '90.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-03-26'),
@@ -839,12 +826,6 @@ INSERT INTO `workers` (`id`, `emp_id`, `last_name`, `first_name`, `middle_name`,
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -966,12 +947,6 @@ ALTER TABLE `cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
@@ -993,13 +968,13 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -1065,7 +1040,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `updates`

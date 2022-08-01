@@ -110,7 +110,7 @@ if (!isset($_SESSION['username'])) {
 													<th class="cell">Project Engineer</th>
 													<th class="cell">Location</th>
 													<th class="cell">Client Name</th>
-													<th class="cell">Due Date</th>
+													<th class="cell">Estimated End Date</th>
 													<th class="cell">Status</th>
 													<th class="cell">Actions</th>
 
@@ -118,7 +118,7 @@ if (!isset($_SESSION['username'])) {
 											</thead>
 											<tbody>
 												<?php
-												$sql = "SELECT * FROM staffs, projects WHERE staffs.id = projects.engineer_id AND projects.engineer_id = '{$_SESSION['id']}'";
+												$sql = "SELECT * FROM staffs, projects WHERE staffs.id = projects.engineer_id AND projects.engineer_id = '{$_SESSION['id']}' ORDER BY projects.id DESC";
 												$result = mysqli_query($conn, $sql);
 												$count = mysqli_num_rows($result);
 

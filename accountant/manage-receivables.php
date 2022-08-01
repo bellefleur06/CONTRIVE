@@ -88,7 +88,7 @@ if (!isset($_SESSION['username'])) {
 											</thead>
 											<tbody>
 												<?php
-												$sql = "SELECT * FROM receivables WHERE total_invoice != '' ";
+												$sql = "SELECT * FROM receivables WHERE total_invoice != ''  ORDER BY receivables.id DESC";
 												$result = mysqli_query($conn, $sql);
 												$count = mysqli_num_rows($result);
 

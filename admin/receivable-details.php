@@ -359,7 +359,7 @@ if (isset($_POST['submit'])) {
                                                 <?php
                                                 $id = $_GET['ID'];
 
-                                                $sql = "SELECT * FROM receivables, payments WHERE receivables.id = payments.receivables_id AND receivables.id = '$id'";
+                                                $sql = "SELECT * FROM receivables, payments WHERE receivables.id = payments.receivables_id AND receivables.id = '$id' ORDER BY payments.payment_id DESC";
                                                 $result = mysqli_query($conn, $sql);
                                                 $count = mysqli_num_rows($result);
 
@@ -447,7 +447,7 @@ if (isset($_POST['submit'])) {
 
                                                 $id = $_GET['ID'];
 
-                                                $sql = "SELECT * FROM receivables, payments WHERE receivables.id = payments.receivables_id AND receivables.id = '$id'";
+                                                $sql = "SELECT * FROM receivables, payments WHERE receivables.id = payments.receivables_id AND receivables.id = '$id' ORDER BY payments.payment_id DESC";
                                                 $result = mysqli_query($conn, $sql);
                                                 $count = mysqli_num_rows($result);
 

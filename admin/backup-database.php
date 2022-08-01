@@ -9,10 +9,15 @@ if (!isset($_SESSION['username'])) {
 }
 
 //database configuration
-$host = "localhost";
-$username = "root";
-$password = "";
-$database_name = "contrive_database";
+// $host = "localhost";
+// $username = "root";
+// $password = "";
+// $database_name = "contrive_database";
+
+$host = "sql113.epizy.com";
+$username = "epiz_32159037";
+$password = "USn3p3xFOtKH72k";
+$database_name = "epiz_32159037_contrive_database";
 
 $activity = "Backuped Database";
 

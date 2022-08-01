@@ -148,7 +148,7 @@ if ($id == "") {
 									</tr>
 									<tr>
 										<td class="cell" style="padding-top: 1em">
-											<label for="setting-input-2" class="form-label">End Date: </label>
+											<label for="setting-input-2" class="form-label">Estimated End Date: </label>
 										</td>
 										<td class="cell" style="padding-top: 1em; text-align:right">
 											<label for="setting-input-3" class="form-label">
@@ -216,7 +216,7 @@ if ($id == "") {
 
 				<h1 class="app-page-title text-success"><span class="nav-icon"><i class="fa fa-chart-bar"></i></span> "<?php echo $row['name']; ?>" Project Division Progress</h1>
 
-				<a href="project-divisions.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-plus"></i> Add Project Update</a>
+				<a href="project-divisions.php?ID=<?php echo $row['id']; ?>" class="btn app-btn btn-info" style="color:white"><i class=" fa fa-plus"></i> Add Project Division/Update</a>
 				<hr class="my-4">
 
 				<div class="row g-4 settings-section">

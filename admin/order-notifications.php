@@ -163,9 +163,8 @@ $row = mysqli_fetch_assoc($result);
                     <?php
                             
                         }
-                        $view_status = 1;
-
-                        $sql= "UPDATE orders SET view_status = '$view_status' WHERE order_id = '$order_id'";
+                        
+                        $sql= "UPDATE orders SET notification_status = '1' WHERE order_id = '$order_id'";
                         $result = mysqli_query($conn, $sql);
 
                         } else {

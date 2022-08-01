@@ -152,11 +152,8 @@ $row = mysqli_fetch_assoc($result);
                     <?php   
                         }
 
-                        $notification_status = 1;
-
-                        $sql= "UPDATE orders SET notification_status = '$notification_status' WHERE payment_id = '$payment_id'";
+                        $sql= "UPDATE orders SET notification_status = '1' WHERE order_id = '$order_id'";
                         $result = mysqli_query($conn, $sql);
-
 
                         } else {
                     ?>

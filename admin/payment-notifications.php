@@ -126,9 +126,7 @@ $row = mysqli_fetch_assoc($result);
                     <?php
                             }
 
-                            $notification_status = 1;
-
-                            $sql= "UPDATE payments SET notification_status = '$notification_status' WHERE payment_id = '$payment_id'";
+                            $sql= "UPDATE payments SET notification_status = '1' WHERE payment_id = '$payment_id'";
                             $result = mysqli_query($conn, $sql);
 
                         } else {

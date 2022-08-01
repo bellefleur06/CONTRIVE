@@ -218,7 +218,9 @@ if (isset($_POST['submit'])) {
 									</div>
 									<?php
 
-									$sql = "SELECT * FROM projects WHERE id = '$id'";
+									$id = $_GET['ID'];
+
+									$sql = "SELECT * FROM staffs, projects WHERE staffs.id = projects.engineer_id AND projects.id = '$id'";
 									$result = mysqli_query($conn, $sql);
 									$row = mysqli_fetch_assoc($result);
 
@@ -256,7 +258,9 @@ if (isset($_POST['submit'])) {
 									</div>
 									<?php
 
-									$sql = "SELECT * FROM projects WHERE id = '$id'";
+									$id = $_GET['ID'];
+
+									$sql = "SELECT * FROM staffs, projects WHERE staffs.id = projects.engineer_id AND projects.id = '$id'";
 									$result = mysqli_query($conn, $sql);
 									$row = mysqli_fetch_assoc($result);
 
@@ -266,7 +270,7 @@ if (isset($_POST['submit'])) {
 										<input type="text" id="startDate" name="start_date" class="form-control" id="setting-input-2" value="<?php echo $row['start_date']; ?>" autocomplete="off" required>
 									</div>
 									<div class="mb-3">
-										<label for="setting-input-3" class="form-label">End Date: </label>
+										<label for="setting-input-3" class="form-label">Estimated End Date: </label>
 										<input type="text" id="endDate" name="end_date" class="form-control" id="setting-input-2" value="<?php echo $row['end_date']; ?>" autocomplete="off" required>
 									</div>
 									<div class="mb-3">

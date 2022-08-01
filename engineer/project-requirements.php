@@ -67,6 +67,7 @@ if (isset($_POST['submit'])) {
 	$total_stocks =  $stocks - $quantity;
 	$activity = "Add New Project Requirement For " . $project_name . " - " . $quantity . " " . $unit . " " . $material_name;
 
+	//check if there are enough stocks for the requirement quantity
 	if ($quantity <= $stocks) {
 
 		$sql = "INSERT INTO requirements (project_id, project, category_id, category_name, material_id, name, description, unit, quantity, price, total) VALUES ('$project_id', '$project_name', '$category_id', '$category_name', '$material_id', '$material_name', '$description', '$unit', '$quantity', '$price', '$total')";
@@ -105,9 +106,6 @@ if (isset($_POST['submit'])) {
 			}
 
 			$_SESSION['add-materials'] = "Material Added Successfully!";
-
-			//clear texboxes if the result is true
-
 		} else {
 
 			$_SESSION['failed-to-add'] = "Failed to Add Material.";
@@ -220,7 +218,7 @@ if (isset($_GET['ID']) && isset($_GET['id'])) {
 	$requirements_id = $_GET['id'];
 	$update = true;
 
-	$sql = "SELECT * FROM requirements WHERE id = '$requirements_id' AND project_id = $project_id;";
+	$sql = "SELECT * FROM requirements WHERE id = '$requirements_id' AND project_id = $project_id";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
 
@@ -558,7 +556,7 @@ if (isset($_POST['update'])) {
 												<?php
 													}
 												} else {
-													echo "<script>alert('No Project Materials Found!')</script>";
+													// echo "<script>alert('No Project Requirements Found!')</script>";
 												}
 												?>
 											</tbody>

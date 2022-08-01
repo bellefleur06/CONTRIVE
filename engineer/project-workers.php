@@ -87,6 +87,7 @@ if (isset($_POST['add'])) {
     $project_name = $row['name'];
     $position_name_id =  mysqli_real_escape_string($conn, $_POST['position']);
     $member_id =  mysqli_real_escape_string($conn, $_POST['member']);
+    $assigned =  "Yes";
 
     if (empty($position_name_id) || empty($member_id)) {
 
@@ -103,8 +104,7 @@ if (isset($_POST['add'])) {
             $result = mysqli_query($conn, $sql);
 
             if ($result == TRUE) {
-    
-                $assigned =  "Yes";
+
                 $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$member_id'";
                 $result = mysqli_query($conn, $sql);
 
@@ -160,9 +160,6 @@ if (isset($_GET['ID']) && isset($_GET['delete'])) {
 
         //check if worker exist
         if ($count == 1) {
-
-            $member_id = $row['id'];
-
         } else {
 
             $_SESSION['project-not-found'] = "Project Not Found.";
@@ -173,6 +170,7 @@ if (isset($_GET['ID']) && isset($_GET['delete'])) {
     $first_name = $row['first_name'];
     $last_name = $row['last_name'];
     $position = $row['position'];
+    $assigned =  "No";
     $activity = "Removed Project Worker For " . $project_name . " - " . $first_name . " " . $last_name . " - " . $position;
 
     $sql = "DELETE FROM teams WHERE id = '$worker_id'";
@@ -181,8 +179,7 @@ if (isset($_GET['ID']) && isset($_GET['delete'])) {
     //check if delete process is true
     if ($result == TRUE) {
 
-        $assigned =  "No";
-        $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$member_id'";
+        $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$worker_id'";
         $result = mysqli_query($conn, $sql);
 
         // $_SESSION['remove-member'] = "Member Removed Successfully!";

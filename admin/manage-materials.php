@@ -18,8 +18,6 @@ $edit = false;
 //check if add button is clicked 
 if (isset($_POST['submit'])) {
 
-	$category = mysqli_real_escape_string($conn, $_POST['category']);
-	$category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
 	$supplier = mysqli_real_escape_string($conn, $_POST['supplier']);
 	$material = mysqli_real_escape_string($conn, $_POST['material']);
 	$description = mysqli_real_escape_string($conn, $_POST['description']);
@@ -27,13 +25,13 @@ if (isset($_POST['submit'])) {
 	$price = mysqli_real_escape_string($conn, $_POST['price']);
 	$activity = "Add New Material - " . $material . " from " . $supplier;
 
-	$sql =  "SELECT category_id, category_name, supplier, name, description, unit FROM materials WHERE category_id = '$category' AND category_name = '$category_name' AND supplier = '$supplier' AND name = '$material' AND description = '$description' AND unit = '$unit'";
+	$sql =  "SELECT supplier, name, description, unit FROM materials WHERE category_id = '$category' AND category_name = '$category_name' AND supplier = '$supplier' AND name = '$material' AND description = '$description' AND unit = '$unit'";
 	$result = mysqli_query($conn, $sql);
 
 	//check if supplier already exist
 	if (!$result->num_rows > 0) {
 
-		$sql = "INSERT INTO materials (category_id, category_name, supplier, name, description, unit, price) VALUES ('$category','$category_name','$supplier','$material','$description','$unit','$price')";
+		$sql = "INSERT INTO materials (supplier, name, description, unit, price) VALUES ('$supplier','$material','$description','$unit','$price')";
 		$result = mysqli_query($conn, $sql);
 
 		//check if insert result is true
@@ -100,8 +98,6 @@ if (isset($_GET['ID'])) {
 //check if update button is clicked
 if (isset($_POST['update'])) {
 
-	$category_id = mysqli_real_escape_string($conn, $_POST['category']);
-	$category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
 	$supplier = mysqli_real_escape_string($conn, $_POST['supplier']);
 	$material = mysqli_real_escape_string($conn, $_POST['material']);
 	$description = mysqli_real_escape_string($conn, $_POST['material_description']);
@@ -109,7 +105,7 @@ if (isset($_POST['update'])) {
 	$price = mysqli_real_escape_string($conn, $_POST['price']);
 	$activity = "Update Material Details of " . $material;
 
-	$sql = "UPDATE materials SET category_id = '$category_id', category_name = '$category_name', supplier = '$supplier', name = '$material', description = '$description', unit = '$unit', price = '$price' WHERE id = '$material_id'";
+	$sql = "UPDATE materials SET supplier = '$supplier', name = '$material', description = '$description', unit = '$unit', price = '$price' WHERE id = '$material_id'";
 	$result = mysqli_query($conn, $sql);
 
 	//check if update process if true
@@ -298,37 +294,29 @@ if (isset($_POST['update'])) {
 									<form class="settings-form" method="post">
 										<div class="mb-3">
 											<fieldset class="form-group">
-												<label for="setting-input-3" class="form-label">Category: </label>
-												<select id="category" name="category" class="form-select" onchange='fetch_select(this.value)' required>
-													<option disabled selected>-- Select Material Category --</option>
+												<label for="setting-input-3" class="form-label">Supplier: </label>
+												<select name="supplier" class="form-select">
+													<option disabled selected>-- Select Supplier --</option>
 													<?php
-													$sql = "SELECT * FROM categories";
+													$sql = "SELECT * FROM suppliers ORDER BY name ASC";
 													$result = mysqli_query($conn, $sql);
 													$count = mysqli_num_rows($result);
 
+													//check if engineer exists
 													if ($count > 0) {
 														while ($row = mysqli_fetch_assoc($result)) {
-															$id = $row['id'];
 															$name = $row['name'];
+
 													?>
-															<option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+															<option value="<?php echo $name; ?>"><?php echo $name ?></option>
 														<?php
 														}
 													} else {
 														?>
-														<option value="0">No Category Found</option>
+														<option value="">No Suppliers Found</option>
 													<?php
 													}
 													?>
-												</select>
-											</fieldset>
-										</div>
-										<input id="name" type="hidden" name="category_name" class="form-control" required readonly>
-										<div class="mb-3">
-											<fieldset class="form-group">
-												<label for="setting-input-3" class="form-label">Supplier: </label>
-												<select id="supplier" name="supplier" class="form-select">
-													<option disabled selected>-- Select Supplier --</option>
 												</select>
 											</fieldset>
 										</div>
@@ -372,55 +360,27 @@ if (isset($_POST['update'])) {
 										}
 										?>
 										<div class="mb-3">
-											<div class="mb-3">
-												<fieldset class="form-group">
-													<label for="setting-input-3" class="form-label">Category: </label>
-													<select id="category" name="category" class="form-select" onchange='fetch_select(this.value)' required>
-														<option value="<?php echo $category_id; ?>"><?php echo $category_name ?></option>
-														<?php
-														$sql = "SELECT * FROM categories";
-														$result = mysqli_query($conn, $sql);
-														$count = mysqli_num_rows($result);
-
-														if ($count > 0) {
-															while ($row = mysqli_fetch_assoc($result)) {
-																$id = $row['id'];
-																$name = $row['name'];
-														?>
-																<option value="<?php echo $id; ?>"><?php echo $name; ?></option>
-															<?php
-															}
-														} else {
-															?>
-															<option value="0">No Category Found</option>
-														<?php
-														}
-														?>
-													</select>
-												</fieldset>
-											</div>
-											<input id="name" type="hidden" name="category_name" class="form-control" value="<?php echo $category_name; ?>" required readonly>
-										</div>
-										<div class="mb-3">
 											<fieldset class="form-group">
 												<label for="setting-input-3" class="form-label">Supplier: </label>
-												<select id="supplier" name="supplier" class="form-select">
-													<option value="<?php echo $supplier; ?>"><?php echo $supplier; ?></option>
+												<select name="supplier" class="form-select">
+													<option selected value="<?php echo $supplier; ?>"><?php echo $supplier ?></option>
 													<?php
-													$sql = "SELECT * FROM suppliers WHERE category_id = '{$row['category_id']}'";
+													$sql = "SELECT * FROM suppliers ORDER BY name ASC";
 													$result = mysqli_query($conn, $sql);
 													$count = mysqli_num_rows($result);
 
+													//check if engineer exists
 													if ($count > 0) {
 														while ($row = mysqli_fetch_assoc($result)) {
 															$name = $row['name'];
+
 													?>
-															<option value="<?php echo $name ?>"><?php echo $name ?></option>
+															<option value="<?php echo $name; ?>"><?php echo $name ?></option>
 														<?php
 														}
 													} else {
 														?>
-														<!-- <option value="0">No Category Found</option> -->
+														<option value="">No Suppliers Found</option>
 													<?php
 													}
 													?>
@@ -489,7 +449,7 @@ if (isset($_POST['update'])) {
 											</thead>
 											<tbody>
 												<?php
-												$sql = "SELECT * FROM materials";
+												$sql = "SELECT * FROM materials ORDER BY id DESC";
 												$result = mysqli_query($conn, $sql);
 												$count = mysqli_num_rows($result);
 
@@ -498,8 +458,6 @@ if (isset($_POST['update'])) {
 
 													while ($row = mysqli_fetch_assoc($result)) {
 														$id = $row['id'];
-														$category_id = $row['category_id'];
-														$category_name = $row['category_name'];
 														$supplier = $row['supplier'];
 														$name = $row['name'];
 														$description = $row['description'];
@@ -510,7 +468,6 @@ if (isset($_POST['update'])) {
 														<tr>
 															<td class="cell" style="padding-top: 0.5em">
 																<p>Name: <b><?php echo $name; ?></b></p>
-																<p><small>Category: <b><?php echo $category_name; ?></b></small></p>
 																<p><small>Description: <b><?php echo $description; ?></b></small></p>
 																<p><small>Unit: <b><?php echo $unit; ?></b></small></p>
 																<p><small>Supplier: <b><?php echo $supplier; ?></b></small></p>
