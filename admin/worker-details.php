@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 $id = $_GET['ID'];
 
-$sql = "SELECT * FROM workers WHERE id = '$id'";
+$sql = "SELECT * FROM workers WHERE workers.id = '$id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -89,7 +89,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Full Name: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636"><?php echo $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; ?></label>
 												</td>
 											</tr>
@@ -97,7 +97,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Birthday: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636">
 														<?php
 														$birthday = $row['birthday'];
@@ -110,7 +110,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Gender: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636"><?php echo $row['gender']; ?></label>
 												</td>
 
@@ -119,7 +119,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Address: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636"><?php echo $row['address']; ?></label>
 												</td>
 											</tr>
@@ -127,7 +127,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Contact No.: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636"><?php echo $row['contact']; ?></label>
 												</td>
 											</tr>
@@ -135,7 +135,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Civil Status: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636"><?php echo $row['civil_status']; ?></label>
 												</td>
 											</tr>
@@ -143,7 +143,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Position: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636"><?php echo $row['position']; ?></label>
 												</td>
 											</tr>
@@ -151,7 +151,7 @@ if ($id == "") {
 												<td class="cell">
 													<label for="setting-input-2" class="form-label">Daily Rate: </label>
 												</td>
-												<td class="cell" style="">
+												<td class="cell">
 													<label for="setting-input-3" class="form-label" style="color:#363636">₱<?php echo $row['rate']; ?></label>
 												</td>
 											</tr>
@@ -173,6 +173,50 @@ if ($id == "") {
 													</td>
 													<td class="cell">
 														<label for="setting-input-3" class="form-label" style="color:red"><?php echo $row['status']; ?></label>
+													</td>
+												<?php
+												}
+												?>
+											</tr>
+											<tr>
+												<?php
+												if ($row['assigned'] == "Yes") {
+												?>
+													<td>
+														<label for="setting-input-2" class="form-label">Working for a Project? </label>
+													</td>
+													<td class="cell">
+														<label for="setting-input-3" class="form-label" style="color:green"><?php echo $row['assigned']; ?></label>
+													</td>
+													<?php
+														$sql = "SELECT * FROM staffs, projects, teams, workers WHERE staffs.id = projects.engineer_id AND projects.id = teams.project_id AND teams.member_id = workers.id AND workers.id = '$id'";
+														$result = mysqli_query($conn, $sql);
+														$row = mysqli_fetch_assoc($result);
+													?>
+													<tr>
+														<td>
+															<label for="setting-input-2" class="form-label">Project: </label>
+														</td>
+														<td class="cell">
+															<label for="setting-input-3" class="form-label"><?php echo $row['project']; ?></label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<label for="setting-input-2" class="form-label">Engineer: </label>
+														</td>
+														<td class="cell">
+															<label for="setting-input-3" class="form-label"><?php echo $row['full_name']; ?></label>
+														</td>
+													</tr>
+												<?php
+												} else if ($row['assigned'] == "No") {
+												?>
+													<td class="cell">
+														<label for="setting-input-2" class="form-label">Assigned: </label>
+													</td>
+													<td class="cell">
+														<label for="setting-input-3" class="form-label" style="color:blue"><?php echo $row['assigned']; ?></label>
 													</td>
 												<?php
 												}

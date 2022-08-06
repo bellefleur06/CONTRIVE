@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 01, 2022 at 11:18 AM
+-- Generation Time: Aug 06, 2022 at 10:52 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -377,7 +377,14 @@ INSERT INTO `logs` (`id`, `username`, `log_time`, `activity`) VALUES
 (231, 'Administrator', '2022-08-01 16:47:50', 'Update Material Details of Electrical Wire and Cable'),
 (232, 'Administrator', '2022-08-01 16:48:40', 'Add New Material - ASD from Cross-Link Electric and Construction Corporation'),
 (233, 'Administrator', '2022-08-01 16:48:47', 'Update Material Details of ASD'),
-(234, 'Administrator', '2022-08-01 16:48:49', 'Delete Material Record of ASD');
+(234, 'Administrator', '2022-08-01 16:48:49', 'Delete Material Record of ASD'),
+(235, 'Engineer', '2022-08-06 16:44:45', 'Removed Project Worker For Paradise Palms - Arthur Ladera - Brick Mason'),
+(236, 'Engineer', '2022-08-06 16:46:47', 'Removed Project Worker For Paradise Palms - Arthur Ladera - Brick Mason'),
+(237, 'Engineer', '2022-08-06 16:48:04', 'Removed Project Worker For  -   - '),
+(238, 'Engineer', '2022-08-06 16:48:22', 'Removed Project Worker For  -   - '),
+(239, 'Engineer', '2022-08-06 16:49:32', 'Removed Project Worker For Paradise Palms - Arthur Ladera - Brick Mason'),
+(240, 'Engineer', '2022-08-06 16:50:47', 'Add New Project Division For Paradise Palms - General Requirement'),
+(241, 'Engineer', '2022-08-06 16:50:55', 'Add New Project Progress Update For Paradise Palms - General Requirement - 100%');
 
 -- --------------------------------------------------------
 
@@ -557,6 +564,13 @@ CREATE TABLE `progress` (
   `date_updated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `progress`
+--
+
+INSERT INTO `progress` (`id`, `project_id`, `project_name`, `division_name`, `progress`, `date_added`, `date_updated`) VALUES
+(1, '3', 'Paradise Palms', 'General Requirement', '100', '2022-08-06 16:50:47', '2022-08-06 16:50:47');
+
 -- --------------------------------------------------------
 
 --
@@ -684,8 +698,8 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `staff_id`, `full_name`, `birthday`, `age`, `gender`, `address`, `contact`, `civil_status`, `profile`, `status`, `email`, `username`, `password`, `access`, `otp`, `date_added`, `last_login`, `last_activity`, `last_logout`) VALUES
-(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-08-01 15:55:54', '2022-08-01 16:48:49', '2022-08-01 16:52:00'),
-(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-08-01 17:03:30', '2022-08-01 17:03:30', '2022-08-01 17:18:18'),
+(1, 'STF-750', 'Kyle Aguinaldo Valdez', '1990-01-16', '32', 'Male', 'Valley View Village, Munting Dilaw, Antipolo City, Rizal', '09154735194', 'Single', 'mehrad-vosoughi-iUQmEFtfdLw-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Administrator', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', 'Admin', '0', '2020-04-01', '2022-08-06 16:51:35', '2022-08-06 16:51:35', '2022-08-06 16:52:16'),
+(3, 'STF-158', 'Carmina Galang Makisig', '1996-01-19', '26', 'Female', 'Cubao, Quezon City', '09638136868', 'Single', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola06@gmail.com', 'Engineer', 'd6f7cd0239ea1b713b76ac957d459000', 'Engineer', '0', '2021-11-21', '2022-08-06 16:44:20', '2022-08-06 16:50:55', '2022-08-06 16:51:29'),
 (8, 'STF-175', 'Ella Camara Manahan', '1982-08-29', '39', 'Female', '1858 Oroquieta Street, Santa Cruz, Manila', '09027412369', 'Married', 'clayton-mpDV4xaFP8c-unsplash.jpg', 'Active', 'pbandola@gmail.com', 'Accountant', '33b7a3ff340fae33c3f9a4b8199cbb29', 'Accountant', '0', '2022-02-24', '2022-08-01 16:52:08', '2022-08-01 16:52:08', '2022-08-01 17:03:21');
 
 -- --------------------------------------------------------
@@ -737,20 +751,11 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `project_id`, `project`, `position_id`, `member_id`, `working_days`) VALUES
-(2, '1', 'Jmb Food Sales', '5', '24', '396'),
-(6, '3', 'Paradise Palms', '12', '2', '147'),
-(7, '3', 'Paradise Palms', '2', '21', '147'),
-(8, '3', 'Paradise Palms', '3', '22', '147'),
-(9, '3', 'Paradise Palms', '8', '26', '147'),
-(10, '3', 'Paradise Palms', '11', '29', '147'),
-(11, '4', 'The Royal Bistro', '13', '30', '777'),
-(12, '4', 'The Royal Bistro', '9', '27', '777'),
-(16, '4', 'The Royal Bistro', '6', '25', '777'),
-(19, '4', 'The Royal Bistro', '4', '23', '777'),
-(26, '33', 'San Pedro City Library', '5', '24', '365'),
-(34, '1', 'Jmb Food Sales', '10', '28', '396'),
-(36, '1', 'Jmb Food Sales', '1', '1', '396'),
-(37, '4', 'The Royal Bistro', '5', '24', '777');
+(6, '3', 'Paradise Palms', '5', '24', '147'),
+(7, '3', 'Paradise Palms', '10', '28', '147'),
+(8, '3', 'Paradise Palms', '7', '3', '147'),
+(9, '3', 'Paradise Palms', '1', '1', '147'),
+(10, '3', 'Paradise Palms', '12', '2', '147');
 
 -- --------------------------------------------------------
 
@@ -769,6 +774,13 @@ CREATE TABLE `updates` (
   `user_id` varchar(255) NOT NULL,
   `date_posted` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `updates`
+--
+
+INSERT INTO `updates` (`update_id`, `project_id`, `project_name`, `division_id`, `division_name`, `progress`, `details`, `user_id`, `date_posted`) VALUES
+(1, '3', 'Paradise Palms', '1', 'General Requirement', '100', 'Done', '3', '2022-08-06 16:50:55');
 
 -- --------------------------------------------------------
 
@@ -805,18 +817,18 @@ CREATE TABLE `workers` (
 INSERT INTO `workers` (`id`, `emp_id`, `last_name`, `first_name`, `middle_name`, `birthday`, `age`, `gender`, `address`, `contact`, `civil_status`, `position_id`, `position`, `rate`, `hours_per_day`, `profile`, `status`, `assigned`, `date_added`) VALUES
 (1, 'EMP-945', 'Alcaraz', 'Frisco ', 'Santos', '1985-11-10', '36', 'Male', 'Dr. A. Santos Ave. Paranaque City', '09632825382', 'Married', '1', 'Construction Worker', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-01-08'),
 (2, 'EMP-227', 'Murcia', 'Jerome', 'Magno', '1993-08-30', '28', 'Male', 'National Highway, Balibago, Santa Rosa City, Laguna', '09498376477', 'Single', '12', 'Electrician', '90.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-04-04'),
-(3, 'EMP-583', 'Alejo', 'Navarro', 'Dantes', '1987-10-19', '34', 'Male', ' McArthur Highway corner Ligtasan Street, Tarlac City', '09456112017', 'Married', '7', 'Concrete Finisher', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2019-09-20'),
-(4, 'EMP-830', 'Sarte', 'Gaspar', 'Villosillo', '1981-10-11', '40', 'Male', '280 G. Araneta Avenue, Quezon City', '09632363260', 'Divorced', '14', 'Foreman', '94.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-03-05'),
-(21, 'EMP-739', 'Dacanay', 'Christian', 'Patacsil', '1990-03-08', '31', 'Male', 'National Road, Calasiao', '09755173939', 'Married', '2', 'Flooring Installer', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-06-06'),
-(22, 'EMP-970', 'Abella', 'Edwardo', 'Everardo', '1995-09-12', '26', 'Male', '2308-C Lt Sy Compound Taft Avenue, Pasay City', '09025520271', 'Single', '3', 'Glazier', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-12-13'),
-(23, 'EMP-866', 'Lorete', 'Steven', 'Ampatuan', '1978-04-10', '43', 'Male', '222 Violago Compound, E. Rodriguez, Quezon City ', '09024149534', 'Divorced', '4', 'Tile Setter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-02-17'),
+(3, 'EMP-583', 'Alejo', 'Navarro', 'Dantes', '1987-10-19', '34', 'Male', ' McArthur Highway corner Ligtasan Street, Tarlac City', '09456112017', 'Married', '7', 'Concrete Finisher', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2019-09-20'),
+(4, 'EMP-830', 'Sarte', 'Gaspar', 'Villosillo', '1981-10-11', '40', 'Male', '280 G. Araneta Avenue, Quezon City', '09632363260', 'Divorced', '14', 'Foreman', '94.00', '8', 'construction worker.jpg', 'Active', 'No', '2019-03-05'),
+(21, 'EMP-739', 'Dacanay', 'Christian', 'Patacsil', '1990-03-08', '31', 'Male', 'National Road, Calasiao', '09755173939', 'Married', '2', 'Flooring Installer', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2019-06-06'),
+(22, 'EMP-970', 'Abella', 'Edwardo', 'Everardo', '1995-09-12', '26', 'Male', '2308-C Lt Sy Compound Taft Avenue, Pasay City', '09025520271', 'Single', '3', 'Glazier', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2020-12-13'),
+(23, 'EMP-866', 'Lorete', 'Steven', 'Ampatuan', '1978-04-10', '43', 'Male', '222 Violago Compound, E. Rodriguez, Quezon City ', '09024149534', 'Divorced', '4', 'Tile Setter', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2020-02-17'),
 (24, 'EMP-818', 'Ladera', 'Arthur', 'Declan', '1965-11-11', '56', 'Male', 'South Drive Baguio, Benguet', '09744447122', 'Separated', '5', 'Brick Mason', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-08-20'),
-(25, 'EMP-880', 'Macalinao', 'Peter', 'Cuanco', '1985-10-12', '36', 'Male', 'Zapote Road, Sycamore Annex, Las Pinas', '09028071413', 'Married', '6', 'Roofer', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-04-19'),
-(26, 'EMP-123', 'Magpantay', 'Ezra', 'Jaron', '1973-11-15', '48', 'Male', '139 Mother Ignacia Avenue, South Triangle, Quezon City', '09099201020', 'Divorced', '8', 'Iron Worker', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2020-05-12'),
-(27, 'EMP-889', 'Frisco', 'Fred', 'Daculug', '1988-02-26', '33', 'Male', 'Ramagi Building, 1081 Pedro Gil Street, Paco, Manila', '09025261955', 'Married', '9', 'Plumber', '90.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-03-26'),
+(25, 'EMP-880', 'Macalinao', 'Peter', 'Cuanco', '1985-10-12', '36', 'Male', 'Zapote Road, Sycamore Annex, Las Pinas', '09028071413', 'Married', '6', 'Roofer', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2020-04-19'),
+(26, 'EMP-123', 'Magpantay', 'Ezra', 'Jaron', '1973-11-15', '48', 'Male', '139 Mother Ignacia Avenue, South Triangle, Quezon City', '09099201020', 'Divorced', '8', 'Iron Worker', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2020-05-12'),
+(27, 'EMP-889', 'Frisco', 'Fred', 'Daculug', '1988-02-26', '33', 'Male', 'Ramagi Building, 1081 Pedro Gil Street, Paco, Manila', '09025261955', 'Married', '9', 'Plumber', '90.00', '8', 'construction worker.jpg', 'Active', 'No', '2021-03-26'),
 (28, 'EMP-951', 'Alfonso', 'Drake', 'Madid', '1991-04-27', '30', 'Male', '434 Plateria Street, Quiapo, Manila', '09077332963', 'Married', '10', 'Carpenter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-01-29'),
 (29, 'EMP-526', 'Torrealba', 'Elmer', 'Holden', '1993-07-01', '28', 'Male', 'Citibank Tower, 8741 Paseo De Roxas Street, Makati City', '09028195177', 'Single', '11', 'Painter', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2021-03-09'),
-(30, 'EMP-675', 'Quaimbao', 'Rodney', 'Asuncion', '1985-12-07', '35', 'Male', 'Baclayon, Bohol', '09055409531', 'Married', '13', 'Pipefitter', '86.00', '8', 'construction worker.jpg', 'Active', 'Yes', '2021-12-06');
+(30, 'EMP-675', 'Quaimbao', 'Rodney', 'Asuncion', '1985-12-07', '35', 'Male', 'Baclayon, Bohol', '09055409531', 'Married', '13', 'Pipefitter', '86.00', '8', 'construction worker.jpg', 'Active', 'No', '2021-12-06');
 
 --
 -- Indexes for dumped tables
@@ -968,7 +980,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -1004,7 +1016,7 @@ ALTER TABLE `positions`
 -- AUTO_INCREMENT for table `progress`
 --
 ALTER TABLE `progress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `projects`
@@ -1040,13 +1052,13 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `updates`
 --
 ALTER TABLE `updates`
-  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `workers`

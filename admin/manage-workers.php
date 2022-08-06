@@ -101,7 +101,7 @@ if (!isset($_SESSION['username'])) {
 													<th class="cell">ID Number</th>
 													<th class="cell">Full Name</th>
 													<th class="cell">Position</th>
-													<th class="cell">Hourly Rate</th>
+													<th class="cell">Working for a Project?</th>
 													<th class="cell">Status</th>
 													<th class="cell">Actions</th>
 												</tr>
@@ -120,7 +120,7 @@ if (!isset($_SESSION['username'])) {
 														$last_name = $row['last_name'];
 														$first_name = $row['first_name'];
 														$position = $row['position'];
-														$rate = $row['rate'];
+														$assigned = $row['assigned'];
 														$profile = $row['profile'];
 														$status = $row['status'];
 												?>
@@ -129,7 +129,19 @@ if (!isset($_SESSION['username'])) {
 															<td class="cell" style="padding-top: 1em"><?php echo $emp_id; ?></td>
 															<td class="cell" style="padding-top: 1em"><?php echo $first_name . " " . $last_name; ?></td>
 															<td class="cell" style="padding-top: 1em"><?php echo $position; ?></td>
-															<td class="cell" style="padding-top: 1em">₱ <?php echo number_format($row['rate'], 2, '.', ','); ?></td>
+															<?php
+															//check if worker is working for a project
+															if ($row['assigned'] == "Yes") {
+															?>
+																<td class="cell text-center" style="padding-top: 1em; font-weight:bold; color:green">Yes</td>
+															<?php
+																//check if worker is not working for a project
+															} else if ($row['assigned'] == "No") {
+															?>
+																<td class="cell text-center" style="padding-top: 1em; font-weight:bold; color:blue">No</td>
+															<?php
+															}
+															?>
 															<?php
 															//check if worker status is active
 															if ($row['status'] == "Active") {

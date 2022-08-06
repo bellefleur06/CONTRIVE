@@ -179,7 +179,7 @@ if (isset($_GET['ID']) && isset($_GET['delete'])) {
     //check if delete process is true
     if ($result == TRUE) {
 
-        $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$worker_id'";
+        $sql =  "UPDATE workers SET assigned = '$assigned' WHERE id = '$member_id'";
         $result = mysqli_query($conn, $sql);
 
         // $_SESSION['remove-member'] = "Member Removed Successfully!";
